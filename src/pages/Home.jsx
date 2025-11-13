@@ -3,6 +3,7 @@ import ServicesSection from "../components/ServicesSection";
 import CoursesSection from "../components/CoursesSection";
 import ContactSection from "../components/ContactSection";
 import Abouts from "../components/Abouts"
+import YouTubeVideos from "../components/YouTubeVideos";
 const Home = () => {
   return (
     <>
@@ -10,6 +11,7 @@ const Home = () => {
       <Abouts />
       <CoursesSection />
         <ServicesSection />
+        <YouTubeVideos />
       <ContactSection />
     </>
   );

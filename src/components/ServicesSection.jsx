@@ -6,13 +6,12 @@ import iwatch from "../assets/iwatch.png";
 import mac from "../assets/mac.png";
 import ipod from "../assets/ipod.png";
 
-// === SERVICES WITH LARGE IMAGE SRC ===
 const services = [
   {
     img: iphones,
     title: "iPhone Repair",
     desc: "Screen, battery, camera, charging port, Face ID, water damage — all models (iPhone 6 to 16 Pro Max).",
-    gradient: "from-orange-500 to-red-600",
+    gradient: "from-[#F37021] to-red-600",
     delay: 0.2,
     badge: "30 MIN FIX",
     badgeColor: "from-yellow-400 to-amber-600",
@@ -25,7 +24,7 @@ const services = [
     img: iwatch,
     title: "Apple Watch Repair",
     desc: "Screen, battery, digital crown, sensors, charging coil — Series 1–10, Ultra, SE.",
-    gradient: "from-orange-400 to-amber-600",
+    gradient: "from-[#F37021] to-orange-700",
     delay: 0.4,
     badge: "FASTEST",
     badgeColor: "from-green-400 to-emerald-600",
@@ -38,7 +37,7 @@ const services = [
     img: mac,
     title: "MacBook Repair",
     desc: "Logic board, screen, keyboard, battery, SSD, M1/M2/M3 chip — MacBook Air & Pro.",
-    gradient: "from-red-500 to-orange-700",
+    gradient: "from-red-600 to-[#F37021]",
     delay: 0.6,
     badge: "EXPERT",
     badgeColor: "from-purple-500 to-pink-600",
@@ -82,17 +81,17 @@ const ServicesSection = () => {
   return (
     <section
       ref={sectionRef}
-      className="py-32 px-6 bg-gradient-to-b from-gray-50 via-white to-orange-50 overflow-hidden relative"
+      className="py-32 px-6 bg-gradient-to-b from-gray-50 via-white to-[#F37021]/5 overflow-hidden relative"
     >
       {/* Background Orbs */}
       <motion.div className="absolute inset-0 pointer-events-none" style={{ y, opacity }}>
-        <div className="absolute top-20 left-10 w-96 h-96 bg-gradient-to-br from-orange-400/20 to-red-500/20 rounded-full blur-3xl" />
-        <div className="absolute bottom-32 right-20 w-80 h-80 bg-gradient-to-tl from-blue-500/20 to-orange-600/20 rounded-full blur-3xl" />
-        <div className="absolute inset-0 bg-grid-orange-100/5 bg-[size:60px_60px]" />
+        <div className="absolute top-20 left-10 w-96 h-96 bg-gradient-to-br from-[#F37021]/20 to-red-500/20 rounded-full blur-3xl" />
+        <div className="absolute bottom-32 right-20 w-80 h-80 bg-gradient-to-tl from-blue-500/20 to-[#F37021]/20 rounded-full blur-3xl" />
+        <div className="absolute inset-0 bg-grid-[#F37021]/5 bg-[size:60px_60px]" />
       </motion.div>
 
       <div className="max-w-7xl mx-auto relative z-10">
-        {/* Hero Title */}
+        {/* MAIN HEADING - SAME STYLE AS "Why Choose Getfix?" */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -100,16 +99,16 @@ const ServicesSection = () => {
           transition={{ duration: 1 }}
           className="text-center mb-20"
         >
-          <motion.h2
-            className="text-5xl sm:text-6xl md:text-8xl lg:text-[96px] font-black bg-clip-text text-transparent bg-gradient-to-r from-orange-600 via-red-600 to-orange-700 mb-6 leading-tight"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={{
-              hidden: { opacity: 0 },
-              visible: { opacity: 1, transition: { staggerChildren: 0.08 } },
-            }}
-          >
+            <motion.h2
+  className="text-5xl sm:text-6xl md:text-7xl lg:text-7xl font-black text-[#F37021] mb-6 leading-tight"
+  initial="hidden"
+  whileInView="visible"
+  viewport={{ once: true }}
+  variants={{
+    hidden: { opacity: 0 },
+    visible: { opacity: 1, transition: { staggerChildren: 0.08 } },
+  }}
+>
             {"Get Fixed".split("").map((char, i) => (
               <motion.span
                 key={i}
@@ -124,13 +123,14 @@ const ServicesSection = () => {
               </motion.span>
             ))}
           </motion.h2>
+
           <motion.p
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             transition={{ delay: 0.6 }}
             className="text-xl md:text-2xl text-gray-700 max-w-4xl mx-auto font-light mb-10"
           >
-            Fast, reliable Apple repair for <span className="font-bold text-orange-600">iPhone, iWatch, MacBook & iPod</span> — done right, the first time.
+            Fast, reliable Apple repair for <span className="font-bold text-[#F37021]">iPhone, iWatch, MacBook & iPod</span> — done right, the first time.
           </motion.p>
 
           {/* Trust Stats */}
@@ -151,9 +151,9 @@ const ServicesSection = () => {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: 1 + i * 0.1 }}
-                className="flex flex-col items-center text-orange-600"
+                className="flex flex-col items-center"
               >
-                {stat.icon}
+                <div className="text-[#F37021] mb-2">{stat.icon}</div>
                 <div className="text-2xl md:text-3xl font-black text-gray-900 mt-2">{stat.value}</div>
                 <div className="text-sm text-gray-600">{stat.label}</div>
               </motion.div>
@@ -161,14 +161,14 @@ const ServicesSection = () => {
           </motion.div>
         </motion.div>
 
-        {/* Service Cards with LARGE IMAGES */}
+        {/* Service Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-20">
           {services.map((service, i) => (
             <ServiceCard key={i} {...service} index={i} />
           ))}
         </div>
 
-        {/* Customer Testimonials */}
+        {/* Testimonials */}
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -186,7 +186,7 @@ const ServicesSection = () => {
                 initial={{ opacity: 0, scale: 0.9 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 transition={{ delay: i * 0.15 }}
-                className="bg-white/80 backdrop-blur-md rounded-2xl p-5 shadow-md border border-orange-100"
+                className="bg-white/80 backdrop-blur-md rounded-2xl p-5 shadow-md border border-[#F37021]/20"
               >
                 <div className="flex gap-1 mb-2">
                   {[...Array(t.rating)].map((_, j) => (
@@ -200,7 +200,7 @@ const ServicesSection = () => {
           </div>
         </motion.div>
 
-        {/* CTA */}
+        {/* CTA + Trust Badges */}
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           whileInView={{ opacity: 1, scale: 1 }}
@@ -211,7 +211,7 @@ const ServicesSection = () => {
           <motion.div whileHover={{ scale: 1.05 }} className="inline-block mb-12">
             <a
               href="/book"
-              className="group relative inline-flex items-center gap-4 px-14 py-6 bg-gradient-to-r from-orange-600 to-red-600 text-white font-bold text-xl rounded-full overflow-hidden shadow-2xl hover:shadow-orange-500/50 transition-all duration-300"
+              className="group relative inline-flex items-center gap-4 px-14 py-6 bg-gradient-to-r from-[#F37021] to-red-600 text-white font-bold text-xl rounded-full overflow-hidden shadow-2xl hover:shadow-[#F37021]/50 transition-all duration-300"
             >
               <span className="relative z-10 flex items-center gap-3">
                 Get Fixed Today
@@ -228,7 +228,6 @@ const ServicesSection = () => {
             </a>
           </motion.div>
 
-          {/* Trust Badges */}
           <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
@@ -248,7 +247,7 @@ const ServicesSection = () => {
               <span>Up to 1-Year Warranty</span>
             </div>
             <div className="flex items-center gap-2">
-              <Headphones className="w-5 h-5 text-orange-600" />
+              <Headphones className="w-5 h-5 text-[#F37021]" />
               <span>Free Pickup & Drop</span>
             </div>
           </motion.div>
@@ -258,7 +257,7 @@ const ServicesSection = () => {
   );
 };
 
-// === 3D SERVICE CARD WITH LARGE IMAGE ===
+// === SERVICE CARD ===
 const ServiceCard = ({
   img, title, desc, gradient, index, delay,
   badge, badgeColor, price, turnaround, warranty, features
@@ -280,11 +279,6 @@ const ServiceCard = ({
     mouseY.set(y);
   };
 
-  const handleMouseLeave = () => {
-    mouseX.set(0);
-    mouseY.set(0);
-  };
-
   return (
     <motion.div
       initial={{ opacity: 0, y: 100 }}
@@ -297,59 +291,48 @@ const ServiceCard = ({
       <motion.div
         ref={cardRef}
         onMouseMove={handleMouseMove}
-        onMouseLeave={handleMouseLeave}
+        onMouseLeave={() => { mouseX.set(0); mouseY.set(0); }}
         style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
         whileHover={{ scale: 1.05, z: 120 }}
         className="relative bg-white/95 backdrop-blur-3xl rounded-3xl overflow-hidden shadow-2xl border border-white/40 hover:shadow-3xl transition-all duration-500"
       >
-        {/* Gradient Overlay */}
         <div className={`absolute inset-0 bg-gradient-to-br ${gradient} opacity-0 group-hover:opacity-20 blur-3xl transition-opacity duration-700`} />
 
         {/* Badge */}
         <motion.div
           initial={{ scale: 0, y: -20 }}
           whileInView={{ scale: 1, y: 0 }}
-          transition={{ delay: delay + 0.3, type: "spring", stiffness: 300 }}
+          transition={{ delay: delay + 0.3, type: "spring" }}
           className={`absolute -top-3 left-1/2 -translate-x-1/2 z-20 bg-gradient-to-r ${badgeColor} text-white text-xs font-bold px-4 py-1.5 rounded-full shadow-xl`}
           style={{ transform: "translateZ(80px)" }}
         >
           {badge}
         </motion.div>
 
-        {/* LARGE IMAGE — FULL WIDTH, HERO SIZE */}
+        {/* Large Image */}
         <motion.div
           className="relative h-64 md:h-72 lg:h-80 overflow-hidden"
           style={{ transform: "translateZ(60px)" }}
           whileHover={{ scale: 1.08 }}
-          transition={{ duration: 0.6 }}
         >
-          <img
-            src={img}
-            alt={title}
-            className="w-full h-full object-cover"
-            loading="lazy"
-          />
+          <img src={img} alt={title} className="w-full h-full object-cover" loading="lazy" />
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
         </motion.div>
 
-        {/* Content Below Image */}
+        {/* Content */}
         <div className="p-6 space-y-4" style={{ transform: "translateZ(40px)" }}>
-          {/* Title */}
           <h3 className="text-2xl font-black text-gray-900 text-center">{title}</h3>
 
-          {/* Turnaround */}
-          <div className="flex items-center justify-center gap-2 text-orange-600 font-bold">
+          <div className="flex items-center justify-center gap-2 text-[#F37021] font-bold">
             <Clock className="w-5 h-5" />
             <span>{turnaround}</span>
           </div>
 
-          {/* Price */}
           <div className="text-center">
             <div className="text-3xl font-black text-gray-900">{price}</div>
             <div className="text-sm text-gray-500">Starting Price</div>
           </div>
 
-          {/* Features */}
           <ul className="space-y-2 text-sm">
             {features.slice(0, 3).map((f, i) => (
               <li key={i} className="flex items-center gap-2 text-gray-700">
@@ -359,14 +342,12 @@ const ServiceCard = ({
             ))}
           </ul>
 
-          {/* Warranty */}
           <div className="flex items-center justify-center gap-1 text-sm font-bold text-green-600">
             <Shield className="w-4 h-4" />
             {warranty} Warranty
           </div>
         </div>
 
-        {/* Shine Effect */}
         <motion.div
           className="absolute inset-0 bg-gradient-to-r from-transparent via-white/50 to-transparent opacity-0 group-hover:opacity-100 pointer-events-none"
           initial={{ x: "-150%" }}

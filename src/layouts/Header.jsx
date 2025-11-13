@@ -6,39 +6,33 @@ import Logo from "../assets/Logo.png";
 
 export default function Header() {
   const [open, setOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
   const headerRef = useRef(null);
 
   const navItems = [
     { name: "Home", path: "/" },
-    { name: "About", path: "/about" },
-    { name: "Services", path: "/services" },
-    { name: "Courses", path: "/courses" },
+    { name: "About Us", path: "/about" },
+    { name: "Our Courses", path: "/courses" },
+     { name: "Our Services", path: "/services" },
+      { name: "Gallery", path: "/gallery" },
     { name: "Contact", path: "/contact" },
   ];
 
   const { scrollY } = useScroll();
-  const backgroundOpacity = useTransform(scrollY, [0, 100], [0, 0.9]);
-  const blurAmount = useTransform(scrollY, [0, 100], [0, 10]);
-  const scale = useTransform(scrollY, [0, 100], [1, 0.95]);
+  const backgroundOpacity = useTransform(scrollY, [0, 70], [0, 0.95]);
+  const blurAmount = useTransform(scrollY, [0, 70], [0, 10]);
+  const scale = useTransform(scrollY, [0, 70], [1, 0.94]);
 
-  const springConfig = { stiffness: 300, damping: 30 };
+  const springConfig = { stiffness: 350, damping: 30 };
   const smoothOpacity = useSpring(backgroundOpacity, springConfig);
   const smoothBlur = useSpring(blurAmount, springConfig);
   const smoothScale = useSpring(scale, springConfig);
 
-  useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 50);
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
   return (
     <>
-      {/* Glass Header */}
+      {/* FIXED HEIGHT & RESPONSIVE GLASS HEADER */}
       <motion.header
         ref={headerRef}
-        className="fixed top-0 left-0 w-full z-50 pointer-events-none"
+        className="fixed top-0 left-0 w-full z-50 pointer-events-none min-h-[56px] sm:min-h-[64px]"
         style={{ scale: smoothScale }}
       >
         <motion.div
@@ -50,150 +44,114 @@ export default function Header() {
           }}
         />
 
-        {/* Layout Container */}
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 sm:py-4 pointer-events-auto">
-          {/* === MOBILE LAYOUT: Logo | Text (Center) | Menu === */}
+        {/* TIGHT PADDING & RESPONSIVE */}
+        <div className="relative max-w-7xl mx-auto px-3 sm:px-4 lg:px-6 py-1.5 sm:py-2 pointer-events-auto">
+          
+          {/* === MOBILE: LOGO + MENU === */}
           <div className="flex items-center justify-between w-full lg:hidden">
-            {/* Logo */}
-            <motion.div
-              whileHover={{ scale: 1.08 }}
-              transition={{ type: "spring", stiffness: 400, damping: 20 }}
-              className="flex items-center group"
-            >
-              <Link to="/" className="flex items-center">
-                <div className="relative">
-                  <motion.div
-                    className="absolute inset-0 rounded-xl bg-gradient-to-br from-orange-400/30 to-red-600/30 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                    initial={{ scale: 0.8 }}
-                    whileHover={{ scale: 1.3 }}
-                  />
-                  <motion.div
-                    className="absolute top-0 left-0 w-6 h-6 bg-white/50 rounded-full blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                    animate={{ x: [0, 18, 0], y: [0, -10, 0] }}
-                    transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-                  />
-                  <div className="w-12 h-12 sm:w-14 sm:h-14 flex items-center justify-center">
-                    <img
-                      src={Logo}
-                      alt="GetFix Academy Logo"
-                      className="w-full h-full object-contain drop-shadow-lg"
-                      style={{
-                        imageRendering: "-webkit-optimize-contrast",
-                        filter: "drop-shadow(0 4px 6px rgba(0,0,0,0.1))",
-                      }}
+            {/* LOGO — BIG BUT RESPONSIVE */}
+            <div className="flex-1 flex justify-center max-w-[120px] sm:max-w-[140px]">
+              <motion.div
+                whileHover={{ scale: 1.15 }}
+                transition={{ type: "spring", stiffness: 400, damping: 20 }}
+                className="relative group"
+              >
+                <Link to="/">
+                  <div className="relative">
+                    {/* CONTROLLED GLOW */}
+                    <motion.div
+                      className="absolute -inset-2 rounded-full bg-gradient-to-r from-[#F37021]/35 to-red-600/35 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                      initial={{ scale: 0.9 }}
+                      whileHover={{ scale: 1.25 }}
                     />
+                    {/* LOGO — SCALED SAFELY */}
+                    <div className="w-16 h-16 sm:w-20 sm:h-20 flex items-center justify-center relative z-10">
+                      <img
+                        src={Logo}
+                        alt="GetFix Academy"
+                        className="w-full h-full object-contain drop-shadow-lg"
+                        style={{
+                          imageRendering: "-webkit-optimize-contrast",
+                          filter: "drop-shadow(0 2px 4px rgba(0,0,0,0.15))",
+                        }}
+                      />
+                    </div>
                   </div>
-                </div>
-              </Link>
-            </motion.div>
+                </Link>
+              </motion.div>
+            </div>
 
-            {/* CENTERED TEXT (MOBILE ONLY) */}
-            <motion.span
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3, type: "spring" }}
-              className="text-lg sm:text-xl font-black bg-clip-text text-transparent bg-gradient-to-r from-orange-600 via-red-600 to-orange-700"
-            >
-              GetFix Academy
-            </motion.span>
-
-            {/* Mobile Menu Toggle */}
+            {/* MENU BUTTON — TIGHT */}
             <motion.button
               whileTap={{ scale: 0.9 }}
               onClick={() => setOpen(!open)}
-              className="p-2 rounded-full bg-white/70 backdrop-blur-md shadow-md border border-white/30"
+              className="p-1.5 rounded-full bg-white/80 backdrop-blur-md shadow-sm border border-white/40 flex items-center justify-center"
             >
-              <motion.div
-                animate={{ rotate: open ? 180 : 0 }}
-                transition={{ duration: 0.3 }}
-              >
-                {open ? (
-                  <X className="w-5 h-5 sm:w-6 sm:h-6 text-orange-600" />
-                ) : (
-                  <Menu className="w-5 h-5 sm:w-6 sm:h-6 text-orange-600" />
-                )}
-              </motion.div>
+              {open ? (
+                <X className="w-4.5 h-4.5 text-[#F37021]" />
+              ) : (
+                <Menu className="w-4.5 h-4.5 text-[#F37021]" />
+              )}
             </motion.button>
           </div>
 
-          {/* === DESKTOP LAYOUT: Logo+Text | Nav | CTA === */}
+          {/* === DESKTOP === */}
           <div className="hidden lg:flex items-center justify-between w-full">
-            {/* LEFT: LOGO + TEXT */}
+            {/* LOGO */}
             <motion.div
-              whileHover={{ scale: 1.08 }}
-              transition={{ type: "spring", stiffness: 400, damping: 20 }}
-              className="flex items-center gap-3 sm:gap-4 group"
+              whileHover={{ scale: 1.12 }}
+              className="relative group max-w-[140px]"
             >
-              <Link to="/" className="flex items-center gap-3 sm:gap-4">
+              <Link to="/">
                 <div className="relative">
                   <motion.div
-                    className="absolute inset-0 rounded-xl bg-gradient-to-br from-orange-400/30 to-red-600/30 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                    initial={{ scale: 0.8 }}
-                    whileHover={{ scale: 1.3 }}
+                    className="absolute -inset-4 rounded-full bg-gradient-to-r from-[#F37021]/35 to-red-600/35 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                    initial={{ scale: 0.9 }}
+                    whileHover={{ scale: 1.25 }}
                   />
-                  <motion.div
-                    className="absolute top-0 left-0 w-6 h-6 sm:w-8 sm:h-8 bg-white/50 rounded-full blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                    animate={{ x: [0, 18, 0], y: [0, -10, 0] }}
-                    transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-                  />
-                  <div className="w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 flex items-center justify-center">
+                  <div className="w-24 h-24 lg:w-28 lg:h-28 flex items-center justify-center relative z-10">
                     <img
                       src={Logo}
-                      alt="GetFix Academy Logo"
-                      className="w-full h-full object-contain drop-shadow-lg"
+                      alt="GetFix Academy"
+                      className="w-full h-full object-contain drop-shadow-xl"
                       style={{
                         imageRendering: "-webkit-optimize-contrast",
-                        filter: "drop-shadow(0 4px 6px rgba(0,0,0,0.1))",
+                        filter: "drop-shadow(0 4px 8px rgba(0,0,0,0.2))",
                       }}
                     />
                   </div>
                 </div>
-
-                <motion.span
-                  className="hidden sm:block text-xl sm:text-2xl md:text-3xl font-black bg-clip-text text-transparent bg-gradient-to-r from-orange-600 via-red-600 to-orange-700"
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.2 }}
-                >
-                  GetFix Academy
-                </motion.span>
               </Link>
             </motion.div>
 
-            {/* CENTER: NAV */}
-            <nav className="flex-1 justify-center flex">
-              <div className="flex items-center gap-1 bg-white/50 backdrop-blur-xl rounded-full px-5 py-2.5 shadow-lg border border-white/30">
+            {/* NAV */}
+            <nav className="flex-1 flex justify-center">
+              <div className="flex items-center gap-1 bg-white/60 backdrop-blur-xl rounded-full px-3 py-1.5 shadow-md border border-white/30 text-sm">
                 {navItems.map((item, i) => (
                   <NavLink key={item.name} {...item} index={i} />
                 ))}
               </div>
             </nav>
 
-            {/* RIGHT: CTA */}
+            {/* CTA */}
             <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
+              initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.6 }}
-              className="flex"
+              transition={{ delay: 0.4 }}
             >
               <Link
                 to="/enroll"
-                className="group relative inline-flex items-center gap-2 px-5 py-2.5 sm:px-6 sm:py-3 bg-gradient-to-r from-orange-600 to-red-600 text-white font-bold text-sm sm:text-base rounded-full overflow-hidden shadow-xl hover:shadow-orange-500/50 transition-all duration-300"
+                className="group relative inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-[#F37021] to-red-600 text-white font-bold text-xs rounded-full overflow-hidden shadow-md hover:shadow-[#F37021]/40 transition-all duration-300"
               >
-                <span className="relative z-10 flex items-center gap-2">
-                  Enroll Now
-                  <motion.span
-                    animate={{ x: [0, 5, 0] }}
-                    transition={{ duration: 1.5, repeat: Infinity }}
-                  >
-                    <Zap className="w-4 h-4 sm:w-5 sm:h-5" />
-                  </motion.span>
+                <span className="relative z-10 flex items-center gap-1.5">
+                  Enroll
+                  <Zap className="w-3.5 h-3.5" />
                 </span>
                 <motion.div
-                  className="absolute inset-0 bg-white opacity-0 group-hover:opacity-30"
+                  className="absolute inset-0 bg-white opacity-0 group-hover:opacity-25"
                   initial={{ x: "-100%" }}
                   whileHover={{ x: "100%" }}
-                  transition={{ duration: 0.6 }}
+                  transition={{ duration: 0.5 }}
                 />
               </Link>
             </motion.div>
@@ -201,34 +159,34 @@ export default function Header() {
         </div>
       </motion.header>
 
-      {/* MOBILE MENU — FULLSCREEN & ANIMATED */}
+      {/* MOBILE MENU */}
       <AnimatePresence>
         {open && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-gradient-to-br from-orange-50 via-white to-red-50 z-40 lg:hidden pt-20"
+            className="fixed inset-0 bg-gradient-to-br from-[#F37021]/5 via-white to-red-50 z-40 lg:hidden pt-16"
           >
             <motion.div
-              initial={{ y: -100, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              exit={{ y: -100, opacity: 0 }}
-              transition={{ type: "spring", stiffness: 300, damping: 30 }}
-              className="flex flex-col items-center justify-center h-full space-y-6 sm:space-y-8 px-6"
+              initial={{ y: -60 }}
+              animate={{ y: 0 }}
+              exit={{ y: -60 }}
+              transition={{ type: "spring", stiffness: 300, damping: 28 }}
+              className="flex flex-col items-center justify-center h-full space-y-6 px-6"
             >
               {navItems.map((item, i) => (
                 <motion.div
                   key={item.name}
-                  initial={{ opacity: 0, y: 50 }}
+                  initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -50 }}
-                  transition={{ delay: i * 0.1 }}
+                  exit={{ opacity: 0, y: -30 }}
+                  transition={{ delay: i * 0.07 }}
                 >
                   <Link
                     to={item.path}
                     onClick={() => setOpen(false)}
-                    className="text-3xl sm:text-4xl md:text-5xl font-black text-gray-800 hover:text-orange-600 transition-all duration-300 text-center"
+                    className="text-3xl sm:text-4xl font-black text-gray-800 hover:text-[#F37021] transition-colors"
                   >
                     {item.name}
                   </Link>
@@ -236,18 +194,18 @@ export default function Header() {
               ))}
 
               <motion.div
-                initial={{ opacity: 0, scale: 0.8 }}
+                initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.6 }}
-                className="mt-8 sm:mt-12"
+                transition={{ delay: 0.5 }}
+                className="mt-8"
               >
                 <Link
                   to="/enroll"
                   onClick={() => setOpen(false)}
-                  className="inline-flex items-center gap-3 px-8 py-4 sm:px-10 sm:py-5 bg-gradient-to-r from-orange-600 to-red-600 text-white font-bold text-lg sm:text-xl rounded-full shadow-2xl hover:shadow-orange-500/50 transition-all duration-300"
+                  className="inline-flex items-center gap-3 px-8 py-3.5 bg-gradient-to-r from-[#F37021] to-red-600 text-white font-bold text-lg rounded-full shadow-xl hover:shadow-[#F37021]/50 transition-all"
                 >
                   Start Learning
-                  <ChevronDown className="w-5 h-5 sm:w-6 sm:h-6 animate-bounce" />
+                  <ChevronDown className="w-5 h-5 animate-bounce" />
                 </Link>
               </motion.div>
             </motion.div>
@@ -258,34 +216,29 @@ export default function Header() {
   );
 }
 
-// === HOLOGRAPHIC NAV LINK ===
+// === RESPONSIVE NAV LINK ===
 const NavLink = ({ name, path, index }) => {
-  const [isHovered, setIsHovered] = useState(false);
+  const [hovered, setHovered] = useState(false);
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: -20 }}
+      initial={{ opacity: 0, y: -10 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: index * 0.1 }}
+      transition={{ delay: index * 0.07 }}
       className="relative"
-      onHoverStart={() => setIsHovered(true)}
-      onHoverEnd={() => setIsHovered(false)}
+      onHoverStart={() => setHovered(true)}
+      onHoverEnd={() => setHovered(false)}
     >
       <Link
         to={path}
-        className="relative px-4 py-2 text-gray-800 font-medium text-sm lg:text-base transition-colors duration-300"
+        className="px-3 py-1 text-gray-700 font-medium text-xs transition-colors whitespace-nowrap"
       >
         {name}
         <motion.div
-          className="absolute inset-0 rounded-full bg-gradient-to-r from-orange-500/20 to-red-500/20 blur-xl"
-          animate={{ scale: isHovered ? 1.5 : 0, opacity: isHovered ? 1 : 0 }}
-          transition={{ duration: 0.4 }}
-        />
-        <motion.div
-          className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-orange-600 to-red-600"
+          className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-[#F37021] to-red-600"
           initial={{ scaleX: 0 }}
-          animate={{ scaleX: isHovered ? 1 : 0 }}
-          transition={{ duration: 0.3 }}
+          animate={{ scaleX: hovered ? 1 : 0 }}
+          transition={{ duration: 0.25 }}
           style={{ transformOrigin: "left" }}
         />
       </Link>

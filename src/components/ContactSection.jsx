@@ -1,5 +1,5 @@
-import { motion, useMotionValue, useTransform, useSpring, useScroll, useTransform as transformScroll } from "framer-motion";
-import { Mail, User, MessageSquare, Send, Sparkles, CheckCircle, ArrowRight } from "lucide-react";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { Mail, User, MessageSquare, Send, Sparkles, CheckCircle } from "lucide-react";
 import { useRef, useState } from "react";
 
 const ContactSection = () => {
@@ -12,8 +12,8 @@ const ContactSection = () => {
     offset: ["start end", "end start"],
   });
 
-  const y = transformScroll(scrollYProgress, [0, 1], [150, -150]);
-  const scale = transformScroll(scrollYProgress, [0, 0.5, 1], [0.8, 1, 1]);
+  const y = useTransform(scrollYProgress, [0, 1], [150, -150]);
+  const scale = useTransform(scrollYProgress, [0, 0.5, 1], [0.8, 1, 1]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -27,7 +27,7 @@ const ContactSection = () => {
   return (
     <section
       ref={sectionRef}
-      className="py-32 px-6 bg-gradient-to-b from-gray-50 via-white to-orange-50 overflow-hidden relative"
+      className="py-32 px-6 bg-gradient-to-b from-gray-50 via-white to-[#F37021]/5 overflow-hidden relative"
       style={{ perspective: 1500 }}
     >
       {/* Floating Background Orbs */}
@@ -41,7 +41,7 @@ const ContactSection = () => {
             y: [0, -80, 0],
           }}
           transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute top-20 left-10 w-96 h-96 bg-gradient-to-br from-orange-400/20 to-red-500/20 rounded-full blur-3xl"
+          className="absolute top-20 left-10 w-96 h-96 bg-gradient-to-br from-[#F37021]/20 to-red-500/20 rounded-full blur-3xl"
         />
         <motion.div
           animate={{
@@ -49,11 +49,11 @@ const ContactSection = () => {
             y: [0, 100, 0],
           }}
           transition={{ duration: 25, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute bottom-32 right-20 w-80 h-80 bg-gradient-to-tl from-purple-500/20 to-orange-600/20 rounded-full blur-3xl"
+          className="absolute bottom-32 right-20 w-80 h-80 bg-gradient-to-tl from-purple-500/20 to-[#F37021]/20 rounded-full blur-3xl"
         />
       </motion.div>
 
-      <div className="max-w-7督导 mx-auto relative z-10">
+      <div className="max-w-7xl mx-auto relative z-10">
         {/* Epic Title */}
         <motion.div
           initial={{ opacity: 0, y: 50 }}
@@ -62,17 +62,14 @@ const ContactSection = () => {
           transition={{ duration: 1 }}
           className="text-center mb-20"
         >
-      <motion.h2
-  className="text-5xl sm:text-6xl md:text-8xl lg:text-[96px] font-black bg-clip-text text-transparent bg-gradient-to-r from-orange-600 via-red-600 to-purple-700 mb-6 leading-tight"
+         <motion.h2
+  className="text-5xl sm:text-6xl md:text-7xl lg:text-7xl font-black text-[#F37021] mb-6 leading-tight"
   initial="hidden"
   whileInView="visible"
   viewport={{ once: true }}
   variants={{
     hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.08 },
-    },
+    visible: { opacity: 1, transition: { staggerChildren: 0.08 } },
   }}
 >
             {"Get In Touch".split("").map((char, i) => (
@@ -95,7 +92,8 @@ const ContactSection = () => {
             transition={{ delay: 0.6 }}
             className="text-xl md:text-2xl text-gray-700 max-w-3xl mx-auto font-light"
           >
-            Have questions? Want to enroll? <span className="font-bold text-orange-600">We’re here to help.</span>
+            Have questions? Want to enroll?{" "}
+            <span className="font-bold text-[#F37021]">We’re here to help.</span>
           </motion.p>
         </motion.div>
 
@@ -118,7 +116,7 @@ const ContactSection = () => {
             transition={{ type: "spring", stiffness: 300 }}
           >
             {/* Holographic Glow */}
-            <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-orange-500/20 to-purple-600/20 opacity-0 group-hover:opacity-100 blur-3xl transition-opacity duration-700" />
+            <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-[#F37021]/20 to-red-600/20 opacity-0 group-hover:opacity-100 blur-3xl transition-opacity duration-700" />
 
             {/* Form Fields */}
             <div className="grid gap-6">
@@ -158,7 +156,7 @@ const ContactSection = () => {
                 type="submit"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="group relative inline-flex items-center gap-4 px-10 py-5 bg-gradient-to-r from-orange-600 to-red-600 text-white font-bold text-lg rounded-full overflow-hidden shadow-2xl hover:shadow-orange-500/50 transition-all duration-300"
+                className="group relative inline-flex items-center gap-4 px-10 py-5 bg-gradient-to-r from-[#F37021] to-red-600 text-white font-bold text-lg rounded-full overflow-hidden shadow-2xl hover:shadow-[#F37021]/50 transition-all duration-300"
               >
                 <motion.span
                   className="relative z-10 flex items-center gap-3"
@@ -211,7 +209,7 @@ const ContactSection = () => {
               className="mt-8 flex justify-center items-center gap-6 text-sm text-gray-500"
             >
               <span className="flex items-center gap-2">
-                <Sparkles className="w-4 h-4 text-orange-600" />
+                <Sparkles className="w-4 h-4 text-[#F37021]" />
                 24hr Response
               </span>
               <span>•</span>
@@ -250,7 +248,6 @@ const ContactSection = () => {
 // === FLOATING INPUT FIELD ===
 const FloatingInput = ({ icon, type, placeholder, value, onChange, delay }) => {
   const [isFocused, setIsFocused] = useState(false);
-  const inputRef = useRef(null);
 
   return (
     <motion.div
@@ -268,19 +265,18 @@ const FloatingInput = ({ icon, type, placeholder, value, onChange, delay }) => {
           {icon}
         </div>
         <input
-          ref={inputRef}
           type={type}
           value={value}
           onChange={onChange}
           onFocus={() => setIsFocused(true)}
           onBlur={() => setIsFocused(false)}
           placeholder=" "
-          className="w-full pl-12 pr-4 py-5 bg-white/70 backdrop-blur-md border border-gray-300 rounded-2xl focus:outline-none focus:border-orange-500 focus:ring-4 focus:ring-orange-500/20 transition-all duration-300 peer"
+          className="w-full pl-12 pr-4 py-5 bg-white/70 backdrop-blur-md border border-gray-300 rounded-2xl focus:outline-none focus:border-[#F37021] focus:ring-4 focus:ring-[#F37021]/20 transition-all duration-300 peer"
         />
         <label
           className={`absolute left-12 top-1/2 transform -translate-y-1/2 text-gray-500 pointer-events-none transition-all duration-300 ${
             isFocused || value
-              ? "text-xs -translate-y-10 text-orange-600 font-medium"
+              ? "text-xs -translate-y-10 text-[#F37021] font-medium"
               : "text-base"
           }`}
         >
@@ -316,12 +312,12 @@ const FloatingTextarea = ({ icon, placeholder, value, onChange, delay }) => {
           onFocus={() => setIsFocused(true)}
           onBlur={() => setIsFocused(false)}
           placeholder=" "
-          className="w-full pl-12 pr-4 py-5 bg-white/70 backdrop-blur-md border border-gray-300 rounded-2xl focus:outline-none focus:border-orange-500 focus:ring-4 focus:ring-orange-500/20 transition-all duration-300 resize-none h-40 peer"
+          className="w-full pl-12 pr-4 py-5 bg-white/70 backdrop-blur-md border border-gray-300 rounded-2xl focus:outline-none focus:border-[#F37021] focus:ring-4 focus:ring-[#F37021]/20 transition-all duration-300 resize-none h-40 peer"
         />
         <label
           className={`absolute left-12 top-6 text-gray-500 pointer-events-none transition-all duration-300 ${
             isFocused || value
-              ? "text-xs -translate-y-8 text-orange-600 font-medium"
+              ? "text-xs -translate-y-8 text-[#F37021] font-medium"
               : "text-base"
           }`}
         >

@@ -3,16 +3,17 @@ import { Link } from "react-router-dom";
 import { ArrowRight, Zap, Shield, Award } from "lucide-react";
 import { useState, useEffect } from "react";
 
-// Import your video
-import videoFile from "../assets/video/Video.mp4"; // This is correct
+// Import your assets
+import videoFile from "../assets/video/Video.mp4";
 import iphones from "../assets/iphones.png";
-import img from "../assets/images/img.png"
-import imgg from "../assets/images/imgg.png"
-import imagee from "../assets/imagee.png"
+import img from "../assets/images/img.png";
+import imgg from "../assets/images/imgg.png";
+import imagee from "../assets/imagee.png";
+
 const carouselItems = [
-   {
+  {
     type: "video",
-    src: videoFile, // Use the imported video
+    src: videoFile,
     poster: "/hero/image1.jpg",
   },
   {
@@ -35,13 +36,11 @@ const carouselItems = [
     src: imagee,
     alt: "Students learning chip-level repair in lab",
   },
-  // Optional: Add second video later
 ];
 
 const HeroSection = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  // Auto-advance every 6 seconds
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % carouselItems.length);
@@ -50,16 +49,16 @@ const HeroSection = () => {
   }, []);
 
   return (
-    <section className="relative min-h-screen flex flex-col justify-center items-center text-center px-6 bg-gradient-to-b from-orange-50 via-white to-orange-50 overflow-hidden">
+    <section className="relative min-h-screen flex flex-col justify-center items-center text-center px-6 bg-gradient-to-b from-[#F37021]/5 via-white to-[#F37021]/5 overflow-hidden">
       {/* Subtle Background Orbs */}
       <div className="absolute inset-0 opacity-30 pointer-events-none">
-        <div className="absolute top-20 left-20 w-96 h-96 bg-orange-200 rounded-full blur-3xl" />
-        <div className="absolute bottom-20 right-20 w-80 h-80 bg-red-200 rounded-full blur-3xl" />
+        <div className="absolute top-20 left-20 w-96 h-96 bg-[#F37021]/30 rounded-full blur-3xl" />
+        <div className="absolute bottom-20 right-20 w-80 h-80 bg-red-200/30 rounded-full blur-3xl" />
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto w-full grid md:grid-cols-2 gap-10 items-center">
         
-        {/* === LEFT: CAROUSEL (Image + Video) === */}
+        {/* LEFT: CAROUSEL */}
         <div className="relative h-96 md:h-full md:min-h-96 rounded-3xl overflow-hidden shadow-2xl">
           <AnimatePresence mode="wait">
             <motion.div
@@ -108,7 +107,7 @@ const HeroSection = () => {
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
         </div>
 
-        {/* === RIGHT: TEXT CONTENT === */}
+        {/* RIGHT: TEXT CONTENT */}
         <div className="text-left md:text-left space-y-6">
           <motion.div
             initial={{ opacity: 0, x: 30 }}
@@ -116,7 +115,10 @@ const HeroSection = () => {
             transition={{ duration: 0.8 }}
           >
             <h1 className="text-5xl md:text-6xl lg:text-7xl font-black text-gray-900 mb-4 leading-tight">
-              Empowering <span className="text-orange-600">Future</span>
+              Empowering{" "}
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#F37021] to-red-600">
+                Future
+              </span>
               <br />
               Mobile Engineers
             </h1>
@@ -134,7 +136,7 @@ const HeroSection = () => {
             className="flex flex-wrap gap-6"
           >
             <div className="flex items-center gap-2 text-gray-700">
-              <Zap className="w-6 h-6 text-orange-600" />
+              <Zap className="w-6 h-6 text-[#F37021]" />
               <span className="font-medium">30-Day Fast-Track</span>
             </div>
             <div className="flex items-center gap-2 text-gray-700">
@@ -156,14 +158,14 @@ const HeroSection = () => {
           >
             <Link
               to="/courses"
-              className="inline-flex items-center justify-center gap-3 px-8 py-4 bg-orange-600 text-white font-bold text-lg rounded-full hover:bg-orange-700 transition-all shadow-lg hover:shadow-xl"
+              className="inline-flex items-center justify-center gap-3 px-8 py-4 bg-gradient-to-r from-[#F37021] to-red-600 text-white font-bold text-lg rounded-full shadow-lg hover:shadow-[#F37021]/50 transition-all duration-300"
             >
               Explore Courses
               <ArrowRight className="w-5 h-5" />
             </Link>
             <Link
               to="/contact"
-              className="inline-flex items-center justify-center gap-3 px-8 py-4 bg-white text-orange-600 font-bold text-lg rounded-full border-2 border-orange-600 hover:bg-orange-50 transition-all shadow-lg"
+              className="inline-flex items-center justify-center gap-3 px-8 py-4 bg-white text-[#F37021] font-bold text-lg rounded-full border-2 border-[#F37021] hover:bg-[#F37021]/5 transition-all shadow-lg"
             >
               Get Free Demo
             </Link>
@@ -183,7 +185,7 @@ const HeroSection = () => {
               { value: "4.9", label: "Student Rating" },
             ].map((stat, i) => (
               <div key={i}>
-                <div className="text-2xl md:text-3xl font-black text-orange-600">{stat.value}</div>
+                <div className="text-2xl md:text-3xl font-black text-[#F37021]">{stat.value}</div>
                 <div className="text-sm text-gray-600">{stat.label}</div>
               </div>
             ))}
@@ -201,9 +203,9 @@ const HeroSection = () => {
         <motion.div
           animate={{ y: [0, 10, 0] }}
           transition={{ duration: 1.5, repeat: Infinity }}
-          className="w-6 h-10 border-2 border-orange-600 rounded-full flex justify-center"
+          className="w-6 h-10 border-2 border-[#F37021] rounded-full flex justify-center"
         >
-          <div className="w-1 h-3 bg-orange-600 rounded-full mt-2" />
+          <div className="w-1 h-3 bg-[#F37021] rounded-full mt-2" />
         </motion.div>
       </motion.div>
     </section>
