@@ -1,194 +1,138 @@
 import { useState, useEffect, useRef } from "react";
-import { motion, useScroll, useTransform, useSpring, AnimatePresence } from "framer-motion";
-import { Menu, X, Zap, ChevronDown } from "lucide-react";
+import {
+  motion,
+  useScroll,
+  useTransform,
+  useSpring,
+  AnimatePresence,
+} from "framer-motion";
+import {
+  Menu,
+  X,
+  Zap,
+  ChevronDown,
+  Home,
+  BookOpen,
+  Wrench,
+  Image,
+  Phone,
+  GraduationCap,
+} from "lucide-react";
 import { Link } from "react-router-dom";
 import Logo from "../assets/Logo.png";
 
+/* -------------------------------------------------
+   Desktop detection – 3-D effects only on lg+
+   ------------------------------------------------- */
+const useIsDesktop = () => {
+  const [isDesktop, setIsDesktop] = useState(true);
+  useEffect(() => {
+    const check = () => setIsDesktop(window.innerWidth >= 1024);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, []);
+  return isDesktop;
+};
+
+/* -------------------------------------------------
+   MAIN HEADER
+   ------------------------------------------------- */
 export default function Header() {
   const [open, setOpen] = useState(false);
-  const headerRef = useRef(null);
+  const isDesktop = useIsDesktop();
 
   const navItems = [
-    { name: "Home", path: "/" },
-    { name: "About Us", path: "/about" },
-    { name: "Our Courses", path: "/courses" },
-     { name: "Our Services", path: "/services" },
-      { name: "Gallery", path: "/gallery" },
-    { name: "Contact", path: "/contact" },
+    { name: "Home", path: "/", icon: <Home className="w-4 h-4" /> },
+    { name: "About Us", path: "/about", icon: <GraduationCap className="w-4 h-4" /> },
+    { name: "Our Courses", path: "/courses", icon: <BookOpen className="w-4 h-4" /> },
+    { name: "Our Services", path: "/services", icon: <Wrench className="w-4 h-4" /> },
+    { name: "Gallery", path: "/gallery", icon: <Image className="w-4 h-4" /> },
+    { name: "Contact", path: "/contact", icon: <Phone className="w-4 h-4" /> },
   ];
 
+  /* ---- scroll glass effect ---- */
   const { scrollY } = useScroll();
-  const backgroundOpacity = useTransform(scrollY, [0, 70], [0, 0.95]);
-  const blurAmount = useTransform(scrollY, [0, 70], [0, 10]);
-  const scale = useTransform(scrollY, [0, 70], [1, 0.94]);
+  const bgOpacity = useTransform(scrollY, [0, 80], [0, 0.92]);
+  const blurAmt   = useTransform(scrollY, [0, 80], [0, 12]);
+  const scale     = useTransform(scrollY, [0, 80], [1, 0.96]);
 
-  const springConfig = { stiffness: 350, damping: 30 };
-  const smoothOpacity = useSpring(backgroundOpacity, springConfig);
-  const smoothBlur = useSpring(blurAmount, springConfig);
-  const smoothScale = useSpring(scale, springConfig);
+  const smoothOpacity = useSpring(bgOpacity, { stiffness: 300, damping: 30 });
+  const smoothBlur    = useSpring(blurAmt,   { stiffness: 300, damping: 30 });
+  const smoothScale   = useSpring(scale,     { stiffness: 300, damping: 30 });
 
   return (
     <>
-      {/* FIXED HEIGHT & RESPONSIVE GLASS HEADER */}
+      {/* ---------- FIXED GLASS HEADER ---------- */}
       <motion.header
-        ref={headerRef}
-        className="fixed top-0 left-0 w-full z-50 pointer-events-none min-h-[56px] sm:min-h-[64px]"
-        style={{ scale: smoothScale }}
+        className="fixed inset-x-0 top-0 z-50 pointer-events-none"
+        style={{ scale: isDesktop ? smoothScale : 1 }}
       >
+        {/* glass backdrop */}
         <motion.div
           className="absolute inset-0 pointer-events-none"
           style={{
-            background: `rgba(255, 255, 255, ${smoothOpacity})`,
-            backdropFilter: smoothBlur.get() > 0 ? `blur(${smoothBlur.get()}px)` : "none",
-            WebkitBackdropFilter: smoothBlur.get() > 0 ? `blur(${smoothBlur.get()}px)` : "none",
+            background: `rgba(255,255,255,${smoothOpacity})`,
+            backdropFilter:
+              smoothBlur.get() > 0 ? `blur(${smoothBlur.get()}px)` : "none",
+            WebkitBackdropFilter:
+              smoothBlur.get() > 0 ? `blur(${smoothBlur.get()}px)` : "none",
           }}
         />
 
-        {/* TIGHT PADDING & RESPONSIVE */}
-        <div className="relative max-w-7xl mx-auto px-3 sm:px-4 lg:px-6 py-1.5 sm:py-2 pointer-events-auto">
-          
-          {/* === MOBILE: LOGO + MENU === */}
-          <div className="flex items-center justify-between w-full lg:hidden">
-            {/* LOGO — BIG BUT RESPONSIVE */}
-            <div className="flex-1 flex justify-center max-w-[120px] sm:max-w-[140px]">
-              <motion.div
-                whileHover={{ scale: 1.15 }}
-                transition={{ type: "spring", stiffness: 400, damping: 20 }}
-                className="relative group"
-              >
-                <Link to="/">
-                  <div className="relative">
-                    {/* CONTROLLED GLOW */}
-                    <motion.div
-                      className="absolute -inset-2 rounded-full bg-gradient-to-r from-[#F37021]/35 to-red-600/35 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                      initial={{ scale: 0.9 }}
-                      whileHover={{ scale: 1.25 }}
-                    />
-                    {/* LOGO — SCALED SAFELY */}
-                    <div className="w-16 h-16 sm:w-20 sm:h-20 flex items-center justify-center relative z-10">
-                      <img
-                        src={Logo}
-                        alt="GetFix Academy"
-                        className="w-full h-full object-contain drop-shadow-lg"
-                        style={{
-                          imageRendering: "-webkit-optimize-contrast",
-                          filter: "drop-shadow(0 2px 4px rgba(0,0,0,0.15))",
-                        }}
-                      />
-                    </div>
-                  </div>
-                </Link>
-              </motion.div>
-            </div>
-
-            {/* MENU BUTTON — TIGHT */}
-            <motion.button
-              whileTap={{ scale: 0.9 }}
-              onClick={() => setOpen(!open)}
-              className="p-1.5 rounded-full bg-white/80 backdrop-blur-md shadow-sm border border-white/40 flex items-center justify-center"
-            >
-              {open ? (
-                <X className="w-4.5 h-4.5 text-[#F37021]" />
-              ) : (
-                <Menu className="w-4.5 h-4.5 text-[#F37021]" />
-              )}
-            </motion.button>
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 pointer-events-auto">
+          {/* ---- MOBILE LAYOUT (logo left – toggle right) ---- */}
+          <div className="flex items-center justify-between lg:hidden">
+            <LogoLink size="sm" />
+            <MenuToggle open={open} setOpen={setOpen} />
           </div>
 
-          {/* === DESKTOP === */}
-          <div className="hidden lg:flex items-center justify-between w-full">
-            {/* LOGO */}
-            <motion.div
-              whileHover={{ scale: 1.12 }}
-              className="relative group max-w-[140px]"
-            >
-              <Link to="/">
-                <div className="relative">
-                  <motion.div
-                    className="absolute -inset-4 rounded-full bg-gradient-to-r from-[#F37021]/35 to-red-600/35 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                    initial={{ scale: 0.9 }}
-                    whileHover={{ scale: 1.25 }}
-                  />
-                  <div className="w-24 h-24 lg:w-28 lg:h-28 flex items-center justify-center relative z-10">
-                    <img
-                      src={Logo}
-                      alt="GetFix Academy"
-                      className="w-full h-full object-contain drop-shadow-xl"
-                      style={{
-                        imageRendering: "-webkit-optimize-contrast",
-                        filter: "drop-shadow(0 4px 8px rgba(0,0,0,0.2))",
-                      }}
-                    />
-                  </div>
-                </div>
-              </Link>
-            </motion.div>
-
-            {/* NAV */}
+          {/* ---- DESKTOP LAYOUT ---- */}
+          <div className="hidden lg:flex items-center justify-between">
+            <LogoLink size="lg" />
             <nav className="flex-1 flex justify-center">
-              <div className="flex items-center gap-1 bg-white/60 backdrop-blur-xl rounded-full px-3 py-1.5 shadow-md border border-white/30 text-sm">
-                {navItems.map((item, i) => (
-                  <NavLink key={item.name} {...item} index={i} />
+              <div className="flex items-center gap-1 bg-white/70 backdrop-blur-xl rounded-full px-4 py-2 shadow-lg border border-white/40">
+                {navItems.map((it, i) => (
+                  <NavLink key={it.name} {...it} index={i} />
                 ))}
               </div>
             </nav>
-
-            {/* CTA */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.4 }}
-            >
-              <Link
-                to="/enroll"
-                className="group relative inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-[#F37021] to-red-600 text-white font-bold text-xs rounded-full overflow-hidden shadow-md hover:shadow-[#F37021]/40 transition-all duration-300"
-              >
-                <span className="relative z-10 flex items-center gap-1.5">
-                  Enroll
-                  <Zap className="w-3.5 h-3.5" />
-                </span>
-                <motion.div
-                  className="absolute inset-0 bg-white opacity-0 group-hover:opacity-25"
-                  initial={{ x: "-100%" }}
-                  whileHover={{ x: "100%" }}
-                  transition={{ duration: 0.5 }}
-                />
-              </Link>
-            </motion.div>
+            <CTAButton />
           </div>
         </div>
       </motion.header>
 
-      {/* MOBILE MENU */}
+      {/* ---------- FULL-SCREEN MOBILE MENU ---------- */}
       <AnimatePresence>
         {open && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-gradient-to-br from-[#F37021]/5 via-white to-red-50 z-40 lg:hidden pt-16"
+            className="fixed inset-0 bg-gradient-to-br from-[#F37021]/10 via-white to-red-50 z-40 pt-20 overflow-y-auto"
           >
             <motion.div
-              initial={{ y: -60 }}
+              initial={{ y: -50 }}
               animate={{ y: 0 }}
-              exit={{ y: -60 }}
-              transition={{ type: "spring", stiffness: 300, damping: 28 }}
-              className="flex flex-col items-center justify-center h-full space-y-6 px-6"
+              exit={{ y: -50 }}
+              className="flex flex-col items-center justify-center min-h-full space-y-8 px-6"
             >
-              {navItems.map((item, i) => (
+              {navItems.map((it, i) => (
                 <motion.div
-                  key={item.name}
+                  key={it.name}
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -30 }}
-                  transition={{ delay: i * 0.07 }}
+                  transition={{ delay: i * 0.08 }}
+                  className="w-full max-w-xs"
                 >
                   <Link
-                    to={item.path}
+                    to={it.path}
                     onClick={() => setOpen(false)}
-                    className="text-3xl sm:text-4xl font-black text-gray-800 hover:text-[#F37021] transition-colors"
+                    className="flex items-center justify-center gap-3 px-6 py-4 text-2xl font-bold text-gray-800 hover:text-[#F37021] rounded-2xl hover:bg-white/60 hover:shadow-lg transition-all"
                   >
-                    {item.name}
+                    {it.icon}
+                    <span>{it.name}</span>
                   </Link>
                 </motion.div>
               ))}
@@ -196,17 +140,10 @@ export default function Header() {
               <motion.div
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.5 }}
-                className="mt-8"
+                transition={{ delay: 0.6 }}
+                className="mt-10 w-full max-w-xs"
               >
-                <Link
-                  to="/enroll"
-                  onClick={() => setOpen(false)}
-                  className="inline-flex items-center gap-3 px-8 py-3.5 bg-gradient-to-r from-[#F37021] to-red-600 text-white font-bold text-lg rounded-full shadow-xl hover:shadow-[#F37021]/50 transition-all"
-                >
-                  Start Learning
-                  <ChevronDown className="w-5 h-5 animate-bounce" />
-                </Link>
+                <CTAButton mobile />
               </motion.div>
             </motion.div>
           </motion.div>
@@ -216,32 +153,156 @@ export default function Header() {
   );
 }
 
-// === RESPONSIVE NAV LINK ===
-const NavLink = ({ name, path, index }) => {
+/* -------------------------------------------------
+   LOGO (left-aligned)
+   ------------------------------------------------- */
+const LogoLink = ({ size = "sm" }) => {
+  const isDesktop = useIsDesktop();
+  const hoverScale = size === "lg" ? 1.12 : 1.15;
+
+  return (
+    <motion.div
+      whileHover={{ scale: isDesktop ? hoverScale : 1.05 }}
+      transition={{ type: "spring", stiffness: 400, damping: 20 }}
+      className="relative group"
+    >
+      <Link to="/" aria-label="GetFix Academy">
+        <div className="relative">
+          {/* glow */}
+          <motion.div
+            className="absolute -inset-3 rounded-full bg-gradient-to-r from-[#F37021]/40 to-red-600/40 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+            initial={{ scale: 0.9 }}
+            whileHover={{ scale: 1.3 }}
+          />
+          {/* image */}
+          <div
+            className={
+              size === "lg"
+                ? "w-24 h-24 lg:w-28 lg:h-28"
+                : "w-16 h-16 sm:w-20 sm:h-20"
+            }
+          >
+            <img
+              src={Logo}
+              alt="GetFix Academy"
+              className="w-full h-full object-contain drop-shadow-xl"
+              style={{
+                imageRendering: "-webkit-optimize-contrast",
+                filter: "drop-shadow(0 4px 8px rgba(0,0,0,0.15))",
+              }}
+              loading="eager"
+            />
+          </div>
+        </div>
+      </Link>
+    </motion.div>
+  );
+};
+
+/* -------------------------------------------------
+   MENU TOGGLE (right-aligned)
+   ------------------------------------------------- */
+const MenuToggle = ({ open, setOpen }) => (
+  <motion.button
+    whileTap={{ scale: 0.9 }}
+    onClick={() => setOpen(!open)}
+    className="p-2 rounded-full bg-white/80 backdrop-blur-md shadow-md border border-white/40"
+    aria-label="Toggle menu"
+  >
+    <AnimatePresence mode="wait">
+      {open ? (
+        <motion.div
+          key="close"
+          initial={{ rotate: -90, opacity: 0 }}
+          animate={{ rotate: 0, opacity: 1 }}
+          exit={{ rotate: 90, opacity: 0 }}
+        >
+          <X className="w-5 h-5 text-[#F37021]" />
+        </motion.div>
+      ) : (
+        <motion.div
+          key="menu"
+          initial={{ rotate: 90, opacity: 0 }}
+          animate={{ rotate: 0, opacity: 1 }}
+          exit={{ rotate: -90, opacity: 0 }}
+        >
+          <Menu className="w-5 h-5 text-[#F37021]" />
+        </motion.div>
+      )}
+    </AnimatePresence>
+  </motion.button>
+);
+
+/* -------------------------------------------------
+   NAV LINK (desktop)
+   ------------------------------------------------- */
+const NavLink = ({ name, path, icon, index }) => {
   const [hovered, setHovered] = useState(false);
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: -10 }}
+      initial={{ opacity: 0, y: -12 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: index * 0.07 }}
-      className="relative"
+      className="relative px-1"
       onHoverStart={() => setHovered(true)}
       onHoverEnd={() => setHovered(false)}
     >
       <Link
         to={path}
-        className="px-3 py-1 text-gray-700 font-medium text-xs transition-colors whitespace-nowrap"
+        className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-gray-700 hover:text-[#F37021] rounded-full transition-colors whitespace-nowrap"
       >
-        {name}
-        <motion.div
-          className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-[#F37021] to-red-600"
-          initial={{ scaleX: 0 }}
-          animate={{ scaleX: hovered ? 1 : 0 }}
-          transition={{ duration: 0.25 }}
-          style={{ transformOrigin: "left" }}
-        />
+        {icon}
+        <span>{name}</span>
       </Link>
+
+      {/* active/hover dot */}
+      <motion.div
+        className="absolute bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 bg-[#F37021] rounded-full"
+        initial={{ scale: 0 }}
+        animate={{ scale: hovered ? 1 : 0 }}
+        transition={{ duration: 0.2 }}
+      />
     </motion.div>
   );
 };
+
+/* -------------------------------------------------
+   CTA BUTTON
+   ------------------------------------------------- */
+const CTAButton = ({ mobile = false }) => (
+  <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+    <Link
+      to="/enroll"
+      className={`
+        group relative inline-flex items-center justify-center gap-2
+        ${mobile
+          ? "px-8 py-4 text-lg font-bold w-full rounded-2xl shadow-xl"
+          : "px-5 py-2.5 text-sm font-bold rounded-full shadow-lg"}
+        bg-gradient-to-r from-[#F37021] to-red-600 text-white overflow-hidden
+        hover:shadow-[#F37021]/50 transition-all duration-300
+      `}
+    >
+      <span className="relative z-10 flex items-center gap-2">
+        {mobile ? "Start Learning" : "Enroll"}
+        {mobile ? (
+          <motion.div
+            animate={{ y: [0, 4, 0] }}
+            transition={{ duration: 1.5, repeat: Infinity }}
+          >
+            <ChevronDown className="w-5 h-5" />
+          </motion.div>
+        ) : (
+          <Zap className="w-4 h-4" />
+        )}
+      </span>
+
+      <motion.div
+        className="absolute inset-0 bg-white opacity-0 group-hover:opacity-25"
+        initial={{ x: "-100%" }}
+        whileHover={{ x: "100%" }}
+        transition={{ duration: 0.6 }}
+      />
+    </Link>
+  </motion.div>
+);
