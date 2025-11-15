@@ -27,14 +27,14 @@ const AboutSection = () => {
 
   // === Mission & Vision ===
   const missionVision = [
-    { icon: <Target className="w-9 h-9 sm:w-10 sm:h-10" />, title: "Our Mission", desc: "Train 100,000 mobile engineers to fix every broken device with confidence." },
+    { icon: <Target className="w-9 h-9 sm:w-10 sm:h-10" />, title: "Our Mission", desc: " Our mission is to establish Kerala’s No.1 Smartphone Training Academy. We aim to produce highly skilled technicians who can meet the growing demand in the mobile repair industry. The academy will also serve as atalent hub for the broader GetFix ecosystem, helping fuel the brand’s long term vision" },
     { icon: <Globe className="w-9 h-9 sm:w-10 sm:h-10" />, title: "Our Vision", desc: "A world where every phone has a skilled repair hero — trained by Getfix." },
   ];
 
   // === Team ===
   const team = [
-    { name: "Sirajul Haque", role: "Founder & Lead Trainer - GetFix Academy", exp: "20+ Years Experience in chip level repair", img: T1 },
-    { name: "Shuhaib Shadi", role: "Co-Founder & Lead Trainer - GetFix Academy", exp: "10+ Year Experience iPhone Chip level Expert", img: T2 },
+    { name: "Sirajul Haque", role: "Founder & Lead Trainer - GetFix & GetFix Academy", exp: "20+ Years Experience in chip level repair", img: T1 },
+    { name: "Shuhaib Shadi", role: "Co-Founder & Director - GetFix & GetFix Academy", exp: "10+ Year Experience iPhone Chip level Expert", img: T2 },
     { name: "Amit Patel", role: "Android Specialist", exp: "10+ yrs in software repair", img: "/team/amit.jpg" },
   ];
 
@@ -50,7 +50,7 @@ const AboutSection = () => {
           transition={{ duration: 0.8 }}
           className="text-center mb-12 sm:mb-16"
         >
-          <h2 className="text-4xl sm:text-5xl md:text-6xl font-black bg-clip-text text-transparent bg-gradient-to-r from-[#F37021] to-red-600 mb-3 sm:mb-4">
+          <h2 className="text-4xl sm:text-5xl md:text-7xl font-black text-[#F37021] mb-4 leading-tight">
             Our Story
           </h2>
           <p className="text-base sm:text-lg md:text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed px-2">
@@ -103,9 +103,10 @@ const AboutSection = () => {
           transition={{ duration: 0.8 }}
           className="mb-12 sm:mb-16"
         >
-          <h3 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-10 sm:mb-12 bg-clip-text text-transparent bg-gradient-to-r from-[#F37021] to-red-600">
-            Why Choose <span className="text-[#F37021]">Getfix</span>?
-          </h3>
+         <h3 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-10 sm:mb-12">
+  <span className="text-[#F37021]">Why Choose</span> <span className="text-black">Getfix</span>?
+</h3>
+
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
             {whyChoose.map((item, i) => (
               <motion.div

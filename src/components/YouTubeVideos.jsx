@@ -105,7 +105,7 @@ const YouTubeVideos = () => {
           className="text-center mt-12"
         >
           <a
-            href="https://www.youtube.com/@getfixonline"
+            href="https://www.youtube.com/watch?v=zMjvlr7nOiM"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 text-[#F37021] font-bold hover:gap-3 transition-all duration-300"

@@ -2,6 +2,7 @@ import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import {
   Mail,
   MapPin,
+  Phone, // <-- NEW: Phone icon
   Facebook,
   Instagram,
   Twitter,
@@ -11,7 +12,7 @@ import {
   Copyright
 } from "lucide-react";
 import { useRef } from "react";
-import Logo from "../assets/Logo.png";
+import Logo2 from "../assets/Logo2.png";
 
 const Footer = () => {
   const footerRef = useRef(null);
@@ -39,10 +40,11 @@ const Footer = () => {
 
   const quickLinks = [
     { name: "Home", path: "/" },
-    { name: "About Us", path: "/about" },
-    { name: "Courses", path: "/courses" },
-    { name: "Services", path: "/services" },
-    { name: "Contact Us", path: "/contact" },
+    { name: "Our Story", path: "/about" },
+    { name: "Learn With Us", path: "/courses" },
+    { name: "What We Offer", path: "/services" },
+    {name:"Highlights",path:"/gallery"},
+    { name: "Get in Touch", path: "/contact" },
   ];
 
   return (
@@ -84,10 +86,11 @@ const Footer = () => {
               className="space-y-5"
             >
               <div className="flex items-center gap-3">
+                {/* LOGO SIZE INCREASED */}
                 <img
-                  src={Logo}
+                  src={Logo2}
                   alt="GetFix Academy Logo"
-                  className="w-16 h-16 sm:w-20 sm:h-20 object-contain drop-shadow-md"
+                  className="w-24 h-24 sm:w-28 sm:h-28 object-contain drop-shadow-md"
                 />
                 <h3 className="text-2xl sm:text-3xl font-black text-white leading-tight">
                   GetFix Academy
@@ -127,7 +130,7 @@ const Footer = () => {
               </ul>
             </motion.div>
 
-            {/* Contact Info */}
+            {/* Contact Info – CONTACT NUMBER ADDED */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -139,15 +142,21 @@ const Footer = () => {
               <div className="space-y-3">
                 <div className="flex items-center gap-3 text-gray-400 text-sm sm:text-base">
                   <div className="p-2 bg-white/10 rounded-lg border border-white/20">
+                    <Phone className="w-4.5 h-4.5 text-[#F37021]" />
+                  </div>
+                  <span>+91 9720108040</span>
+                </div>
+                <div className="flex items-center gap-3 text-gray-400 text-sm sm:text-base">
+                  <div className="p-2 bg-white/10 rounded-lg border border-white/20">
                     <Mail className="w-4.5 h-4.5 text-[#F37021]" />
                   </div>
-                  <span>hello@getfixacademy.com</span>
+                  <span>info@getfixonline.com</span>
                 </div>
                 <div className="flex items-center gap-3 text-gray-400 text-sm sm:text-base">
                   <div className="p-2 bg-white/10 rounded-lg border border-white/20">
                     <MapPin className="w-4.5 h-4.5 text-[#F37021]" />
                   </div>
-                  <span>Kerala, India</span>
+                  <span>Keystone Building Kozhikode, Kerala, India</span>
                 </div>
               </div>
             </motion.div>

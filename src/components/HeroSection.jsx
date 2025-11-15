@@ -49,7 +49,7 @@ const HeroSection = () => {
   useEffect(() => {
     const textInterval = setInterval(() => {
       setCurrentTextIndex((prev) => (prev + 1) % tagLines.length);
-    }, 6000);
+    }, 2000);
     return () => clearInterval(textInterval);
   }, []);
 
@@ -57,7 +57,7 @@ const HeroSection = () => {
   useEffect(() => {
     const wordInterval = setInterval(() => {
       setCurrentWordIndex((prev) => (prev + 1) % futureWords.length);
-    }, 6000);
+    }, 2000);
     return () => clearInterval(wordInterval);
   }, []);
 
@@ -200,7 +200,7 @@ const HeroSection = () => {
               <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
             </Link>
             <Link
-              to="/contact"
+              to="https://www.youtube.com/watch?v=zMjvlr7nOiM"
               className="inline-flex items-center justify-center gap-2 px-6 py-3 sm:px-8 sm:py-4 bg-white text-[#F37021] font-bold text-base sm:text-lg rounded-full border-2 border-[#F37021] hover:bg-[#F37021]/5 transition-all shadow-lg whitespace-nowrap"
             >
               Get Free Demo
@@ -216,7 +216,7 @@ const HeroSection = () => {
           >
             {[
               { value: "10,000+", label: "Students Trained" },
-              { value: "5+", label: "Years Excellence" },
+              { value: "6+", label: "Years Excellence" },
               { value: "100%", label: "Job Placement" },
               { value: "4.9", label: "Student Rating" },
             ].map((stat, i) => (

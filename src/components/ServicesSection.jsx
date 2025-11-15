@@ -1,22 +1,22 @@
-/*  Courses + Services – Unified Section  */
+/*  Courses + Services – Full Data, India-Optimized, Clean  */
 import { motion, useMotionValue, useTransform, useSpring, useScroll } from "framer-motion";
 import {
-  BookOpen, Zap, Award, Clock, Star, Shield, Wrench, Battery,
-  ChevronRight, ExternalLink, Users, Trophy, Globe, CheckCircle,
+  BookOpen, Zap, Award, Clock, Star, ChevronRight, ExternalLink,
+  Users, Trophy, CheckCircle,
 } from "lucide-react";
 import { useRef, useState, useEffect } from "react";
 
 import iphones from "../assets/iphones.png";
-import iwatch from "../assets/iwatch.png";
-import mac from "../assets/mac.png";
-import ipod from "../assets/ipod.png";
+import iwatch   from "../assets/iwatch.png";
+import mac      from "../assets/mac.png";
+import ipod     from "../assets/ipod.png";
 
-/* ------------------- DATA ------------------- */
-const courses = [
+/* ------------------- FULL COURSE DATA ------------------- */
+const initialCourses = [
   {
-    type: "course",
-    name: "iPhone Expert Course",
-    duration: "3 Months",
+    name: "iPhone Basic to Advanced Level Repair Course (Offline)",
+    duration: "18 Days",
+    description: "Master iPhone diagnostics, chip replacement, and full device servicing.",
     level: "Intermediate",
     students: "2,847",
     rating: 4.9,
@@ -26,15 +26,16 @@ const courses = [
     badge: "BEST SELLER",
     badgeColor: "from-yellow-400 to-amber-600",
     live: true,
+    certificate: true,
     support: "24/7 Discord",
-    price: "$899",
-    originalPrice: "$1,499",
-    link: "/courses/iphone-expert",
+    price: "₹60,000/-",
+    originalPrice: "₹72,000",
+    link: "/courses/iphone-basic-advanced",
   },
   {
-    type: "course",
-    name: "Advanced Android Service",
-    duration: "2 Months",
+    name: "iPhone Advanced Level Repair Course (Online)",
+    duration: "3 Months",
+    description: "Comprehensive training on Android software flashing, repairs, and board work.",
     level: "Advanced",
     students: "3,102",
     rating: 4.8,
@@ -44,15 +45,16 @@ const courses = [
     badge: "FAST TRACK",
     badgeColor: "from-green-400 to-emerald-600",
     live: false,
+    certificate: true,
     support: "Email + Forum",
-    price: "$699",
-    originalPrice: "$1,199",
-    link: "/courses/android-advanced",
+    price: "₹24,999/-",
+    originalPrice: "₹30,000",
+    link: "/courses/iphone-advanced-online",
   },
   {
-    type: "course",
     name: "Mobile Chip Engineering",
     duration: "6 Months",
+    description: "Learn micro-soldering, circuit tracing, power supply testing, and IC replacement.",
     level: "Expert",
     students: "1,593",
     rating: 5.0,
@@ -62,21 +64,22 @@ const courses = [
     badge: "ELITE",
     badgeColor: "from-purple-500 to-pink-600",
     live: true,
+    certificate: true,
     support: "Lifetime Access",
-    price: "$1,999",
-    originalPrice: "$2,999",
-    link: "/courses/chip-engineering",
+    price: "₹1,49,999/-",
+    originalPrice: "₹2,25,000",
+    link: "/courses/mobile-chip-engineering",
   },
 ];
 
-const services = [
+/* ------------------- SERVICE DATA ------------------- */
+const initialServices = [
   {
-    type: "service",
     img: iphones,
     title: "iPhone Repair",
     turnaround: "30–60 min",
     warranty: "180 Days",
-    price: "From $89",
+    price: "From ₹899",
     gradient: "from-[#F37021] to-red-600",
     badge: "30 MIN FIX",
     badgeColor: "from-yellow-400 to-amber-600",
@@ -84,12 +87,11 @@ const services = [
     link: "/repair/iphone",
   },
   {
-    type: "service",
     img: iwatch,
     title: "Apple Watch Repair",
     turnaround: "1–2 Hours",
     warranty: "90 Days",
-    price: "From $79",
+    price: "From ₹799",
     gradient: "from-[#F37021] to-orange-700",
     badge: "FASTEST",
     badgeColor: "from-green-400 to-emerald-600",
@@ -97,12 +99,11 @@ const services = [
     link: "/repair/watch",
   },
   {
-    type: "service",
     img: mac,
     title: "MacBook Repair",
     turnaround: "1–3 Days",
     warranty: "365 Days",
-    price: "From $199",
+    price: "From ₹1,999",
     gradient: "from-red-600 to-[#F37021]",
     badge: "EXPERT",
     badgeColor: "from-purple-500 to-pink-600",
@@ -110,12 +111,11 @@ const services = [
     link: "/repair/macbook",
   },
   {
-    type: "service",
-    img: ipod, // <-- your iPod image here
+    img: ipod,
     title: "iPod Repair",
     turnaround: "1–2 Hours",
     warranty: "90 Days",
-    price: "From $49",
+    price: "From ₹499",
     gradient: "from-indigo-500 to-blue-600",
     badge: "POPULAR",
     badgeColor: "from-cyan-400 to-blue-500",
@@ -123,7 +123,6 @@ const services = [
     link: "/repair/ipod",
   },
 ];
-
 
 /* ------------------- HOOK ------------------- */
 const useIsDesktop = () => {
@@ -140,6 +139,9 @@ const useIsDesktop = () => {
 /* ------------------- MAIN SECTION ------------------- */
 const CoursesAndServicesSection = () => {
   const sectionRef = useRef(null);
+  const [courses] = useState(initialCourses);
+  const [services] = useState(initialServices);
+
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["start end", "end start"],
@@ -160,7 +162,7 @@ const CoursesAndServicesSection = () => {
 
       <div className="max-w-7xl mx-auto relative z-10">
 
-        {/* ---------- HERO HEADING ---------- */}
+        {/* HERO HEADING */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -177,7 +179,7 @@ const CoursesAndServicesSection = () => {
               visible: { opacity: 1, transition: { staggerChildren: 0.08 } },
             }}
           >
-            {"Our Courses".split("").map((c, i) => (
+            {"Our Programs & Solutions".split("").map((c, i) => (
               <motion.span
                 key={i}
                 variants={{
@@ -228,14 +230,14 @@ const CoursesAndServicesSection = () => {
           </motion.div>
         </motion.div>
 
-        {/* ---------- COURSES GRID ---------- */}
+        {/* COURSES GRID */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 lg:gap-10 mb-16">
           {courses.map((c, i) => (
-            <UnifiedCard key={i} {...c} index={i} />
+            <CourseCard key={i} {...c} index={i} />
           ))}
         </div>
 
-        {/* ---------- QUICK REPAIR SERVICES ---------- */}
+        {/* QUICK REPAIR SERVICES */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -250,11 +252,11 @@ const CoursesAndServicesSection = () => {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           {services.map((s, i) => (
-            <UnifiedCard key={i} {...s} index={i + courses.length} />
+            <ServiceCard key={i} {...s} index={i + courses.length} />
           ))}
         </div>
 
-        {/* ---------- CTA ---------- */}
+        {/* CTA */}
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           whileInView={{ opacity: 1, scale: 1 }}
@@ -278,29 +280,10 @@ const CoursesAndServicesSection = () => {
   );
 };
 
-/* ------------------- UNIFIED CARD ------------------- */
-const UnifiedCard = ({
-  type,
-  name,
-  title,
-  duration,
-  turnaround,
-  level,
-  students,
-  rating,
-  warranty,
-  gradient,
-  icon,
-  img,
-  features,
-  badge,
-  badgeColor,
-  live,
-  support,
-  price,
-  originalPrice,
-  link,
-  index,
+/* ------------------- COURSE CARD ------------------- */
+const CourseCard = ({
+  name, duration, description, level, students, rating, gradient, icon, features,
+  badge, badgeColor, live, certificate, support, price, originalPrice, link, index
 }) => {
   const isDesktop = useIsDesktop();
   const cardRef = useRef(null);
@@ -317,10 +300,10 @@ const UnifiedCard = ({
     mouseX.set(e.clientX - r.left - r.width / 2);
     mouseY.set(e.clientY - r.top - r.height / 2);
   };
+  const handleLeave = () => { if (isDesktop) { mouseX.set(0); mouseY.set(0); } };
 
-  const handleLeave = () => {
-    if (isDesktop) { mouseX.set(0); mouseY.set(0); }
-  };
+  const clean = (p) => parseInt(p.replace(/[^\d]/g, ""), 10) || 0;
+  const savings = originalPrice ? Math.round((1 - clean(price) / clean(originalPrice)) * 100) : 0;
 
   return (
     <motion.div
@@ -353,92 +336,180 @@ const UnifiedCard = ({
           </motion.div>
         )}
 
-        {/* Image / Icon */}
-        {type === "service" ? (
+        {/* Live */}
+        {live && (
           <motion.div
-            className="h-48 sm:h-56 overflow-hidden"
-            whileHover={{ scale: 1.06 }}
+            animate={{ opacity: [1, 0.6, 1] }}
+            transition={{ duration: 2, repeat: Infinity }}
+            className="absolute top-3 left-3 w-2.5 h-2.5 bg-red-500 rounded-full"
             style={isDesktop ? { transform: "translateZ(50px)" } : {}}
-          >
-            <img src={img} alt={title} className="w-full h-full object-cover" loading="lazy" />
-          </motion.div>
-        ) : (
-          <motion.div
-            className="flex justify-center py-6"
-            style={isDesktop ? { transform: "translateZ(50px)" } : {}}
-          >
-            <div className="p-4 bg-gradient-to-br from-[#F37021]/10 to-red-100 rounded-2xl shadow-inner">
-              {icon}
-            </div>
-          </motion.div>
+          />
         )}
 
-        {/* Content */}
+        {/* Icon */}
+        <motion.div
+          className="flex justify-center py-6"
+          style={isDesktop ? { transform: "translateZ(50px)" } : {}}
+        >
+          <div className="p-4 bg-gradient-to-br from-[#F37021]/10 to-red-100 rounded-2xl shadow-inner">
+            {icon}
+          </div>
+        </motion.div>
+
         <div className="p-5 sm:p-6 space-y-3" style={isDesktop ? { transform: "translateZ(40px)" } : {}}>
-          <h3 className="text-lg sm:text-xl md:text-2xl font-black text-gray-900 text-center">
-            {type === "course" ? name : title}
+          <h3 className="text-lg sm:text-xl md:text-2xl font-black text-gray-900 text-center line-clamp-2">
+            {name}
           </h3>
 
-          {/* Time */}
           <div className="flex items-center justify-center gap-2 text-[#F37021] font-semibold text-sm sm:text-base">
             <Clock className="w-4 h-4 sm:w-5 sm:h-5" />
-            <span>{type === "course" ? duration : turnaround}</span>
+            <span>{duration}</span>
           </div>
 
-          {/* Price */}
+          <p className="text-gray-600 text-xs sm:text-sm text-center line-clamp-2">
+            {description}
+          </p>
+
           <div className="text-center">
             <div className="text-2xl sm:text-3xl font-black text-gray-900">{price}</div>
             {originalPrice && (
               <div className="text-xs sm:text-sm text-green-600 font-bold">
-                Save {Math.round((1 - parseInt(price.slice(1)) / parseInt(originalPrice.slice(1))) * 100)}%
+                Save {savings}%
               </div>
             )}
           </div>
 
-          {/* Small Details */}
           <div className="space-y-1.5 text-xs sm:text-sm text-gray-700">
-            {type === "course" ? (
-              <>
-                <div className="flex justify-between"><span>Level:</span><span className="font-bold text-[#F37021]">{level}</span></div>
-                <div className="flex justify-between"><span>Students:</span><span>{students}</span></div>
-                <div className="flex justify-between"><span>Support:</span><span>{support}</span></div>
-              </>
-            ) : (
-              <>
-                <div className="flex justify-between"><span>Warranty:</span><span className="font-bold text-green-600">{warranty}</span></div>
-                <div className="flex justify-center gap-1">
-                  {features.slice(0, 2).map((f, i) => (
-                    <span key={i} className="inline-flex items-center gap-1">
-                      <CheckCircle className="w-3 h-3 text-green-600" />{f}
-                    </span>
-                  ))}
-                </div>
-              </>
-            )}
+            <div className="flex justify-between"><span>Level:</span><span className="font-bold text-[#F37021]">{level}</span></div>
+            <div className="flex justify-between"><span>Students:</span><span>{students}</span></div>
+            <div className="flex justify-between"><span>Support:</span><span>{support}</span></div>
           </div>
 
-          {/* Rating (courses only) */}
-          {type === "course" && (
-            <div className="flex justify-center items-center gap-1">
-              <Star className="w-4 h-4 text-yellow-500 fill-current" />
-              <span className="font-bold">{rating}</span>
-              <span className="text-gray-500 text-xs">({students})</span>
-            </div>
-          )}
+          <div className="flex justify-center items-center gap-1">
+            <Star className="w-4 h-4 text-yellow-500 fill-current" />
+            <span className="font-bold">{rating}</span>
+            <span className="text-gray-500 text-xs">({students})</span>
+          </div>
 
-          {/* SEE MORE */}
           <motion.a
             href={link}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             className="mt-3 w-full inline-flex items-center justify-center gap-2 px-4 py-2 bg-gradient-to-r from-[#F37021] to-red-600 text-white font-bold text-xs sm:text-sm rounded-full shadow-lg hover:shadow-[#F37021]/50 transition-all"
           >
-            See More
+           See More Details
             <ExternalLink className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
           </motion.a>
         </div>
 
-        {/* Shine */}
+        <motion.div
+          className="absolute inset-0 rounded-2xl sm:rounded-3xl bg-gradient-to-r from-transparent via-white/50 to-transparent opacity-0 group-hover:opacity-100 pointer-events-none"
+          initial={{ x: "-150%" }}
+          whileHover={{ x: "150%" }}
+          transition={{ duration: 0.8 }}
+        />
+      </motion.div>
+    </motion.div>
+  );
+};
+
+/* ------------------- SERVICE CARD ------------------- */
+const ServiceCard = ({
+  img, title, turnaround, warranty, price, gradient, badge, badgeColor, features, link, index
+}) => {
+  const isDesktop = useIsDesktop();
+  const cardRef = useRef(null);
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+  const smoothX = useSpring(mouseX, { stiffness: 300, damping: 30 });
+  const smoothY = useSpring(mouseY, { stiffness: 300, damping: 30 });
+  const rotateX = useTransform(smoothY, [-300, 300], [12, -12]);
+  const rotateY = useTransform(smoothX, [-300, 300], [-12, 12]);
+
+  const handleMouse = (e) => {
+    if (!cardRef.current || !isDesktop) return;
+    const r = cardRef.current.getBoundingClientRect();
+    mouseX.set(e.clientX - r.left - r.width / 2);
+    mouseY.set(e.clientY - r.top - r.height / 2);
+  };
+  const handleLeave = () => { if (isDesktop) { mouseX.set(0); mouseY.set(0); } };
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 80 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.7, delay: index * 0.12 }}
+      className="relative group"
+    >
+      <motion.div
+        ref={cardRef}
+        onMouseMove={handleMouse}
+        onMouseLeave={handleLeave}
+        style={isDesktop ? { rotateX, rotateY, transformStyle: "preserve-3d" } : {}}
+        whileHover={isDesktop ? { scale: 1.04, z: 60 } : { scale: 1.02 }}
+        className="relative bg-white/95 backdrop-blur-xl rounded-2xl sm:rounded-3xl overflow-hidden shadow-xl border border-white/40 hover:shadow-2xl transition-all duration-500"
+      >
+        <div className={`absolute inset-0 rounded-2xl sm:rounded-3xl bg-gradient-to-br ${gradient} opacity-0 group-hover:opacity-30 blur-2xl transition-opacity`} />
+
+        {/* Badge */}
+        {badge && (
+          <motion.div
+            initial={{ scale: 0, rotate: -180 }}
+            whileInView={{ scale: 1, rotate: 0 }}
+            transition={{ delay: index * 0.12 + 0.2, type: "spring" }}
+            className={`absolute -top-3 sm:-top-5 left-1/2 -translate-x-1/2 bg-gradient-to-r ${badgeColor} text-white text-xs font-bold px-3 sm:px-4 py-1 sm:py-1.5 rounded-full shadow-xl flex items-center gap-1 text-[10px] sm:text-xs`}
+            style={isDesktop ? { transform: "translateZ(60px)" } : {}}
+          >
+            {badge}
+          </motion.div>
+        )}
+
+        {/* Image */}
+        <motion.div
+          className="h-48 sm:h-56 overflow-hidden"
+          whileHover={{ scale: 1.06 }}
+          style={isDesktop ? { transform: "translateZ(50px)" } : {}}
+        >
+          <img src={img} alt={title} className="w-full h-full object-cover" loading="lazy" />
+        </motion.div>
+
+        <div className="p-5 sm:p-6 space-y-3" style={isDesktop ? { transform: "translateZ(40px)" } : {}}>
+          <h3 className="text-lg sm:text-xl md:text-2xl font-black text-gray-900 text-center">
+            {title}
+          </h3>
+
+          <div className="flex items-center justify-center gap-2 text-[#F37021] font-semibold text-sm sm:text-base">
+            <Clock className="w-4 h-4 sm:w-5 sm:h-5" />
+            <span>{turnaround}</span>
+          </div>
+
+          <div className="text-center">
+            <div className="text-2xl sm:text-3xl font-black text-gray-900">{price}</div>
+          </div>
+
+          <div className="space-y-1.5 text-xs sm:text-sm text-gray-700">
+            <div className="flex justify-between"><span>Warranty:</span><span className="font-bold text-green-600">{warranty}</span></div>
+            <div className="flex justify-center gap-1 flex-wrap">
+              {features.slice(0, 2).map((f, i) => (
+                <span key={i} className="inline-flex items-center gap-1">
+                  <CheckCircle className="w-3 h-3 text-green-600" />{f}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          <motion.a
+            href={link}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="mt-3 w-full inline-flex items-center justify-center gap-2 px-4 py-2 bg-gradient-to-r from-[#F37021] to-red-600 text-white font-bold text-xs sm:text-sm rounded-full shadow-lg hover:shadow-[#F37021]/50 transition-all"
+          >
+            Book Repair
+            <ExternalLink className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+          </motion.a>
+        </div>
+
         <motion.div
           className="absolute inset-0 rounded-2xl sm:rounded-3xl bg-gradient-to-r from-transparent via-white/50 to-transparent opacity-0 group-hover:opacity-100 pointer-events-none"
           initial={{ x: "-150%" }}

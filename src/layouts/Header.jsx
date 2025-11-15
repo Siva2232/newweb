@@ -44,11 +44,11 @@ export default function Header() {
 
   const navItems = [
     { name: "Home", path: "/", icon: <Home className="w-4 h-4" /> },
-    { name: "About Us", path: "/about", icon: <GraduationCap className="w-4 h-4" /> },
-    { name: "Our Courses", path: "/courses", icon: <BookOpen className="w-4 h-4" /> },
-    { name: "Our Services", path: "/services", icon: <Wrench className="w-4 h-4" /> },
-    { name: "Gallery", path: "/gallery", icon: <Image className="w-4 h-4" /> },
-    { name: "Contact", path: "/contact", icon: <Phone className="w-4 h-4" /> },
+    { name: "Our Story", path: "/about", icon: <GraduationCap className="w-4 h-4" /> },
+    { name: "Learn With Us", path: "/courses", icon: <BookOpen className="w-4 h-4" /> },
+    { name: "What We Offer", path: "/services", icon: <Wrench className="w-4 h-4" /> },
+    { name: "Highlights", path: "/gallery", icon: <Image className="w-4 h-4" /> },
+    { name: "Get in Touch", path: "/contact", icon: <Phone className="w-4 h-4" /> },
   ];
 
   /* ---- scroll glass effect ---- */
