@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import {
   GraduationCap, Users, Award, Wrench, Cpu, Shield, Rocket,
-  Target, Globe, Star, Zap, Clock, CheckCircle, ChevronRight
+  Target, Globe, Star, Zap, Clock, CheckCircle, ChevronRight,Layers,MonitorSmartphone,UserCheck,
 } from "lucide-react";
 import T1 from "../assets/T1.png";
 import T2 from "../assets/T2.png";
@@ -17,13 +17,55 @@ const AboutSection = () => {
 
   // === Why Choose Us ===
   const whyChoose = [
-    { icon: <Wrench className="w-8 h-8" />, title: "Hands-On Labs", desc: "Real iPhone & Android devices — no simulators." },
-    { icon: <Cpu className="w-8 h-8" />, title: "Chip-Level Repair", desc: "Micro-soldering, BGA, IC replacement." },
-    { icon: <Shield className="w-8 h-8" />, title: "Certified Instructors", desc: "Apple & Android certified experts." },
-    { icon: <Rocket className="w-8 h-8" />, title: "Job Guarantee", desc: "100% placement or money back." },
-    { icon: <Clock className="w-8 h-8" />, title: "Flexible Schedule", desc: "Weekend & evening batches." },
-    { icon: <CheckCircle className="w-8 h-8" />, title: "Lifetime Support", desc: "Free doubt sessions & updates." },
-  ];
+     {
+    icon: <Layers className="w-8 h-8" />,
+    title: "Structured Learning",
+    desc: "Basic → Advanced → Master modules designed for technicians to upgrade skills step-by-step.",
+  },
+  {
+    icon: <Users className="w-8 h-8" />,
+    title: "Lifetime Support Community",
+    desc: "Join a strong community with regular updates, doubt clearing, and guidance even after the course.",
+  },
+  {
+    icon: <MonitorSmartphone className="w-8 h-8" />,
+    title: "Online + Offline + App Learning",
+    desc: "Learn anytime, anywhere — with weekly live sessions for new faults and techniques.",
+  },
+   {
+    icon: <UserCheck className="w-8 h-8" />,
+    title: "Learn Directly From the Expert",
+    desc: "Get trained by Sirajul Haque, Kerala’s leading iPhone repair specialist and a trusted chip-level trainer across South India.",
+  },
+  {
+    icon: <Wrench className="w-8 h-8" />,
+    title: "Hands-On Labs",
+    desc: "Work on real iPhone & Android devices — not simulators.",
+  },
+  {
+    icon: <Cpu className="w-8 h-8" />,
+    title: "Chip-Level Expertise",
+    desc: "Learn micro-soldering, BGA reballing, and IC replacement.",
+  },
+  {
+    icon: <Shield className="w-8 h-8" />,
+    title: "Certified Instructors",
+    desc: "Trained Apple & Android repair specialists teaching you directly.",
+  },
+  {
+    icon: <Rocket className="w-8 h-8" />,
+    title: "Job Guarantee",
+    desc: "100% placement assistance — or your money back.",
+  },
+  {
+    icon: <Clock className="w-8 h-8" />,
+    title: "Flexible Schedules",
+    desc: "Weekend and evening batches designed for working professionals.",
+  },
+
+  // ⭐ ADDED NEW ENTRIES BELOW
+];
+
 
   // === Mission & Vision ===
   const missionVision = [
@@ -33,8 +75,8 @@ const AboutSection = () => {
 
   // === Team ===
   const team = [
-    { name: "Sirajul Haque", role: "Founder & Lead Trainer - GetFix & GetFix Academy", exp: "20+ Years Experience in chip level repair", img: T1 },
-    { name: "Shuhaib Shadi", role: "Co-Founder & Director - GetFix & GetFix Academy", exp: "10+ Year Experience iPhone Chip level Expert", img: T2 },
+    { name: "Sirajul Haque", role: "Founder & Lead Trainer - GetFix & GetFix Academy", exp: "Industry Expert Trainers and 20+ Years Experience in chip level repair", img: T1 },
+    { name: "Shuhaib Shadi", role: "Co-Founder & Director - GetFix & GetFix Academy", exp: "Industry Expert Trainers and 10+ Year Experience iPhone Chip level Expert", img: T2 },
     { name: "Amit Patel", role: "Android Specialist", exp: "10+ yrs in software repair", img: "/team/amit.jpg" },
   ];
 

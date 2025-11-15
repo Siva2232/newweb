@@ -169,16 +169,20 @@ const CoursesAndServicesSection = () => {
           viewport={{ once: true }}
           className="text-center mb-12 sm:mb-16"
         >
-          <motion.h2
-            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-[#F37021] mb-4 leading-tight"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={{
-              hidden: { opacity: 0 },
-              visible: { opacity: 1, transition: { staggerChildren: 0.08 } },
-            }}
-          >
+         <motion.h2
+  className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-black text-[#F37021] mb-4 leading-tight break-words text-wrap-normal"
+  initial="hidden"
+  whileInView="visible"
+  viewport={{ once: true }}
+  variants={{
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.08 },
+    },
+  }}
+>
+
             {"Our Programs & Solutions".split("").map((c, i) => (
               <motion.span
                 key={i}
