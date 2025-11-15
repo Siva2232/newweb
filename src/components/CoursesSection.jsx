@@ -164,7 +164,7 @@ const CoursesSection = () => {
           >
             {[
               { icon: <Users className="w-6 h-6 sm:w-7 sm:h-7" />, value: "700+", label: "Students" },
-              { icon: <Trophy className="w-6 h-6 sm:w-7 sm:h-7" />, value: "2000+", label: "Placed" },
+              { icon: <Trophy className="w-6 h-6 sm:w-7 sm:h-7" />, value: "500+", label: "Placed" },
               { icon: <Star className="w-6 h-6 sm:w-7 sm:h-7" />, value: "4.9", label: "Rating" },
             ].map((s, i) => (
               <motion.div
