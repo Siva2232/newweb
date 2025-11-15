@@ -45,7 +45,7 @@ const AboutSection = () => {
   const team = [
     { name: "Sirajul Haque", role: "Founder & Lead Trainer - GetFix Academy", exp: "Industry Expert Trainers with 20+ Years of Chip-Level Repair Experience", img: T1 },
     { name: "Shuhaib Shadi", role: "Co-Founder & Director - GetFix Academy", exp: "Industry Expert Trainers with 10+ Years of iPhone Chip-Level Repair Experience", img: T2 },
-    { name: "Amit Patel", role: "Android Specialist", exp: "10+ Years in Software Repair", img: "/team/amit.jpg" },
+    { name: "Pinks", role: "Co-Founder - GetFix Academy", exp: "Over 20 Years of Industry Expertise with International Apple Experience (Croatia)", img: "/team/amit.jpg" },
   ];
 
   return (
