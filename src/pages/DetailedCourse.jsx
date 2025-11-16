@@ -1,4 +1,4 @@
-/*  DetailedCourse.jsx – NOV 16, 2025 | FINAL 100% WORKING */
+/*  DetailedCourse.jsx – NOV 16, 2025 | 100% WORKING */
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import {
   Clock, Star, Users, CheckCircle, IndianRupee,
@@ -7,7 +7,12 @@ import {
 import { useRef, useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 
-// === MOCK DATA ===
+// === IMPORT IMAGES ===
+import offline from "../assets/offline.png";
+import online from "../assets/online.png";
+import android from "../assets/android.png";
+
+// === MOCK DATA (IMAGE FIXED) ===
 const courseData = [
   {
     id: "iphone-offline",
@@ -18,7 +23,7 @@ const courseData = [
     rating: 4.9,
     price: "₹60,000/-",
     originalPrice: "₹72,000",
-    image: "/src/assets/offline.png",
+    image: offline, // FIXED: was {offline}
     badge: "BEST SELLER",
     badgeColor: "from-yellow-400 to-amber-600",
     live: true,
@@ -40,7 +45,7 @@ const courseData = [
     rating: 4.8,
     price: "₹24,999/-",
     originalPrice: "₹30,000",
-    image: "/src/assets/online.png",
+    image: online,
     badge: "FAST TRACK",
     badgeColor: "from-green-400 to-emerald-600",
     live: false,
@@ -62,7 +67,7 @@ const courseData = [
     rating: 5.0,
     price: "₹2,499/month",
     originalPrice: "₹2,999/month",
-    image: "/src/assets/android.png",
+    image: android,
     badge: "ELITE",
     badgeColor: "from-purple-500 to-pink-600",
     live: true,
@@ -84,7 +89,6 @@ const DetailedCourse = () => {
   const [course, setCourse] = useState(null);
   const [isDesktop, setIsDesktop] = useState(false);
 
-  // === FIND COURSE + DESKTOP CHECK ===
   useEffect(() => {
     const found = courseData.find(c => c.id === id);
     if (!found) {
@@ -99,7 +103,6 @@ const DetailedCourse = () => {
     return () => window.removeEventListener("resize", check);
   }, [id, navigate]);
 
-  // === LOADING STATE ===
   if (!course) {
     return (
       <div className="flex items-center justify-center min-h-screen bg-gradient-to-b from-orange-50 to-white">
@@ -115,7 +118,6 @@ const DetailedCourse = () => {
     );
   }
 
-  // === SAVINGS ===
   const clean = (p) => parseInt(p.replace(/[^\d]/g, ""), 10) || 0;
   const current = clean(course.price);
   const original = clean(course.originalPrice);
@@ -127,12 +129,11 @@ const DetailedCourse = () => {
       className="py-20 sm:py-28 md:py-36 px-4 sm:px-6 bg-gradient-to-b from-orange-50 via-white to-gray-50 overflow-hidden relative"
       style={{ perspective: isDesktop ? "2000px" : "none" }}
     >
-      {/* === PARALLAX BACKGROUND — SAFE AFTER REF === */}
       <ParallaxBackground sectionRef={sectionRef} />
 
       <div className="max-w-7xl mx-auto relative z-10">
 
-        {/* HERO TITLE */}
+        {/* HERO TITLE — RESPONSIVE & VIBRANT */}
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -140,18 +141,8 @@ const DetailedCourse = () => {
           className="text-center mb-16"
         >
           <motion.h1
-            className="
-  text-2xl
-  sm:text-2xl
-  md:text-4xl
-  lg:text-4xl
-  font-black
-  bg-clip-text text-transparent
-  bg-gradient-to-r from-[#F37021] via-[#F37021] to-[#F37021]
-  mb-6 leading-tight
-"
-initial="hidden"
-
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black bg-clip-text text-transparent bg-gradient-to-r from-[#F37021] via-red-600 to-orange-700 mb-6 leading-tight"
+            initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
             variants={{
@@ -372,7 +363,7 @@ initial="hidden"
   );
 };
 
-// === PARALLAX BACKGROUND — NOW WORKS ===
+// === PARALLAX BACKGROUND ===
 const ParallaxBackground = ({ sectionRef }) => {
   const { scrollYProgress } = useScroll({
     target: sectionRef,
