@@ -1,4 +1,3 @@
-/* CoursesSection.jsx – FIXED: No Blank Screen on Direct Nav */
 import {
   motion,
   useMotionValue,
@@ -130,7 +129,7 @@ const CoursesSection = () => {
         {/* HERO – ALWAYS ANIMATES ON LOAD */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}  // ← THIS FIXES BLANK SCREEN
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
@@ -269,11 +268,11 @@ const CoursesSection = () => {
           className="text-center"
         >
           <motion.a
-           href="https://wa.me/+918304952266"
-  target="_blank"
-  rel="noopener noreferrer"
-  whileHover={{ scale: 1.08 }}
-  whileTap={{ scale: 0.95 }}
+            href="https://wa.me/+918304952266"
+            target="_blank"
+            rel="noopener noreferrer"
+            whileHover={{ scale: 1.08 }}
+            whileTap={{ scale: 0.95 }}
             className="inline-flex items-center gap-4 px-12 py-6 bg-gradient-to-r from-[#F37021] to-red-600 text-white font-bold text-xl rounded-full shadow-2xl"
           >
             Enroll Now & Start Earning
@@ -287,8 +286,9 @@ const CoursesSection = () => {
   );
 };
 
-// ── COURSE CARD (Same as before – with price logic) ─────────────────
+// ── COURSE CARD – Entire card clickable on mobile with View Details button ─────────────────
 const CourseCard = ({
+  id,
   name,
   duration,
   description,
@@ -326,97 +326,149 @@ const CourseCard = ({
     return { savings: orig ? Math.round((1 - cur / orig) * 100) : 0 };
   }, [price, originalPrice]);
 
+  // Links for the card and buttons
+  const cardLink = "https://wa.me/+918304952266"; // Card and Enroll Now
+  const detailsLink = `/courses/${id}`; // View Details button (fallback to # if no routing)
+
+  // Card content
+  const cardContent = (
+    <motion.div
+      ref={cardRef}
+      onMouseMove={handleMouse}
+      onMouseLeave={() => isDesktop && (mouseX.set(0), mouseY.set(0))}
+      style={isDesktop ? { rotateX, rotateY, transformStyle: "preserve-3d" } : {}}
+      whileHover={isDesktop ? { scale: 1.05 } : { scale: 1.03 }}
+      className="relative bg-white/95 backdrop-blur-xl rounded-3xl overflow-hidden shadow-2xl border border-white/50"
+    >
+      <div className="relative h-56 overflow-hidden">
+        <img
+          src={image}
+          alt={name}
+          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
+        {badge && (
+          <motion.div
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            className={`absolute top-4 left-4 bg-gradient-to-r ${badgeColor} text-white text-xs font-bold px-4 py-2 rounded-full shadow-xl`}
+          >
+            {badge}
+          </motion.div>
+        )}
+        {live && (
+          <motion.div
+            animate={{ opacity: [1, 0.5, 1] }}
+            transition={{ duration: 2, repeat: Infinity }}
+            className="absolute top-4 right-4 w-3 h-3 bg-red-500 rounded-full"
+          />
+        )}
+      </div>
+
+      <div className="p-6 space-y-4" style={isDesktop ? { transform: "translateZ(60px)" } : {}}>
+        <h3 className="text-xl font-black text-gray-900 line-clamp-2">{name}</h3>
+        <div className="flex items-center gap-2 text-[#F37021] font-semibold">
+          <Clock className="w-5 h-5" /> <span>{duration}</span>
+        </div>
+        <p className="text-gray-600 text-sm line-clamp-2">{description}</p>
+
+        <div className="flex items-center gap-2">
+          <div className="text-3xl font-black text-gray-900">{price}</div>
+          {originalPrice && (
+            <>
+              <div className="text-lg text-gray-500 line-through">{originalPrice}</div>
+              <div className="ml-2 px-3 py-1 bg-green-100 text-green-700 font-bold text-sm rounded-full">
+                Save {savings}%
+              </div>
+            </>
+          )}
+        </div>
+
+        <div className="flex justify-between items-center">
+          <div className="text-right">
+            <div className="text-sm font-bold text-[#F37021]">{level}</div>
+            <div className="text-xs text-gray-500">{students} students</div>
+          </div>
+        </div>
+
+        <div className="flex items-center gap-2">
+          {[...Array(5)].map((_, i) => (
+            <Star
+              key={i}
+              className={`w-4 h-4 ${
+                i < Math.floor(rating) ? "fill-yellow-500 text-yellow-500" : "text-gray-300"
+              }`}
+            />
+          ))}
+          <span className="ml-2 font-bold">{rating}</span>
+        </div>
+
+        {/* View Details Button */}
+        <motion.a
+          href={detailsLink}
+          onClick={(e) => {
+            if (!isDesktop) e.stopPropagation(); // Prevent card click on mobile
+            if (detailsLink === "#") e.preventDefault(); // Prevent # navigation
+          }}
+          whileHover={{ scale: 1.08 }}
+          whileTap={{ scale: 0.95 }}
+          className="w-full block text-center py-3 bg-gray-200 text-gray-800 font-bold rounded-full shadow-lg"
+        >
+          View Details
+        </motion.a>
+
+        {/* Enroll Now Button */}
+        <motion.a
+          href={cardLink}
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={(e) => !isDesktop && e.stopPropagation()} // Prevent card click on mobile
+          whileHover={{ scale: 1.08 }}
+          whileTap={{ scale: 0.95 }}
+          className="w-full block text-center py-3 bg-gradient-to-r from-[#F37021] to-red-600 text-white font-bold rounded-full shadow-lg"
+        >
+          Enroll Now
+        </motion.a>
+      </div>
+
+      <motion.div
+        className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent opacity-0 group-hover:opacity-100 pointer-events-none -skew-x-12"
+        initial={{ x: "-100%" }}
+        whileHover={{ x: "100%" }}
+        transition={{ duration: 0.9 }}
+      />
+    </motion.div>
+  );
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 80 }}
-      animate={{ opacity: 1, y: 0 }}  // ← This ensures it shows on direct nav
+      animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.7, delay: index * 0.15 }}
       className="relative group"
     >
-      <motion.div
-        ref={cardRef}
-        onMouseMove={handleMouse}
-        onMouseLeave={() => isDesktop && (mouseX.set(0), mouseY.set(0))}
-        style={isDesktop ? { rotateX, rotateY, transformStyle: "preserve-3d" } : {}}
-        whileHover={isDesktop ? { scale: 1.05 } : { scale: 1.03 }}
-        className="relative bg-white/95 backdrop-blur-xl rounded-3xl overflow-hidden shadow-2xl border border-white/50"
-      >
-        <div className="relative h-56 overflow-hidden">
-          <img src={image} alt={name} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
-          {badge && (
-            <motion.div
-              initial={{ scale: 0 }}
-              animate={{ scale: 1 }}
-              className={`absolute top-4 left-4 bg-gradient-to-r ${badgeColor} text-white text-xs font-bold px-4 py-2 rounded-full shadow-xl`}
-            >
-              {badge}
-            </motion.div>
-          )}
-          {live && (
-            <motion.div
-              animate={{ opacity: [1, 0.5, 1] }}
-              transition={{ duration: 2, repeat: Infinity }}
-              className="absolute top-4 right-4 w-3 h-3 bg-red-500 rounded-full"
-            />
-          )}
-        </div>
-
-        <div className="p-6 space-y-4" style={isDesktop ? { transform: "translateZ(60px)" } : {}}>
-          <h3 className="text-xl font-black text-gray-900 line-clamp-2">{name}</h3>
-          <div className="flex items-center gap-2 text-[#F37021] font-semibold">
-            <Clock className="w-5 h-5" /> <span>{duration}</span>
-          </div>
-          <p className="text-gray-600 text-sm line-clamp-2">{description}</p>
-
-          <div className="flex items-center gap-2">
-            <div className="text-3xl font-black text-gray-900">{price}</div>
-            {originalPrice && (
-              <>
-                <div className="text-lg text-gray-500 line-through">{originalPrice}</div>
-                <div className="ml-2 px-3 py-1 bg-green-100 text-green-700 font-bold text-sm rounded-full">
-                  Save {savings}%
-                </div>
-              </>
-            )}
-          </div>
-
-          <div className="flex justify-between items-center">
-            <div className="text-right">
-              <div className="text-sm font-bold text-[#F37021]">{level}</div>
-              <div className="text-xs text-gray-500">{students} students</div>
-            </div>
-          </div>
-
-          <div className="flex items-center gap-2">
-            {[...Array(5)].map((_, i) => (
-              <Star
-                key={i}
-                className={`w-4 h-4 ${i < Math.floor(rating) ? "fill-yellow-500 text-yellow-500" : "text-gray-300"}`}
-              />
-            ))}
-            <span className="ml-2 font-bold">{rating}</span>
-          </div>
-
-          <motion.a
-           href="https://wa.me/+918304952266"
-  target="_blank"
-  rel="noopener noreferrer"
-  whileHover={{ scale: 1.08 }}
-  whileTap={{ scale: 0.95 }}
-            className="w-full block text-center py-3 bg-gradient-to-r from-[#F37021] to-red-600 text-white font-bold rounded-full shadow-lg"
-          >
-            Enroll Now
-          </motion.a>
-        </div>
-
-        <motion.div
-          className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent opacity-0 group-hover:opacity-100 pointer-events-none -skew-x-12"
-          initial={{ x: "-100%" }}
-          whileHover={{ x: "100%" }}
-          transition={{ duration: 0.9 }}
-        />
-      </motion.div>
+      {/* Wrap card in <a> tag for mobile only */}
+      {isDesktop ? (
+        cardContent
+      ) : (
+        <a
+          href={cardLink}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="block"
+          onClick={(e) => {
+            // Prevent card navigation if clicking a button
+            if (e.target.closest("a")) {
+              e.stopPropagation();
+              return;
+            }
+            // Ensure navigation to cardLink
+            window.open(cardLink, "_blank", "noopener,noreferrer");
+          }}
+        >
+          {cardContent}
+        </a>
+      )}
     </motion.div>
   );
 };
