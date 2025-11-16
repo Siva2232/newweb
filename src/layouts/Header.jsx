@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import {
   motion,
   useScroll,
@@ -18,12 +18,8 @@ import {
   Phone,
   GraduationCap,
 } from "lucide-react";
-import { Link } from "react-router-dom";
 import Logo from "../assets/Logo.png";
 
-/* -------------------------------------------------
-   Desktop detection – 3-D effects only on lg+
-   ------------------------------------------------- */
 const useIsDesktop = () => {
   const [isDesktop, setIsDesktop] = useState(true);
   useEffect(() => {
@@ -35,9 +31,6 @@ const useIsDesktop = () => {
   return isDesktop;
 };
 
-/* -------------------------------------------------
-   MAIN HEADER
-   ------------------------------------------------- */
 export default function Header() {
   const [open, setOpen] = useState(false);
   const isDesktop = useIsDesktop();
@@ -61,39 +54,41 @@ export default function Header() {
   const smoothBlur    = useSpring(blurAmt,   { stiffness: 300, damping: 30 });
   const smoothScale   = useSpring(scale,     { stiffness: 300, damping: 30 });
 
+  const handleNavClick = (path) => {
+    window.location.href = path; // Full navigation (same as <a href>)
+    // Or if you want SPA feel with scroll: 
+    // window.location.href = path;
+  };
+
   return (
     <>
-      {/* ---------- FIXED GLASS HEADER ---------- */}
       <motion.header
         className="fixed inset-x-0 top-0 z-50 pointer-events-none"
         style={{ scale: isDesktop ? smoothScale : 1 }}
       >
-        {/* glass backdrop */}
         <motion.div
           className="absolute inset-0 pointer-events-none"
           style={{
             background: `rgba(255,255,255,${smoothOpacity})`,
-            backdropFilter:
-              smoothBlur.get() > 0 ? `blur(${smoothBlur.get()}px)` : "none",
-            WebkitBackdropFilter:
-              smoothBlur.get() > 0 ? `blur(${smoothBlur.get()}px)` : "none",
+            backdropFilter: smoothBlur.get() > 0 ? `blur(${smoothBlur.get()}px)` : "none",
+            WebkitBackdropFilter: smoothBlur.get() > 0 ? `blur(${smoothBlur.get()}px)` : "none",
           }}
         />
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 pointer-events-auto">
-          {/* ---- MOBILE LAYOUT (logo left – toggle right) ---- */}
+          {/* Mobile */}
           <div className="flex items-center justify-between lg:hidden">
             <LogoLink size="sm" />
             <MenuToggle open={open} setOpen={setOpen} />
           </div>
 
-          {/* ---- DESKTOP LAYOUT ---- */}
+          {/* Desktop */}
           <div className="hidden lg:flex items-center justify-between">
             <LogoLink size="lg" />
             <nav className="flex-1 flex justify-center">
               <div className="flex items-center gap-1 bg-white/70 backdrop-blur-xl rounded-full px-4 py-2 shadow-lg border border-white/40">
                 {navItems.map((it, i) => (
-                  <NavLink key={it.name} {...it} index={i} />
+                  <NavLink key={it.name} {...it} index={i} onNavClick={handleNavClick} />
                 ))}
               </div>
             </nav>
@@ -102,7 +97,7 @@ export default function Header() {
         </div>
       </motion.header>
 
-      {/* ---------- FULL-SCREEN MOBILE MENU ---------- */}
+      {/* Mobile Menu - Now uses same logic as Footer */}
       <AnimatePresence>
         {open && (
           <motion.div
@@ -126,14 +121,18 @@ export default function Header() {
                   transition={{ delay: i * 0.08 }}
                   className="w-full max-w-xs"
                 >
-                  <Link
-                    to={it.path}
-                    onClick={() => setOpen(false)}
+                  <a
+                    href={it.path}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setOpen(false);
+                      window.location.href = it.path; // Same as Footer
+                    }}
                     className="flex items-center justify-center gap-3 px-6 py-4 text-2xl font-bold text-gray-800 hover:text-[#F37021] rounded-2xl hover:bg-white/60 hover:shadow-lg transition-all"
                   >
                     {it.icon}
                     <span>{it.name}</span>
-                  </Link>
+                  </a>
                 </motion.div>
               ))}
 
@@ -153,9 +152,7 @@ export default function Header() {
   );
 }
 
-/* -------------------------------------------------
-   LOGO (left-aligned)
-   ------------------------------------------------- */
+/* LOGO */
 const LogoLink = ({ size = "sm" }) => {
   const isDesktop = useIsDesktop();
   const hoverScale = size === "lg" ? 1.12 : 1.15;
@@ -166,22 +163,14 @@ const LogoLink = ({ size = "sm" }) => {
       transition={{ type: "spring", stiffness: 400, damping: 20 }}
       className="relative group"
     >
-      <Link to="/" aria-label="GetFix Academy">
+      <a href="/" aria-label="GetFix Academy">
         <div className="relative">
-          {/* glow */}
           <motion.div
             className="absolute -inset-3 rounded-full bg-gradient-to-r from-[#F37021]/40 to-red-600/40 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
             initial={{ scale: 0.9 }}
             whileHover={{ scale: 1.3 }}
           />
-          {/* image */}
-          <div
-            className={
-              size === "lg"
-                ? "w-24 h-24 lg:w-28 lg:h-28"
-                : "w-16 h-16 sm:w-20 sm:h-20"
-            }
-          >
+          <div className={size === "lg" ? "w-24 h-24 lg:w-28 lg:h-28" : "w-16 h-16 sm:w-20 sm:h-20"}>
             <img
               src={Logo}
               alt="GetFix Academy"
@@ -194,14 +183,12 @@ const LogoLink = ({ size = "sm" }) => {
             />
           </div>
         </div>
-      </Link>
+      </a>
     </motion.div>
   );
 };
 
-/* -------------------------------------------------
-   MENU TOGGLE (right-aligned)
-   ------------------------------------------------- */
+/* TOGGLE */
 const MenuToggle = ({ open, setOpen }) => (
   <motion.button
     whileTap={{ scale: 0.9 }}
@@ -211,21 +198,11 @@ const MenuToggle = ({ open, setOpen }) => (
   >
     <AnimatePresence mode="wait">
       {open ? (
-        <motion.div
-          key="close"
-          initial={{ rotate: -90, opacity: 0 }}
-          animate={{ rotate: 0, opacity: 1 }}
-          exit={{ rotate: 90, opacity: 0 }}
-        >
+        <motion.div key="close" initial={{ rotate: -90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: 90, opacity: 0 }}>
           <X className="w-5 h-5 text-[#F37021]" />
         </motion.div>
       ) : (
-        <motion.div
-          key="menu"
-          initial={{ rotate: 90, opacity: 0 }}
-          animate={{ rotate: 0, opacity: 1 }}
-          exit={{ rotate: -90, opacity: 0 }}
-        >
+        <motion.div key="menu" initial={{ rotate: 90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: -90, opacity: 0 }}>
           <Menu className="w-5 h-5 text-[#F37021]" />
         </motion.div>
       )}
@@ -233,10 +210,8 @@ const MenuToggle = ({ open, setOpen }) => (
   </motion.button>
 );
 
-/* -------------------------------------------------
-   NAV LINK (desktop)
-   ------------------------------------------------- */
-const NavLink = ({ name, path, icon, index }) => {
+/* DESKTOP NAV LINK - Now uses Footer-style navigation */
+const NavLink = ({ name, path, icon, index, onNavClick }) => {
   const [hovered, setHovered] = useState(false);
 
   return (
@@ -248,15 +223,18 @@ const NavLink = ({ name, path, icon, index }) => {
       onHoverStart={() => setHovered(true)}
       onHoverEnd={() => setHovered(false)}
     >
-      <Link
-        to={path}
+      <a
+        href={path}
+        onClick={(e) => {
+          e.preventDefault();
+          onNavClick(path);
+        }}
         className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-gray-700 hover:text-[#F37021] rounded-full transition-colors whitespace-nowrap"
       >
         {icon}
         <span>{name}</span>
-      </Link>
+      </a>
 
-      {/* active/hover dot */}
       <motion.div
         className="absolute bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 bg-[#F37021] rounded-full"
         initial={{ scale: 0 }}
@@ -267,44 +245,38 @@ const NavLink = ({ name, path, icon, index }) => {
   );
 };
 
-/* -------------------------------------------------
-   CTA BUTTON
-   ------------------------------------------------- */
+/* CTA */
 const CTAButton = ({ mobile = false }) => (
   <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
- <Link
-  to="https://wa.me/+918304952266"
-  target="_blank"
-  rel="noopener noreferrer"
-  className={`
-    group relative inline-flex items-center justify-center gap-2
-    ${mobile
-      ? "px-8 py-4 text-lg font-bold w-full rounded-2xl shadow-xl"
-      : "px-5 py-2.5 text-sm font-bold rounded-full shadow-lg"}
-    bg-gradient-to-r from-[#F37021] to-red-600 text-white overflow-hidden
-    hover:shadow-[#F37021]/50 transition-all duration-300
-  `}
->
-  <span className="relative z-10 flex items-center gap-2">
-    {mobile ? "Start Learning" : "Enroll"}
-    {mobile ? (
+    <a
+      href="https://wa.me/+918304952266"
+      target="_blank"
+      rel="noopener noreferrer"
+      className={`
+        group relative inline-flex items-center justify-center gap-2
+        ${mobile
+          ? "px-8 py-4 text-lg font-bold w-full rounded-2xl shadow-xl"
+          : "px-5 py-2.5 text-sm font-bold rounded-full shadow-lg"}
+        bg-gradient-to-r from-[#F37021] to-red-600 text-white overflow-hidden
+        hover:shadow-[#F37021]/50 transition-all duration-300
+      `}
+    >
+      <span className="relative z-10 flex items-center gap-2">
+        {mobile ? "Start Learning" : "Enroll"}
+        {mobile ? (
+          <motion.div animate={{ y: [0, 4, 0] }} transition={{ duration: 1.5, repeat: Infinity }}>
+            <ChevronDown className="w-5 h-5" />
+          </motion.div>
+        ) : (
+          <Zap className="w-4 h-4" />
+        )}
+      </span>
       <motion.div
-        animate={{ y: [0, 4, 0] }}
-        transition={{ duration: 1.5, repeat: Infinity }}
-      >
-        <ChevronDown className="w-5 h-5" />
-      </motion.div>
-    ) : (
-      <Zap className="w-4 h-4" />
-    )}
-  </span>
-
-  <motion.div
-    className="absolute inset-0 bg-white opacity-0 group-hover:opacity-25"
-    initial={{ x: "-100%" }}
-    whileHover={{ x: "100%" }}
-    transition={{ duration: 0.6 }}
-  />
-</Link>
+        className="absolute inset-0 bg-white opacity-0 group-hover:opacity-25"
+        initial={{ x: "-100%" }}
+        whileHover={{ x: "100%" }}
+        transition={{ duration: 0.6 }}
+      />
+    </a>
   </motion.div>
 );
