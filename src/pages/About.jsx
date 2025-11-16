@@ -185,10 +185,10 @@ const About = () => {
     },
   ];
 
-  const team = [
-    { name: "Sirajul Haque", role: "Founder & Lead Trainer - GetFix Academy", exp: "20+ Years Experience in chip level repair", img: T1 },
+ const team = [
+    { name: "Sirajul Haque", tagline: "Co-Founder - GetFix Academy", role: "Founder & Lead Trainer - GetFix Academy", exp: "20+ Years Experience in chip level repair", img: T1 },
     { name: "Shuhaib Shadi", role: "Co-Founder & Director - GetFix Academy", exp: "10+ Year Experience iPhone Chip level Expert", img: T2 },
-    { name: "Pinks", role: "Co-Founder and Technical Support - Getfix", exp: "20+ Years Industry Expertise (Works at Apple-Croatia)", img: T3 },
+    { name: "Pinks", role: "Co-Founder and Technical Support - GetFix", exp: "20+ Years Industry Expertise (Works at Apple-Croatia)", img: T3 },
   ];
 
   return (
@@ -448,21 +448,50 @@ const About = () => {
         </motion.div>
 
         {/* Team */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1 }}
-          className="mb-24"
-        >
-          <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 bg-clip-text text-transparent bg-gradient-to-r from-[#F37021] to-[#F37021]">
-            Meet Our Expert Instructors
-          </h2>
-          <div className="grid md:grid-cols-3 gap-8">
-            {team.map((member, i) => (
-              <TeamCard key={i} {...member} index={i} />
-            ))}
-          </div>
-        </motion.div>
+      <motion.div
+  initial={{ opacity: 0 }}
+  animate={{ opacity: 1 }}
+  transition={{ duration: 1 }}
+  className="mb-24"
+>
+  <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 bg-clip-text text-transparent bg-gradient-to-r from-[#F37021] to-[#F37021]">
+    Meet Our Expert Instructors
+  </h2>
+
+  <div className="grid md:grid-cols-3 gap-8">
+    {team.map((member, i) => (
+      <motion.div
+        key={i}
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ delay: i * 0.2, duration: 0.7 }}
+        whileHover={{ y: -12 }}
+        className="group overflow-hidden rounded-3xl bg-white shadow-xl border border-gray-200"
+      >
+        <div className="h-64 overflow-hidden">
+          <img
+            src={member.img}
+            alt={member.name}
+            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+          />
+        </div>
+
+        <div className="p-6 text-center">
+          <h4 className="text-xl font-bold text-gray-900">{member.name}</h4>
+
+          {/* 🔸 NEW SENTENCE BETWEEN NAME & ROLE */}
+
+          <p className="text-[#F37021] font-medium">{member.role}</p>
+          <p className="text-[#F37021] font-medium">{member.tagline}</p>
+          <p className="text-sm text-gray-600 mt-1">{member.exp}</p>
+        </div>
+      </motion.div>
+    ))}
+  </div>
+</motion.div>
+
+
 
         {/* CTA */}
         <motion.div

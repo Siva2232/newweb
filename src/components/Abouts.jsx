@@ -39,7 +39,7 @@ const AboutSection = () => {
   ];
 
   const team = [
-    { name: "Sirajul Haque", role: "Founder & Lead Trainer - GetFix Academy", exp: "20+ Years Experience in chip level repair", img: T1 },
+    { name: "Sirajul Haque", tagline: "Co-Founder - GetFix Academy", role: "Founder & Lead Trainer - GetFix Academy", exp: "20+ Years Experience in chip level repair", img: T1 },
     { name: "Shuhaib Shadi", role: "Co-Founder & Director - GetFix Academy", exp: "10+ Year Experience iPhone Chip level Expert", img: T2 },
     { name: "Pinks", role: "Co-Founder and Technical Support - GetFix", exp: "20+ Years Industry Expertise (Works at Apple-Croatia)", img: T3 },
   ];
@@ -212,6 +212,7 @@ const AboutSection = () => {
                 <div className="p-6 text-center">
                   <h4 className="text-xl font-bold text-gray-900">{member.name}</h4>
                   <p className="text-[#F37021] font-medium">{member.role}</p>
+                  <p className="text-[#F37021] font-medium">{member.tagline}</p>
                   <p className="text-sm text-gray-600 mt-1">{member.exp}</p>
                 </div>
               </motion.div>

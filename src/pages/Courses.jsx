@@ -1,3 +1,4 @@
+/* CoursesSection.jsx – Enhanced Debugging, Clickable View Details and Card */
 import {
   motion,
   useMotionValue,
@@ -17,6 +18,7 @@ import {
   Laptop,
 } from "lucide-react";
 import { useRef, useState, useEffect, useMemo } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 import offline from "../assets/offline.png";
 import online from "../assets/online.png";
@@ -24,7 +26,7 @@ import android from "../assets/android.png";
 
 const allCourses = [
   {
-    id: 1,
+    id: "iphone-offline",
     name: "iPhone Basic to Advanced Level Repair Course (Offline)",
     duration: "18 Days",
     description: "Master iPhone diagnostics, chip replacement, and full device servicing.",
@@ -39,7 +41,7 @@ const allCourses = [
     live: true,
   },
   {
-    id: 2,
+    id: "iphone-online",
     name: "iPhone Advanced Level Repair Course (Online)",
     duration: "3 Months",
     description: "Comprehensive training on Android software flashing, repairs, and board work.",
@@ -54,7 +56,7 @@ const allCourses = [
     live: false,
   },
   {
-    id: 3,
+    id: "combo-online",
     name: "iPhone & Android Advanced Course (Online)",
     duration: "12 Months",
     description: "Learn micro-soldering, circuit tracing, power supply testing, and IC replacement.",
@@ -118,6 +120,7 @@ const CoursesSection = () => {
     <section
       ref={sectionRef}
       className="py-20 bg-gradient-to-b from-[#F37021]/5 via-white to-gray-50 overflow-hidden relative"
+      style={{ position: "relative" }}
     >
       {/* Floating Orbs */}
       <motion.div className="absolute inset-0 pointer-events-none" style={{ y, opacity }}>
@@ -133,7 +136,7 @@ const CoursesSection = () => {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <motion.h2 className="text-5xl sm:text-6xl md:text-7xl font-black text-[#F37021] mb-6">
+         <motion.h2 className="text-5xl sm:text-6xl md:text-7xl font-black text-[#F37021] mb-6">
             {"Learn With Us".split("").map((char, i) => (
               <motion.span
                 key={i}
@@ -198,7 +201,7 @@ const CoursesSection = () => {
           </div>
         </motion.div>
 
-        {/* Course Grid – Use animate for initial load */}
+        {/* Course Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
           {filteredCourses.map((course, i) => (
             <CourseCard key={course.id} {...course} index={i} />
@@ -286,7 +289,6 @@ const CoursesSection = () => {
   );
 };
 
-// ── COURSE CARD – Entire card clickable on mobile with View Details button ─────────────────
 const CourseCard = ({
   id,
   name,
@@ -304,6 +306,7 @@ const CourseCard = ({
   index,
 }) => {
   const isDesktop = useIsDesktop();
+  const navigate = useNavigate();
   const cardRef = useRef(null);
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
@@ -326,119 +329,24 @@ const CourseCard = ({
     return { savings: orig ? Math.round((1 - cur / orig) * 100) : 0 };
   }, [price, originalPrice]);
 
-  // Links for the card and buttons
-  const cardLink = "https://wa.me/+918304952266"; // Card and Enroll Now
-  const detailsLink = `/courses/${id}`; // View Details button (fallback to # if no routing)
+  const handleButtonClick = (e) => {
+    e.stopPropagation();
+    console.log(`View Details clicked for course ${id}, navigating to /course/${id}`);
+    navigate(`/course/${id}`);
+  };
 
-  // Card content
-  const cardContent = (
-    <motion.div
-      ref={cardRef}
-      onMouseMove={handleMouse}
-      onMouseLeave={() => isDesktop && (mouseX.set(0), mouseY.set(0))}
-      style={isDesktop ? { rotateX, rotateY, transformStyle: "preserve-3d" } : {}}
-      whileHover={isDesktop ? { scale: 1.05 } : { scale: 1.03 }}
-      className="relative bg-white/95 backdrop-blur-xl rounded-3xl overflow-hidden shadow-2xl border border-white/50"
-    >
-      <div className="relative h-56 overflow-hidden">
-        <img
-          src={image}
-          alt={name}
-          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
-        {badge && (
-          <motion.div
-            initial={{ scale: 0 }}
-            animate={{ scale: 1 }}
-            className={`absolute top-4 left-4 bg-gradient-to-r ${badgeColor} text-white text-xs font-bold px-4 py-2 rounded-full shadow-xl`}
-          >
-            {badge}
-          </motion.div>
-        )}
-        {live && (
-          <motion.div
-            animate={{ opacity: [1, 0.5, 1] }}
-            transition={{ duration: 2, repeat: Infinity }}
-            className="absolute top-4 right-4 w-3 h-3 bg-red-500 rounded-full"
-          />
-        )}
-      </div>
-
-      <div className="p-6 space-y-4" style={isDesktop ? { transform: "translateZ(60px)" } : {}}>
-        <h3 className="text-xl font-black text-gray-900 line-clamp-2">{name}</h3>
-        <div className="flex items-center gap-2 text-[#F37021] font-semibold">
-          <Clock className="w-5 h-5" /> <span>{duration}</span>
-        </div>
-        <p className="text-gray-600 text-sm line-clamp-2">{description}</p>
-
-        <div className="flex items-center gap-2">
-          <div className="text-3xl font-black text-gray-900">{price}</div>
-          {originalPrice && (
-            <>
-              <div className="text-lg text-gray-500 line-through">{originalPrice}</div>
-              <div className="ml-2 px-3 py-1 bg-green-100 text-green-700 font-bold text-sm rounded-full">
-                Save {savings}%
-              </div>
-            </>
-          )}
-        </div>
-
-        <div className="flex justify-between items-center">
-          <div className="text-right">
-            <div className="text-sm font-bold text-[#F37021]">{level}</div>
-            <div className="text-xs text-gray-500">{students} students</div>
-          </div>
-        </div>
-
-        <div className="flex items-center gap-2">
-          {[...Array(5)].map((_, i) => (
-            <Star
-              key={i}
-              className={`w-4 h-4 ${
-                i < Math.floor(rating) ? "fill-yellow-500 text-yellow-500" : "text-gray-300"
-              }`}
-            />
-          ))}
-          <span className="ml-2 font-bold">{rating}</span>
-        </div>
-
-        {/* View Details Button */}
-        <motion.a
-          href={detailsLink}
-          onClick={(e) => {
-            if (!isDesktop) e.stopPropagation(); // Prevent card click on mobile
-            if (detailsLink === "#") e.preventDefault(); // Prevent # navigation
-          }}
-          whileHover={{ scale: 1.08 }}
-          whileTap={{ scale: 0.95 }}
-          className="w-full block text-center py-3 bg-gray-200 text-gray-800 font-bold rounded-full shadow-lg"
-        >
-          View Details
-        </motion.a>
-
-        {/* Enroll Now Button */}
-        <motion.a
-          href={cardLink}
-          target="_blank"
-          rel="noopener noreferrer"
-          onClick={(e) => !isDesktop && e.stopPropagation()} // Prevent card click on mobile
-          whileHover={{ scale: 1.08 }}
-          whileTap={{ scale: 0.95 }}
-          className="w-full block text-center py-3 bg-gradient-to-r from-[#F37021] to-red-600 text-white font-bold rounded-full shadow-lg"
-        >
-          Enroll Now
-        </motion.a>
-      </div>
-
-      <motion.div
-        className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent opacity-0 group-hover:opacity-100 pointer-events-none -skew-x-12"
-        initial={{ x: "-100%" }}
-        whileHover={{ x: "100%" }}
-        transition={{ duration: 0.9 }}
-      />
-    </motion.div>
-  );
+  const handleCardClick = (e) => {
+    if (isDesktop) {
+      console.log(`Card click ignored on desktop for course ${id}`);
+      return;
+    }
+    if (e.target.closest("a") || e.target.closest("button")) {
+      console.log(`Card click ignored due to button/link click for course ${id}`);
+      return;
+    }
+    console.log(`Card clicked for course ${id}, navigating to /course/${id}`);
+    navigate(`/course/${id}`);
+  };
 
   return (
     <motion.div
@@ -446,29 +354,101 @@ const CourseCard = ({
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.7, delay: index * 0.15 }}
       className="relative group"
+      onClick={handleCardClick}
+      style={{ cursor: !isDesktop ? "pointer" : "default", zIndex: 10, position: "relative" }}
     >
-      {/* Wrap card in <a> tag for mobile only */}
-      {isDesktop ? (
-        cardContent
-      ) : (
-        <a
-          href={cardLink}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="block"
-          onClick={(e) => {
-            // Prevent card navigation if clicking a button
-            if (e.target.closest("a")) {
-              e.stopPropagation();
-              return;
-            }
-            // Ensure navigation to cardLink
-            window.open(cardLink, "_blank", "noopener,noreferrer");
-          }}
-        >
-          {cardContent}
-        </a>
-      )}
+      <motion.div
+        ref={cardRef}
+        onMouseMove={handleMouse}
+        onMouseLeave={() => isDesktop && (mouseX.set(0), mouseY.set(0))}
+        style={isDesktop ? { rotateX, rotateY, transformStyle: "preserve-3d" } : {}}
+        whileHover={isDesktop ? { scale: 1.05 } : { scale: 1.03 }}
+        className="relative bg-white/95 backdrop-blur-xl rounded-3xl overflow-hidden shadow-2xl border border-white/50"
+      >
+        <div className="relative h-56 overflow-hidden">
+          <img
+            src={image}
+            alt={name}
+            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
+          {badge && (
+            <motion.div
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              className={`absolute top-4 left-4 bg-gradient-to-r ${badgeColor} text-white text-xs font-bold px-4 py-2 rounded-full shadow-xl`}
+            >
+              {badge}
+            </motion.div>
+          )}
+          {live && (
+            <motion.div
+              animate={{ opacity: [1, 0.5, 1] }}
+              transition={{ duration: 2, repeat: Infinity }}
+              className="absolute top-4 right-4 w-3 h-3 bg-red-500 rounded-full"
+            />
+          )}
+        </div>
+
+        <div className="p-6 space-y-4" style={isDesktop ? { transform: "translateZ(60px)" } : {}}>
+          <h3 className="text-xl font-black text-gray-900 line-clamp-2">{name}</h3>
+          <div className="flex items-center gap-2 text-[#F37021] font-semibold">
+            <Clock className="w-5 h-5" /> <span>{duration}</span>
+          </div>
+          <p className="text-gray-600 text-sm line-clamp-2">{description}</p>
+
+          <div className="flex items-center gap-2">
+            <div className="text-3xl font-black text-gray-900">{price}</div>
+            {originalPrice && (
+              <>
+                <div className="text-lg text-gray-500 line-through">{originalPrice}</div>
+                <div className="ml-2 px-3 py-1 bg-green-100 text-green-700 font-bold text-sm rounded-full">
+                  Save {savings}%
+                </div>
+              </>
+            )}
+          </div>
+
+          <div className="flex justify-between items-center">
+            <div className="text-right">
+              <div className="text-sm font-bold text-[#F37021]">{level}</div>
+              <div className="text-xs text-gray-500">{students} students</div>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-2">
+            {[...Array(5)].map((_, i) => (
+              <Star
+                key={i}
+                className={`w-4 h-4 ${i < Math.floor(rating) ? "fill-yellow-500 text-yellow-500" : "text-gray-300"}`}
+              />
+            ))}
+            <span className="ml-2 font-bold">{rating}</span>
+          </div>
+
+          <motion.div
+            whileHover={{ scale: 1.08 }}
+            whileTap={{ scale: 0.95 }}
+            style={{ position: "relative", zIndex: 20, pointerEvents: "auto" }}
+          >
+            <Link
+              to={`/course/${id}`}
+              className="w-full block text-center py-3 bg-gradient-to-r from-[#F37021] to-red-600 text-white font-bold rounded-full shadow-lg"
+              onClick={handleButtonClick}
+              style={{ pointerEvents: "auto" }}
+            >
+              View Details
+            </Link>
+          </motion.div>
+        </div>
+
+        <motion.div
+          className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent opacity-0 group-hover:opacity-100 pointer-events-none -skew-x-12"
+          initial={{ x: "-100%" }}
+          whileHover={{ x: "100%" }}
+          transition={{ duration: 0.9 }}
+        />
+      </motion.div>
     </motion.div>
   );
 };

@@ -121,7 +121,6 @@ const CoursesSection = () => {
       </motion.div>
 
       <div className="max-w-7xl mx-auto relative z-10">
-
         {/* HERO */}
         <motion.div
           initial={{ opacity: 0, y: 50 }}
@@ -246,6 +245,128 @@ const CourseCard = ({
   const original = clean(originalPrice);
   const savings = original > current ? Math.round((1 - current / original) * 100) : 0;
 
+  // Card content to avoid repetition
+  const cardContent = (
+    <motion.div
+      ref={cardRef}
+      onMouseMove={handleMouse}
+      onMouseLeave={() => isDesktop && (mouseX.set(0), mouseY.set(0))}
+      style={isDesktop ? { rotateX, rotateY, transformStyle: "preserve-3d" } : {}}
+      whileHover={isDesktop ? { scale: 1.06, z: 100 } : { scale: 1.03 }}
+      className="relative bg-white/80 backdrop-blur-2xl rounded-3xl overflow-hidden shadow-xl border border-white/50 hover:shadow-2xl transition-all duration-500"
+    >
+      <div className={`absolute inset-0 bg-gradient-to-br ${gradient} opacity-0 group-hover:opacity-40 blur-3xl transition-opacity`} />
+
+      {badge && (
+        <motion.div
+          initial={{ scale: 0, y: -20 }}
+          whileInView={{ scale: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: index * 0.15 + 0.3, type: "spring" }}
+          className={`absolute left-1/2 -translate-x-1/2 z-20 shadow-2xl bg-gradient-to-r ${badgeColor} text-white font-bold rounded-full top-3 text-[10px] px-2.5 py-1 md:top-[-14px] md:text-xs md:px-3.5 md:py-1.5`}
+          style={isDesktop ? { transform: "translateZ(80px)" } : {}}
+        >
+          {badge}
+        </motion.div>
+      )}
+
+      {live && (
+        <motion.div
+          animate={{ scale: [1, 1.2, 1] }}
+          transition={{ duration: 1.5, repeat: Infinity }}
+          className="absolute top-4 right-4 w-3 h-3 bg-red-500 rounded-full shadow-lg"
+          style={isDesktop ? { transform: "translateZ(80px)" } : {}}
+        />
+      )}
+
+      <div className="relative h-56 overflow-hidden">
+        <img
+          src={image}
+          alt={name}
+          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+          loading="lazy"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
+      </div>
+
+      <div className="p-6 space-y-4" style={isDesktop ? { transform: "translateZ(60px)" } : {}}>
+        <div className="flex justify-center text-[#F37021]">{icon}</div>
+
+        <h3 className="text-xl md:text-2xl font-black text-gray-900 text-center line-clamp-2">{name}</h3>
+
+        <div className="flex items-center justify-center gap-2 text-[#F37021] font-bold">
+          <Clock className="w-5 h-5" />
+          <span>{duration}</span>
+        </div>
+
+        <p className="text-sm text-gray-600 text-center line-clamp-2">{description}</p>
+
+        <div className="text-center space-y-2">
+          <div className="flex items-center justify-center gap-2">
+            <span className="text-3xl font-black text-gray-900 flex items-center">
+              <IndianRupee className="w-5 h-5" />
+              {current.toLocaleString("en-IN")}
+            </span>
+            {originalPrice && (
+              <span className="text-sm text-gray-500 line-through opacity-80">
+                <IndianRupee className="w-4 h-4 inline" />
+                {original.toLocaleString("en-IN")}
+              </span>
+            )}
+          </div>
+          {savings > 0 && (
+            <motion.span
+              initial={{ scale: 0 }}
+              whileInView={{ scale: 1 }}
+              viewport={{ once: true }}
+              className="inline-block px-4 py-1.5 bg-gradient-to-r from-green-500 to-emerald-600 text-white font-bold text-sm rounded-full shadow-lg"
+            >
+              Save {savings}%
+            </motion.span>
+          )}
+        </div>
+
+        <div className="flex justify-center gap-3 flex-wrap text-xs text-gray-600">
+          {features.slice(0, 2).map((f, i) => (
+            <span key={i} className="flex items-center gap-1">
+              <CheckCircle className="w-3 h-3 text-green-600" /> {f}
+            </span>
+          ))}
+        </div>
+
+        <div className="flex justify-center items-center gap-1">
+          {[...Array(5)].map((_, i) => (
+            <Star
+              key={i}
+              className={`w-4 h-4 ${i < Math.floor(rating) ? "text-yellow-500 fill-current" : "text-gray-300"}`}
+            />
+          ))}
+          <span className="ml-1 font-bold text-sm">{rating}</span>
+        </div>
+
+        <motion.div
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+        >
+          <Link
+            to={`/course/${id}`}
+            className="w-full block text-center py-3 bg-gradient-to-r from-[#F37021] to-red-600 text-white font-bold rounded-full shadow-lg hover:shadow-[#F37021]/50 transition-all"
+            onClick={(e) => !isDesktop && e.stopPropagation()}
+          >
+            View Details
+          </Link>
+        </motion.div>
+      </div>
+
+      <motion.div
+        className="absolute inset-0 bg-gradient-to-r from-transparent via-white/60 to-transparent opacity-0 group-hover:opacity-100 pointer-events-none"
+        initial={{ x: "-150%" }}
+        whileHover={{ x: "150%" }}
+        transition={{ duration: 0.9 }}
+      />
+    </motion.div>
+  );
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 100 }}
@@ -254,110 +375,23 @@ const CourseCard = ({
       transition={{ duration: 0.8, delay: index * 0.15, type: "spring" }}
       className="relative group"
     >
-      <motion.div
-        ref={cardRef}
-        onMouseMove={handleMouse}
-        onMouseLeave={() => isDesktop && (mouseX.set(0), mouseY.set(0))}
-        style={isDesktop ? { rotateX, rotateY, transformStyle: "preserve-3d" } : {}}
-        whileHover={isDesktop ? { scale: 1.06, z: 100 } : { scale: 1.03 }}
-        className="relative bg-white/80 backdrop-blur-2xl rounded-3xl overflow-hidden shadow-xl border border-white/50 hover:shadow-2xl transition-all duration-500"
-      >
-        <div className={`absolute inset-0 bg-gradient-to-br ${gradient} opacity-0 group-hover:opacity-40 blur-3xl transition-opacity`} />
-
-        {badge && (
-          <motion.div
-            initial={{ scale: 0, y: -20 }}
-            whileInView={{ scale: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: index * 0.15 + 0.3, type: "spring" }}
-            className={`absolute left-1/2 -translate-x-1/2 z-20 shadow-2xl bg-gradient-to-r ${badgeColor} text-white font-bold rounded-full top-3 text-[10px] px-2.5 py-1 md:top-[-14px] md:text-xs md:px-3.5 md:py-1.5`}
-            style={isDesktop ? { transform: "translateZ(80px)" } : {}}
-          >
-            {badge}
-          </motion.div>
-        )}
-
-        {live && (
-          <motion.div
-            animate={{ scale: [1, 1.2, 1] }}
-            transition={{ duration: 1.5, repeat: Infinity }}
-            className="absolute top-4 right-4 w-3 h-3 bg-red-500 rounded-full shadow-lg"
-            style={isDesktop ? { transform: "translateZ(80px)" } : {}}
-          />
-        )}
-
-        <div className="relative h-56 overflow-hidden">
-          <img src={image} alt={name} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" loading="lazy" />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
-        </div>
-
-        <div className="p-6 space-y-4" style={isDesktop ? { transform: "translateZ(60px)" } : {}}>
-          <div className="flex justify-center text-[#F37021]">{icon}</div>
-
-          <h3 className="text-xl md:text-2xl font-black text-gray-900 text-center line-clamp-2">{name}</h3>
-
-          <div className="flex items-center justify-center gap-2 text-[#F37021] font-bold">
-            <Clock className="w-5 h-5" />
-            <span>{duration}</span>
-          </div>
-
-          <p className="text-sm text-gray-600 text-center line-clamp-2">{description}</p>
-
-          <div className="text-center space-y-2">
-            <div className="flex items-center justify-center gap-2">
-              <span className="text-3xl font-black text-gray-900 flex items-center">
-                <IndianRupee className="w-5 h-5" />
-                {current.toLocaleString("en-IN")}
-              </span>
-              {originalPrice && (
-                <span className="text-sm text-gray-500 line-through opacity-80">
-                  <IndianRupee className="w-4 h-4 inline" />
-                  {original.toLocaleString("en-IN")}
-                </span>
-              )}
-            </div>
-            {savings > 0 && (
-              <motion.span
-                initial={{ scale: 0 }}
-                whileInView={{ scale: 1 }}
-                viewport={{ once: true }}
-                className="inline-block px-4 py-1.5 bg-gradient-to-r from-green-500 to-emerald-600 text-white font-bold text-sm rounded-full shadow-lg"
-              >
-                Save {savings}%
-              </motion.span>
-            )}
-          </div>
-
-          <div className="flex justify-center gap-3 flex-wrap text-xs text-gray-600">
-            {features.slice(0, 2).map((f, i) => (
-              <span key={i} className="flex items-center gap-1">
-                <CheckCircle className="w-3 h-3 text-green-600" /> {f}
-              </span>
-            ))}
-          </div>
-
-          <div className="flex justify-center items-center gap-1">
-            {[...Array(5)].map((_, i) => (
-              <Star key={i} className={`w-4 h-4 ${i < Math.floor(rating) ? "text-yellow-500 fill-current" : "text-gray-300"}`} />
-            ))}
-            <span className="ml-1 font-bold text-sm">{rating}</span>
-          </div>
-
-          <Link
-            to={`/course/${id}`}
-            className="w-full block text-center py-3 bg-gradient-to-r from-[#F37021] to-red-600 text-white font-bold rounded-full shadow-lg hover:shadow-[#F37021]/50 transition-all"
-          >
-            View Details
-          </Link>
-        </div>
-
-        <motion.div
-          className="absolute inset-0 bg-gradient-to-r from-transparent via-white/60 to-transparent opacity-0 group-hover:opacity-100 pointer-events-none"
-          initial={{ x: "-150%" }}
-          whileHover={{ x: "150%" }}
-          transition={{ duration: 0.9 }}
-        />
-      </motion.div>
+      {/* Wrap card in Link for mobile only */}
+      {isDesktop ? (
+        cardContent
+      ) : (
+        <Link
+          to={`/course/${id}`}
+          className="block"
+          onClick={(e) => {
+            // Prevent navigation if clicking the View Details button
+            if (e.target.closest("a")) {
+              e.stopPropagation();
+            }
+          }}
+        >
+          {cardContent}
+        </Link>
+      )}
     </motion.div>
   );
 };
