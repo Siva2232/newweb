@@ -141,7 +141,17 @@ const DetailedCourse = () => {
           className="text-center mb-16"
         >
           <motion.h1
-            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black bg-clip-text text-transparent bg-gradient-to-r from-[#F37021] via-red-600 to-orange-700 mb-6 leading-tight"
+         className="
+  text-2xl
+  sm:text-5xl
+  md:text-4xl
+  lg:text-4xl
+  font-black
+  bg-clip-text text-transparent
+  bg-gradient-to-r from-[#F37021] via-[#F37021] to-[#F37021]
+  mb-6 leading-tight
+"
+
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
