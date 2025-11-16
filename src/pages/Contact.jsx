@@ -11,7 +11,7 @@ const stats = [
   { icon: <Users />, value: "15,842+", label: "Students Helped" },
   { icon: <Award />, value: "4.9", label: "Support Rating" },
   { icon: <Zap />, value: "24/7", label: "Live Support" },
-  { icon: <Globe />, value: "68", label: "Countries" },
+  { icon: <Globe />, value: "3", label: "Countries" },
 ];
 
 const faqs = [
@@ -63,15 +63,20 @@ const Contact = () => {
         transition={{ duration: 1 }}
         className="relative z-10 text-center py-20 px-6"
       >
-        <motion.h1
-          className="text-7xl md:text-9xl font-black bg-clip-text text-transparent bg-gradient-to-r from-orange-600 via-red-600 to-purple-700 mb-8"
-          initial="hidden"
-          animate="visible"
-          variants={{
-            hidden: { opacity: 0 },
-            visible: { opacity: 1, transition: { staggerChildren: 0.08 } },
-          }}
-        >
+      <motion.h1
+  className="text-6xl md:text-8xl font-black bg-clip-text text-transparent bg-gradient-to-r from-[#F37021] via-[#F37021] to-[#F37021] mb-6"
+  initial="hidden"
+  whileInView="visible"
+  viewport={{ once: true }}
+  variants={{
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.08 },
+    },
+  }}
+>
+
           {"Contact Us".split("").map((char, i) => (
             <motion.span
               key={i}
@@ -311,8 +316,12 @@ const Contact = () => {
           </p>
           
           <motion.div whileHover={{ scale: 1.05 }} className="inline-block mb-12">
-            <a
-              href="/enroll"
+            <motion.a
+              href="https://wa.me/+918304952266"
+  target="_blank"
+  rel="noopener noreferrer"
+  whileHover={{ scale: 1.08 }}
+  whileTap={{ scale: 0.95 }}
               className="group relative inline-flex items-center gap-6 px-20 py-7 bg-white text-orange-600 font-black text-2xl rounded-full overflow-hidden shadow-2xl transition-all duration-300"
             >
               <span className="relative z-10 flex items-center gap-4">
@@ -327,10 +336,10 @@ const Contact = () => {
                 whileHover={{ x: "100%" }}
                 transition={{ duration: 0.7 }}
               />
-            </a>
+            </motion.a>
           </motion.div>
 
-          <div className="flex justify-center gap-6">
+          {/* <div className="flex justify-center gap-6">
             {[Instagram, Youtube, Facebook, Twitter, Linkedin].map((Icon, i) => (
               <motion.a
                 key={i}
@@ -341,7 +350,7 @@ const Contact = () => {
                 <Icon className="w-6 h-6" />
               </motion.a>
             ))}
-          </div>
+          </div> */}
         </div>
       </motion.div>
     </div>

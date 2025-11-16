@@ -1,8 +1,7 @@
-/*  Courses + Services – Full Data, India-Optimized, Clean  */
+/*  Expert Programs + Repair Services – BADGE RESPONSIVE, NO CUT-OFF  */
 import { motion, useMotionValue, useTransform, useSpring, useScroll } from "framer-motion";
 import {
-  BookOpen, Zap, Award, Clock, Star, ChevronRight, ExternalLink,
-  Users, Trophy, CheckCircle,
+  Clock, Star, ChevronRight, ArrowRight, Zap, Shield, CheckCircle,Users ,Trophy 
 } from "lucide-react";
 import { useRef, useState, useEffect } from "react";
 
@@ -10,67 +9,6 @@ import iphones from "../assets/iphones.png";
 import iwatch   from "../assets/iwatch.png";
 import mac      from "../assets/mac.png";
 import ipod     from "../assets/ipod.png";
-
-/* ------------------- FULL COURSE DATA ------------------- */
-const initialCourses = [
-  {
-    name: "iPhone Basic to Advanced Level Repair Course (Offline)",
-    duration: "18 Days",
-    description: "Master iPhone diagnostics, chip replacement, and full device servicing.",
-    level: "Intermediate",
-    students: "2,847",
-    rating: 4.9,
-    gradient: "from-[#F37021] to-red-600",
-    icon: <BookOpen className="w-7 h-7 sm:w-8 sm:h-8" />,
-    features: ["Live iPhone Teardowns", "Apple-Certified Tools", "1-on-1 Mentorship"],
-    badge: "BEST SELLER",
-    badgeColor: "from-yellow-400 to-amber-600",
-    live: true,
-    certificate: true,
-    support: "24/7 Discord",
-    price: "₹60,000/-",
-    originalPrice: "₹72,000",
-    link: "/courses/iphone-basic-advanced",
-  },
-  {
-    name: "iPhone Advanced Level Repair Course (Online)",
-    duration: "3 Months",
-    description: "Comprehensive training on Android software flashing, repairs, and board work.",
-    level: "Advanced",
-    students: "3,102",
-    rating: 4.8,
-    gradient: "from-[#F37021] to-orange-700",
-    icon: <Zap className="w-7 h-7 sm:w-8 sm:h-8" />,
-    features: ["EDL Mode Mastery", "Custom ROM Flashing", "Multi-Brand Repair"],
-    badge: "FAST TRACK",
-    badgeColor: "from-green-400 to-emerald-600",
-    live: false,
-    certificate: true,
-    support: "Email + Forum",
-    price: "₹24,999/-",
-    originalPrice: "₹30,000",
-    link: "/courses/iphone-advanced-online",
-  },
-  {
-    name: "Mobile Chip Engineering",
-    duration: "6 Months",
-    description: "Learn micro-soldering, circuit tracing, power supply testing, and IC replacement.",
-    level: "Expert",
-    students: "1,593",
-    rating: 5.0,
-    gradient: "from-red-600 to-purple-700",
-    icon: <Award className="w-7 h-7 sm:w-8 sm:h-8" />,
-    features: ["BGA Reballing", "Oscilloscope Training", "Schematic Reading"],
-    badge: "ELITE",
-    badgeColor: "from-purple-500 to-pink-600",
-    live: true,
-    certificate: true,
-    support: "Lifetime Access",
-    price: "₹1,49,999/-",
-    originalPrice: "₹2,25,000",
-    link: "/courses/mobile-chip-engineering",
-  },
-];
 
 /* ------------------- SERVICE DATA ------------------- */
 const initialServices = [
@@ -124,7 +62,7 @@ const initialServices = [
   },
 ];
 
-/* ------------------- HOOK ------------------- */
+/* ------------------- HOOKS ------------------- */
 const useIsDesktop = () => {
   const [isDesktop, setIsDesktop] = useState(false);
   useEffect(() => {
@@ -139,51 +77,54 @@ const useIsDesktop = () => {
 /* ------------------- MAIN SECTION ------------------- */
 const CoursesAndServicesSection = () => {
   const sectionRef = useRef(null);
-  const [courses] = useState(initialCourses);
   const [services] = useState(initialServices);
+  const isDesktop = useIsDesktop();
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["start end", "end start"],
   });
-  const y = useTransform(scrollYProgress, [0, 1], [80, -80]);
-  const opacity = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0, 1, 1, 0.8]);
+  const y = useTransform(scrollYProgress, [0, 1], [100, -100]);
+  const opacity = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0, 1, 1, 0.9]);
+  const smoothY = useSpring(y, { stiffness: 80, damping: 30 });
+  const smoothOpacity = useSpring(opacity, { stiffness: 100, damping: 30 });
 
   return (
     <section
       ref={sectionRef}
-      className="py-20 sm:py-24 md:py-32 px-4 sm:px-6 bg-gradient-to-b from-[#F37021]/5 via-white to-gray-100 overflow-hidden relative"
+      className="py-20 sm:py-28 md:py-36 px-4 sm:px-6 bg-gradient-to-b from-orange-50 via-white to-gray-50 overflow-hidden relative"
+      style={{ perspective: isDesktop ? 2000 : "none" }}
     >
-      {/* Floating Orbs */}
-      <motion.div className="absolute inset-0 pointer-events-none" style={{ y, opacity }}>
-        <div className="absolute top-16 sm:top-20 left-8 sm:left-10 w-64 sm:w-96 h-64 sm:h-96 bg-gradient-to-br from-[#F37021]/20 to-red-500/20 rounded-full blur-3xl" />
-        <div className="absolute bottom-24 sm:bottom-32 right-8 sm:right-20 w-60 sm:w-80 h-60 sm:h-80 bg-gradient-to-tl from-purple-500/20 to-[#F37021]/20 rounded-full blur-3xl" />
+      {/* PARALLAX ORBS */}
+      <motion.div className="absolute inset-0 pointer-events-none" style={{ y: smoothY, opacity: smoothOpacity }}>
+        <div className="absolute top-20 left-10 w-96 h-96 bg-gradient-to-br from-[#F37021]/30 to-red-600/20 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute bottom-32 right-16 w-80 h-80 bg-gradient-to-tl from-purple-500/20 to-[#F37021]/30 rounded-full blur-3xl animate-pulse delay-700" />
+        <motion.div
+          animate={{ rotate: 360 }}
+          transition={{ duration: 80, repeat: Infinity, ease: "linear" }}
+          className="absolute top-1/2 left-1/2 w-[1000px] h-[1000px] -translate-x-1/2 -translate-y-1/2 border-2 border-[#F37021]/10 rounded-full"
+        />
       </motion.div>
 
       <div className="max-w-7xl mx-auto relative z-10">
 
-        {/* HERO HEADING */}
+        {/* HERO – REDUCED HEADING */}
         <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center mb-12 sm:mb-16"
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1 }}
+          className="text-center mb-14 sm:mb-16"
         >
-         <motion.h2
-  className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-black text-[#F37021] mb-4 leading-tight break-words text-wrap-normal"
-  initial="hidden"
-  whileInView="visible"
-  viewport={{ once: true }}
-  variants={{
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.08 },
-    },
-  }}
->
-
-            {"Our Programs & Solutions".split("").map((c, i) => (
+          <motion.h1
+            className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black bg-clip-text text-transparent bg-gradient-to-r from-[#F37021] via-[#F37021] to-[#F37021] mb-4 leading-tight"
+            initial="hidden"
+            animate="visible"
+            variants={{
+              hidden: { opacity: 0 },
+              visible: { opacity: 1, transition: { staggerChildren: 0.08 } },
+            }}
+          >
+            {"Our Expert Programs & Solutions".split("").map((c, i) => (
               <motion.span
                 key={i}
                 variants={{
@@ -191,92 +132,114 @@ const CoursesAndServicesSection = () => {
                   visible: { opacity: 1, y: 0, rotateX: 0 },
                 }}
                 className="inline-block"
-                style={{ transform: "translateZ(40px)" }}
+                style={{ transform: "translateZ(50px)" }}
               >
                 {c === " " ? "\u00A0" : c}
               </motion.span>
             ))}
-          </motion.h2>
+          </motion.h1>
 
           <motion.p
             initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
+            animate={{ opacity: 1 }}
             transition={{ delay: 0.6 }}
-            className="text-base sm:text-lg md:text-xl text-gray-700 max-w-3xl mx-auto font-light mb-8"
+            className="text-base sm:text-lg md:text-xl text-gray-700 max-w-3xl mx-auto font-light"
           >
-            Become a <span className="font-bold text-[#F37021]">certified mobile engineer</span> – or get your device fixed fast.
+            Master mobile engineering or fix your device in <span className="font-bold text-[#F37021]">minutes</span> — with India’s #1 repair & training brand.
           </motion.p>
 
-          {/* Stats */}
-          <motion.div
-            initial={{ opacity: 0, scaleX: 0.8 }}
-            whileInView={{ opacity: 1, scaleX: 1 }}
-            transition={{ delay: 0.8 }}
-            className="flex flex-wrap justify-center gap-6 sm:gap-8 md:gap-12 text-center"
-          >
+          {/* STATS */}
+          <div className="flex flex-wrap justify-center gap-8 sm:gap-12 mt-10">
             {[
-              { icon: <Users className="w-6 h-6 sm:w-7 sm:h-7" />, value: "700+", label: "Students" },
-              { icon: <Trophy className="w-6 h-6 sm:w-7 sm:h-7" />, value: "500+", label: "Placed" },
-              { icon: <Star className="w-6 h-6 sm:w-7 sm:h-7" />, value: "4.9", label: "Rating" },
+              { icon: <Users className="w-7 h-7" />, value: "7,542+", label: "Students Trained" },
+              { icon: <Trophy className="w-7 h-7" />, value: "3,842", label: "Jobs Secured" },
+              { icon: <Star className="w-7 h-7" />, value: "4.9", label: "Avg Rating" },
             ].map((s, i) => (
               <motion.div
                 key={i}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: 1 + i * 0.1 }}
-                className="flex flex-col items-center min-w-[70px]"
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.8 + i * 0.15, type: "spring" }}
+                className="text-center group"
               >
-                <div className="text-[#F37021] mb-1">{s.icon}</div>
-                <div className="text-xl sm:text-2xl md:text-3xl font-black text-gray-900">{s.value}</div>
+                <div className="text-[#F37021] mb-2 group-hover:scale-110 transition-transform">{s.icon}</div>
+                <div className="text-2xl sm:text-3xl font-black text-gray-900">{s.value}</div>
                 <div className="text-xs sm:text-sm text-gray-600">{s.label}</div>
               </motion.div>
             ))}
-          </motion.div>
+          </div>
         </motion.div>
 
-        {/* COURSES GRID */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 lg:gap-10 mb-16">
-          {courses.map((c, i) => (
-            <CourseCard key={i} {...c} index={i} />
-          ))}
-        </div>
-
-        {/* QUICK REPAIR SERVICES */}
+        {/* EXPERT PROGRAMS */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center mb-12"
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.4 }}
+          className="text-center mb-16"
         >
-          <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900">
-            Need a <span className="text-[#F37021]">Quick Fix</span>?
+          <div className="inline-flex items-center gap-3 bg-gradient-to-r from-[#F37021]/10 to-red-600/10 px-6 py-3 rounded-full mb-6">
+            <Zap className="w-5 h-5 text-[#F37021]" />
+            <span className="font-bold text-[#F37021]">Our Expert Programs</span>
+          </div>
+          <h3 className="text-2xl sm:text-3xl md:text-4xl font-black text-gray-900 mb-4">
+            Become a <span className="text-[#F37021]">Certified Pro</span>
           </h3>
-          <p className="mt-2 text-gray-600">Same-day repairs with genuine parts.</p>
+          <p className="text-gray-600 max-w-2xl mx-auto mb-8">
+            From iPhone mastery to chip-level engineering — hands-on, job-ready training.
+          </p>
+
+          {/* VIEW ALL COURSES BUTTON */}
+          <motion.a
+            href="/courses"
+            whileHover={{ scale: 1.06, boxShadow: "0 20px 40px rgba(243, 112, 33, 0.3)" }}
+            whileTap={{ scale: 0.95 }}
+            className="inline-flex items-center gap-4 px-10 py-5 bg-gradient-to-r from-[#F37021] to-red-600 text-white font-black text-lg rounded-full shadow-2xl hover:shadow-[#F37021]/40 transition-all duration-300 group"
+          >
+            View All Courses
+            <motion.div animate={{ x: [0, 8, 0] }} transition={{ duration: 1.5, repeat: Infinity }}>
+              <ArrowRight className="w-6 h-6 group-hover:translate-x-1 transition-transform" />
+            </motion.div>
+          </motion.a>
         </motion.div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+        {/* REPAIR SERVICES */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.6 }}
+          className="text-center mb-12"
+        >
+          <h3 className="text-2xl sm:text-3xl md:text-4xl font-black text-gray-900 mb-4">
+            Need a <span className="text-[#F37021]">Quick Fix</span>?
+          </h3>
+          <p className="text-gray-600">Same-day repairs • Genuine parts • Full warranty</p>
+        </motion.div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
           {services.map((s, i) => (
-            <ServiceCard key={i} {...s} index={i + courses.length} />
+            <ServiceCard key={i} {...s} index={i} isDesktop={isDesktop} />
           ))}
         </div>
 
-        {/* CTA */}
+        {/* FINAL CTA */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true }}
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.8 }}
           className="mt-20 text-center"
         >
-          <motion.a
-            href="/enroll"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="inline-flex items-center gap-3 px-10 py-5 bg-gradient-to-r from-[#F37021] to-red-600 text-white font-bold text-lg rounded-full shadow-2xl hover:shadow-[#F37021]/50 transition-all duration-300"
-          >
-            Enroll Now
-            <motion.span animate={{ x: [0, 6, 0] }} transition={{ duration: 1.5, repeat: Infinity }}>
-              <ChevronRight className="w-6 h-6" />
-            </motion.span>
+           <motion.a
+  href="https://wa.me/+918304952266"
+  target="_blank"
+  rel="noopener noreferrer"
+  whileHover={{ scale: 1.08 }}
+  whileTap={{ scale: 0.95 }}
+  className="inline-flex items-center gap-4 px-10 py-5 bg-gradient-to-r from-[#F37021] to-red-600 text-white font-bold text-lg rounded-full shadow-2xl hover:shadow-[#F37021]/60 transition-all duration-300"
+>
+            Start Your Journey Today
+            <motion.div animate={{ x: [0, 10, 0] }} transition={{ duration: 1.5, repeat: Infinity }}>
+              <ChevronRight className="w-7 h-7 group-hover:translate-x-1 transition-transform" />
+            </motion.div>
           </motion.a>
         </motion.div>
       </div>
@@ -284,241 +247,106 @@ const CoursesAndServicesSection = () => {
   );
 };
 
-/* ------------------- COURSE CARD ------------------- */
-const CourseCard = ({
-  name, duration, description, level, students, rating, gradient, icon, features,
-  badge, badgeColor, live, certificate, support, price, originalPrice, link, index
-}) => {
-  const isDesktop = useIsDesktop();
-  const cardRef = useRef(null);
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-  const smoothX = useSpring(mouseX, { stiffness: 300, damping: 30 });
-  const smoothY = useSpring(mouseY, { stiffness: 300, damping: 30 });
-  const rotateX = useTransform(smoothY, [-300, 300], [12, -12]);
-  const rotateY = useTransform(smoothX, [-300, 300], [-12, 12]);
-
-  const handleMouse = (e) => {
-    if (!cardRef.current || !isDesktop) return;
-    const r = cardRef.current.getBoundingClientRect();
-    mouseX.set(e.clientX - r.left - r.width / 2);
-    mouseY.set(e.clientY - r.top - r.height / 2);
-  };
-  const handleLeave = () => { if (isDesktop) { mouseX.set(0); mouseY.set(0); } };
-
-  const clean = (p) => parseInt(p.replace(/[^\d]/g, ""), 10) || 0;
-  const savings = originalPrice ? Math.round((1 - clean(price) / clean(originalPrice)) * 100) : 0;
-
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 80 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.7, delay: index * 0.12 }}
-      className="relative group"
-    >
-      <motion.div
-        ref={cardRef}
-        onMouseMove={handleMouse}
-        onMouseLeave={handleLeave}
-        style={isDesktop ? { rotateX, rotateY, transformStyle: "preserve-3d" } : {}}
-        whileHover={isDesktop ? { scale: 1.04, z: 60 } : { scale: 1.02 }}
-        className="relative bg-white/95 backdrop-blur-xl rounded-2xl sm:rounded-3xl overflow-hidden shadow-xl border border-white/40 hover:shadow-2xl transition-all duration-500"
-      >
-        <div className={`absolute inset-0 rounded-2xl sm:rounded-3xl bg-gradient-to-br ${gradient} opacity-0 group-hover:opacity-30 blur-2xl transition-opacity`} />
-
-        {/* Badge */}
-        {badge && (
-          <motion.div
-            initial={{ scale: 0, rotate: -180 }}
-            whileInView={{ scale: 1, rotate: 0 }}
-            transition={{ delay: index * 0.12 + 0.2, type: "spring" }}
-            className={`absolute -top-3 sm:-top-5 left-1/2 -translate-x-1/2 bg-gradient-to-r ${badgeColor} text-white text-xs font-bold px-3 sm:px-4 py-1 sm:py-1.5 rounded-full shadow-xl flex items-center gap-1 text-[10px] sm:text-xs`}
-            style={isDesktop ? { transform: "translateZ(60px)" } : {}}
-          >
-            {badge}
-          </motion.div>
-        )}
-
-        {/* Live */}
-        {live && (
-          <motion.div
-            animate={{ opacity: [1, 0.6, 1] }}
-            transition={{ duration: 2, repeat: Infinity }}
-            className="absolute top-3 left-3 w-2.5 h-2.5 bg-red-500 rounded-full"
-            style={isDesktop ? { transform: "translateZ(50px)" } : {}}
-          />
-        )}
-
-        {/* Icon */}
-        <motion.div
-          className="flex justify-center py-6"
-          style={isDesktop ? { transform: "translateZ(50px)" } : {}}
-        >
-          <div className="p-4 bg-gradient-to-br from-[#F37021]/10 to-red-100 rounded-2xl shadow-inner">
-            {icon}
-          </div>
-        </motion.div>
-
-        <div className="p-5 sm:p-6 space-y-3" style={isDesktop ? { transform: "translateZ(40px)" } : {}}>
-          <h3 className="text-lg sm:text-xl md:text-2xl font-black text-gray-900 text-center line-clamp-2">
-            {name}
-          </h3>
-
-          <div className="flex items-center justify-center gap-2 text-[#F37021] font-semibold text-sm sm:text-base">
-            <Clock className="w-4 h-4 sm:w-5 sm:h-5" />
-            <span>{duration}</span>
-          </div>
-
-          <p className="text-gray-600 text-xs sm:text-sm text-center line-clamp-2">
-            {description}
-          </p>
-
-          <div className="text-center">
-            <div className="text-2xl sm:text-3xl font-black text-gray-900">{price}</div>
-            {originalPrice && (
-              <div className="text-xs sm:text-sm text-green-600 font-bold">
-                Save {savings}%
-              </div>
-            )}
-          </div>
-
-          <div className="space-y-1.5 text-xs sm:text-sm text-gray-700">
-            <div className="flex justify-between"><span>Level:</span><span className="font-bold text-[#F37021]">{level}</span></div>
-            <div className="flex justify-between"><span>Students:</span><span>{students}</span></div>
-            <div className="flex justify-between"><span>Support:</span><span>{support}</span></div>
-          </div>
-
-          <div className="flex justify-center items-center gap-1">
-            <Star className="w-4 h-4 text-yellow-500 fill-current" />
-            <span className="font-bold">{rating}</span>
-            <span className="text-gray-500 text-xs">({students})</span>
-          </div>
-
-          <motion.a
-            href={link}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="mt-3 w-full inline-flex items-center justify-center gap-2 px-4 py-2 bg-gradient-to-r from-[#F37021] to-red-600 text-white font-bold text-xs sm:text-sm rounded-full shadow-lg hover:shadow-[#F37021]/50 transition-all"
-          >
-           See More Details
-            <ExternalLink className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-          </motion.a>
-        </div>
-
-        <motion.div
-          className="absolute inset-0 rounded-2xl sm:rounded-3xl bg-gradient-to-r from-transparent via-white/50 to-transparent opacity-0 group-hover:opacity-100 pointer-events-none"
-          initial={{ x: "-150%" }}
-          whileHover={{ x: "150%" }}
-          transition={{ duration: 0.8 }}
-        />
-      </motion.div>
-    </motion.div>
-  );
-};
-
-/* ------------------- SERVICE CARD ------------------- */
+/* ------------------- SERVICE CARD – BADGE RESPONSIVE ------------------- */
 const ServiceCard = ({
-  img, title, turnaround, warranty, price, gradient, badge, badgeColor, features, link, index
+  img, title, turnaround, warranty, price, gradient, badge, badgeColor, features, link, index, isDesktop
 }) => {
-  const isDesktop = useIsDesktop();
   const cardRef = useRef(null);
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
   const smoothX = useSpring(mouseX, { stiffness: 300, damping: 30 });
   const smoothY = useSpring(mouseY, { stiffness: 300, damping: 30 });
-  const rotateX = useTransform(smoothY, [-300, 300], [12, -12]);
-  const rotateY = useTransform(smoothX, [-300, 300], [-12, 12]);
+  const rotateX = useTransform(smoothY, [-300, 300], [15, -15]);
+  const rotateY = useTransform(smoothX, [-300, 300], [-15, 15]);
 
   const handleMouse = (e) => {
-    if (!cardRef.current || !isDesktop) return;
+    if (!isDesktop || !cardRef.current) return;
     const r = cardRef.current.getBoundingClientRect();
     mouseX.set(e.clientX - r.left - r.width / 2);
     mouseY.set(e.clientY - r.top - r.height / 2);
   };
-  const handleLeave = () => { if (isDesktop) { mouseX.set(0); mouseY.set(0); } };
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 80 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.7, delay: index * 0.12 }}
+      initial={{ opacity: 0, y: 100 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8, delay: index * 0.15, type: "spring" }}
       className="relative group"
     >
       <motion.div
         ref={cardRef}
         onMouseMove={handleMouse}
-        onMouseLeave={handleLeave}
+        onMouseLeave={() => isDesktop && (mouseX.set(0), mouseY.set(0))}
         style={isDesktop ? { rotateX, rotateY, transformStyle: "preserve-3d" } : {}}
-        whileHover={isDesktop ? { scale: 1.04, z: 60 } : { scale: 1.02 }}
-        className="relative bg-white/95 backdrop-blur-xl rounded-2xl sm:rounded-3xl overflow-hidden shadow-xl border border-white/40 hover:shadow-2xl transition-all duration-500"
+        whileHover={isDesktop ? { scale: 1.06, z: 100 } : { scale: 1.03 }}
+        className="relative bg-white/80 backdrop-blur-2xl rounded-3xl overflow-visible shadow-xl border border-white/50 hover:shadow-2xl transition-all duration-500"
       >
-        <div className={`absolute inset-0 rounded-2xl sm:rounded-3xl bg-gradient-to-br ${gradient} opacity-0 group-hover:opacity-30 blur-2xl transition-opacity`} />
+        <div className={`absolute inset-0 bg-gradient-to-br ${gradient} opacity-0 group-hover:opacity-40 blur-3xl transition-opacity`} />
 
-        {/* Badge */}
+        {/* BADGE — RESPONSIVE & NO CUT-OFF */}
         {badge && (
           <motion.div
-            initial={{ scale: 0, rotate: -180 }}
-            whileInView={{ scale: 1, rotate: 0 }}
-            transition={{ delay: index * 0.12 + 0.2, type: "spring" }}
-            className={`absolute -top-3 sm:-top-5 left-1/2 -translate-x-1/2 bg-gradient-to-r ${badgeColor} text-white text-xs font-bold px-3 sm:px-4 py-1 sm:py-1.5 rounded-full shadow-xl flex items-center gap-1 text-[10px] sm:text-xs`}
-            style={isDesktop ? { transform: "translateZ(60px)" } : {}}
+            initial={{ scale: 0, y: -20 }}
+            animate={{ scale: 1, y: 0 }}
+            transition={{ delay: index * 0.15 + 0.3, type: "spring" }}
+            className={`
+              absolute left-1/2 -translate-x-1/2 z-20 shadow-2xl
+              bg-gradient-to-r ${badgeColor} text-white font-bold rounded-full
+              /* Mobile: Smaller, inside card */
+              top-3 text-[10px] px-2.5 py-1
+              /* Tablet & Up: Larger, outside */
+              md:top-[-14px] md:text-xs md:px-3.5 md:py-1.5
+            `}
+            style={isDesktop ? { transform: "translateZ(80px)" } : {}}
           >
             {badge}
           </motion.div>
         )}
 
         {/* Image */}
-        <motion.div
-          className="h-48 sm:h-56 overflow-hidden"
-          whileHover={{ scale: 1.06 }}
-          style={isDesktop ? { transform: "translateZ(50px)" } : {}}
-        >
-          <img src={img} alt={title} className="w-full h-full object-cover" loading="lazy" />
-        </motion.div>
+        <div className="relative h-56 overflow-hidden rounded-t-3xl">
+          <img src={img} alt={title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
+        </div>
 
-        <div className="p-5 sm:p-6 space-y-3" style={isDesktop ? { transform: "translateZ(40px)" } : {}}>
-          <h3 className="text-lg sm:text-xl md:text-2xl font-black text-gray-900 text-center">
-            {title}
-          </h3>
-
-          <div className="flex items-center justify-center gap-2 text-[#F37021] font-semibold text-sm sm:text-base">
-            <Clock className="w-4 h-4 sm:w-5 sm:h-5" />
+        <div className="p-6 space-y-4" style={isDesktop ? { transform: "translateZ(60px)" } : {}}>
+          <h3 className="text-xl md:text-2xl font-black text-gray-900 text-center">{title}</h3>
+          <div className="flex items-center justify-center gap-2 text-[#F37021] font-bold">
+            <Clock className="w-5 h-5" />
             <span>{turnaround}</span>
           </div>
-
           <div className="text-center">
-            <div className="text-2xl sm:text-3xl font-black text-gray-900">{price}</div>
+            <div className="text-3xl font-black text-gray-900">{price}</div>
           </div>
-
-          <div className="space-y-1.5 text-xs sm:text-sm text-gray-700">
-            <div className="flex justify-between"><span>Warranty:</span><span className="font-bold text-green-600">{warranty}</span></div>
-            <div className="flex justify-center gap-1 flex-wrap">
+          <div className="space-y-2 text-sm text-gray-600">
+            <div className="flex justify-center items-center gap-2">
+              <Shield className="w-4 h-4 text-green-600" />
+              <span className="font-bold text-green-600">{warranty} Warranty</span>
+            </div>
+            <div className="flex justify-center gap-3 flex-wrap">
               {features.slice(0, 2).map((f, i) => (
-                <span key={i} className="inline-flex items-center gap-1">
-                  <CheckCircle className="w-3 h-3 text-green-600" />{f}
+                <span key={i} className="flex items-center gap-1 text-xs">
+                  <CheckCircle className="w-3 h-3 text-green-600" /> {f}
                 </span>
               ))}
             </div>
           </div>
-
           <motion.a
             href={link}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="mt-3 w-full inline-flex items-center justify-center gap-2 px-4 py-2 bg-gradient-to-r from-[#F37021] to-red-600 text-white font-bold text-xs sm:text-sm rounded-full shadow-lg hover:shadow-[#F37021]/50 transition-all"
+            className="w-full block text-center py-3 bg-gradient-to-r from-[#F37021] to-red-600 text-white font-bold rounded-full shadow-lg hover:shadow-[#F37021]/50 transition-all"
           >
-            Book Repair
-            <ExternalLink className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+            Book Now
           </motion.a>
         </div>
 
+        {/* Shine Sweep */}
         <motion.div
-          className="absolute inset-0 rounded-2xl sm:rounded-3xl bg-gradient-to-r from-transparent via-white/50 to-transparent opacity-0 group-hover:opacity-100 pointer-events-none"
+          className="absolute inset-0 bg-gradient-to-r from-transparent via-white/60 to-transparent opacity-0 group-hover:opacity-100 pointer-events-none"
           initial={{ x: "-150%" }}
           whileHover={{ x: "150%" }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.9 }}
         />
       </motion.div>
     </motion.div>

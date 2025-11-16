@@ -9,6 +9,7 @@ import {
   Youtube,
   Sparkles,
   ArrowUp,
+  Linkedin,
   Copyright
 } from "lucide-react";
 import { useRef } from "react";
@@ -32,10 +33,10 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   const socialLinks = [
-    { icon: <Facebook className="w-4.5 h-4.5" />, href: "#", label: "Facebook" },
-    { icon: <Instagram className="w-4.5 h-4.5" />, href: "#", label: "Instagram" },
-    { icon: <Twitter className="w-4.5 h-4.5" />, href: "#", label: "Twitter" },
-    { icon: <Youtube className="w-4.5 h-4.5" />, href: "#", label: "YouTube" },
+    { icon: <Facebook className="w-4.5 h-4.5" />, href: "https://www.facebook.com/Getfixonline/", label: "Facebook" },
+    { icon: <Instagram className="w-4.5 h-4.5" />, href: "https://www.instagram.com/getfixonline/?hl=en", label: "Instagram" },
+    { icon: <Linkedin className="w-4.5 h-4.5" />, href: "https://www.linkedin.com/company/getfixonline/?trk=organization_guest_main-feed-card_feed-actor-name&originalSubdomain=in", label: "LinkedIn" },
+    { icon: <Youtube className="w-4.5 h-4.5" />, href: "https://www.youtube.com/watch?v=zMjvlr7nOiM", label: "YouTube" },
   ];
 
   const quickLinks = [
@@ -144,7 +145,7 @@ const Footer = () => {
                   <div className="p-2 bg-white/10 rounded-lg border border-white/20">
                     <Phone className="w-4.5 h-4.5 text-[#F37021]" />
                   </div>
-                  <span>+91 9720108040</span>
+                  <span>+91 9758828258</span>
                 </div>
                 <div className="flex items-center gap-3 text-gray-400 text-sm sm:text-base">
                   <div className="p-2 bg-white/10 rounded-lg border border-white/20">

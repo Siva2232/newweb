@@ -1,25 +1,36 @@
-/* CoursesSection.jsx – Ultimate Version (Image Cards + Filters + 3D Tilt + Testimonials) */
-import { motion, useMotionValue, useTransform, useSpring, useScroll } from "framer-motion";
+/* CoursesSection.jsx – FIXED: No Blank Screen on Direct Nav */
 import {
-  BookOpen, Clock, Zap, ChevronRight, Star, Award, Users, Trophy, Globe,
-  Shield, Headphones, CheckCircle, Search, Filter, PlayCircle, Laptop
+  motion,
+  useMotionValue,
+  useTransform,
+  useSpring,
+  useScroll,
+} from "framer-motion";
+import {
+  Clock,
+  ChevronRight,
+  Star,
+  Award,
+  Users,
+  Trophy,
+  Globe,
+  Search,
+  Laptop,
 } from "lucide-react";
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect, useMemo } from "react";
 
-// === IMPORT YOUR IMAGES ===
 import offline from "../assets/offline.png";
 import online from "../assets/online.png";
 import android from "../assets/android.png";
 
-// === COURSES DATA (with images) ===
 const allCourses = [
   {
     id: 1,
     name: "iPhone Basic to Advanced Level Repair Course (Offline)",
     duration: "18 Days",
     description: "Master iPhone diagnostics, chip replacement, and full device servicing.",
-    level: "Intermediate",
-    students: "2,847",
+    level: "Expert",
+    students: "250+",
     rating: 4.9,
     price: "₹60,000/-",
     originalPrice: "₹72,000",
@@ -27,8 +38,6 @@ const allCourses = [
     badge: "BEST SELLER",
     badgeColor: "from-yellow-400 to-amber-600",
     live: true,
-    support: "24/7 Discord",
-    features: ["Live iPhone Teardowns", "Apple-Certified Tools", "1-on-1 Mentorship"],
   },
   {
     id: 2,
@@ -36,7 +45,7 @@ const allCourses = [
     duration: "3 Months",
     description: "Comprehensive training on Android software flashing, repairs, and board work.",
     level: "Advanced",
-    students: "3,102",
+    students: "150+",
     rating: 4.8,
     price: "₹24,999/-",
     originalPrice: "₹30,000",
@@ -44,29 +53,24 @@ const allCourses = [
     badge: "FAST TRACK",
     badgeColor: "from-green-400 to-emerald-600",
     live: false,
-    support: "Email + Forum",
-    features: ["EDL Mode Mastery", "Custom ROM Flashing", "Multi-Brand Repair"],
   },
   {
     id: 3,
     name: "iPhone & Android Advanced Course (Online)",
     duration: "12 Months",
     description: "Learn micro-soldering, circuit tracing, power supply testing, and IC replacement.",
-    level: "Expert",
-    students: "1,593",
+    level: "Advanced",
+    students: "250+",
     rating: 5.0,
     price: "₹2,499/month",
-    originalPrice: "₹5,999/month",
+    originalPrice: "₹2,999/month",
     image: android,
     badge: "ELITE",
     badgeColor: "from-purple-500 to-pink-600",
     live: true,
-    support: "Lifetime Access",
-    features: ["BGA Reballing", "Oscilloscope Training", "Schematic Reading"],
   },
 ];
 
-// === HOOKS ===
 const useIsDesktop = () => {
   const [isDesktop, setIsDesktop] = useState(false);
   useEffect(() => {
@@ -78,7 +82,6 @@ const useIsDesktop = () => {
   return isDesktop;
 };
 
-// === TESTIMONIALS & STATS ===
 const stats = [
   { icon: <Users className="w-8 h-8" />, value: "12K+", label: "Students Trained" },
   { icon: <Trophy className="w-8 h-8" />, value: "3,842+", label: "Placed" },
@@ -92,10 +95,8 @@ const testimonials = [
   { name: "Rohan Desai", role: "Chip Engineer", text: "Best technical training I’ve ever had.", rating: 5 },
 ];
 
-// === MAIN COMPONENT ===
 const CoursesSection = () => {
   const sectionRef = useRef(null);
-  const [courses] = useState(allCourses);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedLevel, setSelectedLevel] = useState("All");
 
@@ -106,26 +107,41 @@ const CoursesSection = () => {
   const y = useTransform(scrollYProgress, [0, 1], [100, -100]);
   const opacity = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0, 1, 1, 0.8]);
 
-  const filteredCourses = courses.filter(course => {
-    const matchesSearch = course.name.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesLevel = selectedLevel === "All" || course.level === selectedLevel;
-    return matchesSearch && matchesLevel;
-  });
+  const filteredCourses = useMemo(() => {
+    return allCourses.filter((c) => {
+      const matchesSearch = c.name.toLowerCase().includes(searchTerm.toLowerCase());
+      const matchesLevel = selectedLevel === "All" || c.level === selectedLevel;
+      return matchesSearch && matchesLevel;
+    });
+  }, [searchTerm, selectedLevel]);
 
   return (
-    <section ref={sectionRef} className="py-20 bg-gradient-to-b from-[#F37021]/5 via-white to-gray-50 overflow-hidden relative">
-      {/* Floating Background Orbs */}
+    <section
+      ref={sectionRef}
+      className="py-20 bg-gradient-to-b from-[#F37021]/5 via-white to-gray-50 overflow-hidden relative"
+    >
+      {/* Floating Orbs */}
       <motion.div className="absolute inset-0 pointer-events-none" style={{ y, opacity }}>
         <div className="absolute top-20 left-10 w-96 h-96 bg-gradient-to-br from-[#F37021]/20 to-red-500/20 rounded-full blur-3xl" />
         <div className="absolute bottom-32 right-20 w-80 h-80 bg-gradient-to-tl from-purple-500/20 to-[#F37021]/20 rounded-full blur-3xl" />
       </motion.div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
-        {/* Hero */}
-        <motion.div initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} className="text-center mb-16">
+        {/* HERO – ALWAYS ANIMATES ON LOAD */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}  // ← THIS FIXES BLANK SCREEN
+          transition={{ duration: 0.8 }}
+          className="text-center mb-16"
+        >
           <motion.h2 className="text-5xl sm:text-6xl md:text-7xl font-black text-[#F37021] mb-6">
             {"Learn With Us".split("").map((char, i) => (
-              <motion.span key={i} initial={{ opacity: 0, y: 60 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.05 }}>
+              <motion.span
+                key={i}
+                initial={{ opacity: 0, y: 60 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: i * 0.05 }}
+              >
                 {char === " " ? "\u00A0" : char}
               </motion.span>
             ))}
@@ -137,7 +153,13 @@ const CoursesSection = () => {
           {/* Stats */}
           <div className="flex flex-wrap justify-center gap-10 mt-12">
             {stats.map((s, i) => (
-              <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.1 }} className="text-center">
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3 + i * 0.1 }}
+                className="text-center"
+              >
                 <div className="text-[#F37021] mb-2">{s.icon}</div>
                 <div className="text-3xl font-black text-gray-900">{s.value}</div>
                 <div className="text-sm text-gray-600">{s.label}</div>
@@ -147,7 +169,12 @@ const CoursesSection = () => {
         </motion.div>
 
         {/* Search & Filter */}
-        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} className="mb-12">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.4 }}
+          className="mb-12"
+        >
           <div className="flex flex-col md:flex-row gap-4 items-center justify-between">
             <div className="relative w-full md:w-96">
               <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5" />
@@ -172,7 +199,7 @@ const CoursesSection = () => {
           </div>
         </motion.div>
 
-        {/* Course Grid */}
+        {/* Course Grid – Use animate for initial load */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
           {filteredCourses.map((course, i) => (
             <CourseCard key={course.id} {...course} index={i} />
@@ -180,7 +207,13 @@ const CoursesSection = () => {
         </div>
 
         {/* Certification Section */}
-        <motion.div initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} className="my-20 bg-gradient-to-r from-[#F37021] to-red-600 text-white py-16 rounded-3xl px-8 text-center">
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.2 }}
+          className="my-20 bg-gradient-to-r from-[#F37021] to-red-600 text-white py-16 rounded-3xl px-8 text-center"
+        >
           <h3 className="text-4xl md:text-5xl font-black mb-6">Certification & Lifetime Support</h3>
           <p className="text-xl mb-10 max-w-3xl mx-auto opacity-90">
             Industry-recognized certificate • 100% job placement assistance • Lifetime community access
@@ -193,14 +226,27 @@ const CoursesSection = () => {
         </motion.div>
 
         {/* Testimonials */}
-        <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} className="mb-20">
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          className="mb-20"
+        >
           <h3 className="text-4xl font-bold text-center mb-12">Student Success Stories</h3>
           <div className="grid md:grid-cols-3 gap-8">
             {testimonials.map((t, i) => (
-              <motion.div key={i} initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} transition={{ delay: i * 0.2 }}
-                className="bg-white rounded-2xl p-6 shadow-xl border border-orange-100">
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.2 }}
+                className="bg-white rounded-2xl p-6 shadow-xl border border-orange-100"
+              >
                 <div className="flex gap-1 mb-3">
-                  {[...Array(t.rating)].map((_, j) => <Star key={j} className="w-5 h-5 fill-yellow-500 text-yellow-500" />)}
+                  {[...Array(t.rating)].map((_, j) => (
+                    <Star key={j} className="w-5 h-5 fill-yellow-500 text-yellow-500" />
+                  ))}
                 </div>
                 <p className="italic text-gray-700 mb-4">"{t.text}"</p>
                 <div className="flex items-center gap-4">
@@ -216,11 +262,18 @@ const CoursesSection = () => {
         </motion.div>
 
         {/* Final CTA */}
-        <motion.div initial={{ opacity: 0, scale: 0.95 }} whileInView={{ opacity: 1, scale: 1 }} className="text-center">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.5 }}
+          className="text-center"
+        >
           <motion.a
-            href="/enroll"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+           href="https://wa.me/+918304952266"
+  target="_blank"
+  rel="noopener noreferrer"
+  whileHover={{ scale: 1.08 }}
+  whileTap={{ scale: 0.95 }}
             className="inline-flex items-center gap-4 px-12 py-6 bg-gradient-to-r from-[#F37021] to-red-600 text-white font-bold text-xl rounded-full shadow-2xl"
           >
             Enroll Now & Start Earning
@@ -234,8 +287,22 @@ const CoursesSection = () => {
   );
 };
 
-// === 3D TILT COURSE CARD (with Image) ===
-const CourseCard = ({ name, duration, description, level, students, rating, price, originalPrice, image, badge, badgeColor, live, support, features, index }) => {
+// ── COURSE CARD (Same as before – with price logic) ─────────────────
+const CourseCard = ({
+  name,
+  duration,
+  description,
+  level,
+  students,
+  rating,
+  price,
+  originalPrice,
+  image,
+  badge,
+  badgeColor,
+  live,
+  index,
+}) => {
   const isDesktop = useIsDesktop();
   const cardRef = useRef(null);
   const mouseX = useMotionValue(0);
@@ -252,44 +319,49 @@ const CourseCard = ({ name, duration, description, level, students, rating, pric
     mouseY.set(e.clientY - r.top - r.height / 2);
   };
 
-  const savings = originalPrice ? Math.round((1 - parseInt(price.replace(/[^\d]/g), "") / parseInt(originalPrice.replace(/[^\d]/g), "")) * 100) : 0;
+  const { savings } = useMemo(() => {
+    const clean = (s) => parseInt(s?.replace(/[^\d]/g, "") ?? "0", 10);
+    const cur = clean(price);
+    const orig = clean(originalPrice);
+    return { savings: orig ? Math.round((1 - cur / orig) * 100) : 0 };
+  }, [price, originalPrice]);
 
   return (
     <motion.div
       initial={{ opacity: 0, y: 80 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
+      animate={{ opacity: 1, y: 0 }}  // ← This ensures it shows on direct nav
       transition={{ duration: 0.7, delay: index * 0.15 }}
       className="relative group"
     >
       <motion.div
         ref={cardRef}
         onMouseMove={handleMouse}
-        onMouseLeave={() => { if (isDesktop) { mouseX.set(0); mouseY.set(0); } }}
+        onMouseLeave={() => isDesktop && (mouseX.set(0), mouseY.set(0))}
         style={isDesktop ? { rotateX, rotateY, transformStyle: "preserve-3d" } : {}}
-        whileHover={isDesktop ? { scale: 1.05, z: 100 } : { scale: 1.03 }}
-        className="relative bg-white/95 backdrop-blur-xl rounded-3xl overflow-hidden shadow-2xl border border-white/50 transition-all duration-500"
+        whileHover={isDesktop ? { scale: 1.05 } : { scale: 1.03 }}
+        className="relative bg-white/95 backdrop-blur-xl rounded-3xl overflow-hidden shadow-2xl border border-white/50"
       >
-        {/* Image */}
         <div className="relative h-56 overflow-hidden">
           <img src={image} alt={name} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
           <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
-
           {badge && (
             <motion.div
               initial={{ scale: 0 }}
-              whileInView={{ scale: 1 }}
-              className={`absolute top-4 left-4 bg-gradient-to-r ${badgeColor} text-white text-xs font-bold px-4 py-2 rounded-full shadow-xl`}>
+              animate={{ scale: 1 }}
+              className={`absolute top-4 left-4 bg-gradient-to-r ${badgeColor} text-white text-xs font-bold px-4 py-2 rounded-full shadow-xl`}
+            >
               {badge}
             </motion.div>
           )}
           {live && (
-            <motion.div animate={{ opacity: [1, 0.5, 1] }} transition={{ duration: 2, repeat: Infinity }}
-              className="absolute top-4 right-4 w-3 h-3 bg-red-500 rounded-full" />
+            <motion.div
+              animate={{ opacity: [1, 0.5, 1] }}
+              transition={{ duration: 2, repeat: Infinity }}
+              className="absolute top-4 right-4 w-3 h-3 bg-red-500 rounded-full"
+            />
           )}
         </div>
 
-        {/* Content */}
         <div className="p-6 space-y-4" style={isDesktop ? { transform: "translateZ(60px)" } : {}}>
           <h3 className="text-xl font-black text-gray-900 line-clamp-2">{name}</h3>
           <div className="flex items-center gap-2 text-[#F37021] font-semibold">
@@ -297,11 +369,19 @@ const CourseCard = ({ name, duration, description, level, students, rating, pric
           </div>
           <p className="text-gray-600 text-sm line-clamp-2">{description}</p>
 
+          <div className="flex items-center gap-2">
+            <div className="text-3xl font-black text-gray-900">{price}</div>
+            {originalPrice && (
+              <>
+                <div className="text-lg text-gray-500 line-through">{originalPrice}</div>
+                <div className="ml-2 px-3 py-1 bg-green-100 text-green-700 font-bold text-sm rounded-full">
+                  Save {savings}%
+                </div>
+              </>
+            )}
+          </div>
+
           <div className="flex justify-between items-center">
-            <div>
-              <div className="text-2xl font-black text-gray-900">{price}</div>
-              {originalPrice && <div className="text-sm text-green-600 font-bold">Save {savings}%</div>}
-            </div>
             <div className="text-right">
               <div className="text-sm font-bold text-[#F37021]">{level}</div>
               <div className="text-xs text-gray-500">{students} students</div>
@@ -310,21 +390,26 @@ const CourseCard = ({ name, duration, description, level, students, rating, pric
 
           <div className="flex items-center gap-2">
             {[...Array(5)].map((_, i) => (
-              <Star key={i} className={`w-4 h-4 ${i < Math.floor(rating) ? "fill-yellow-500 text-yellow-500" : "text-gray-300"}`} />
+              <Star
+                key={i}
+                className={`w-4 h-4 ${i < Math.floor(rating) ? "fill-yellow-500 text-yellow-500" : "text-gray-300"}`}
+              />
             ))}
             <span className="ml-2 font-bold">{rating}</span>
           </div>
 
           <motion.a
-            href="/enroll"
-            whileHover={{ scale: 1.05 }}
+           href="https://wa.me/+918304952266"
+  target="_blank"
+  rel="noopener noreferrer"
+  whileHover={{ scale: 1.08 }}
+  whileTap={{ scale: 0.95 }}
             className="w-full block text-center py-3 bg-gradient-to-r from-[#F37021] to-red-600 text-white font-bold rounded-full shadow-lg"
           >
             Enroll Now
           </motion.a>
         </div>
 
-        {/* Shine Effect */}
         <motion.div
           className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent opacity-0 group-hover:opacity-100 pointer-events-none -skew-x-12"
           initial={{ x: "-100%" }}

@@ -41,7 +41,7 @@ const AboutSection = () => {
   const team = [
     { name: "Sirajul Haque", role: "Founder & Lead Trainer - GetFix Academy", exp: "20+ Years Experience in chip level repair", img: T1 },
     { name: "Shuhaib Shadi", role: "Co-Founder & Director - GetFix Academy", exp: "10+ Year Experience iPhone Chip level Expert", img: T2 },
-    { name: "Pinks", role: "Co-Founder and Technical Support - Getfix", exp: "20+ Years Industry Expertise (Works at Apple-Croatia)", img: T3 },
+    { name: "Pinks", role: "Co-Founder and Technical Support - GetFix", exp: "20+ Years Industry Expertise (Works at Apple-Croatia)", img: T3 },
   ];
 
   return (
@@ -160,7 +160,7 @@ const AboutSection = () => {
             className="space-y-8 order-1 lg:order-2"
           >
             <h3 className="text-4xl sm:text-5xl font-bold text-center lg:text-left">
-              <span className="text-[#F37021]">Why Choose</span> <span className="text-black">Getfix</span>?
+              <span className="text-[#F37021]">Why Choose</span> <span className="text-black">GetFix</span>?
             </h3>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
@@ -227,16 +227,19 @@ const AboutSection = () => {
           className="text-center"
         >
           <motion.a
-            href="/enroll"
-            whileHover={{ scale: 1.08 }}
-            whileTap={{ scale: 0.95 }}
-            className="inline-flex items-center gap-4 px-10 py-5 bg-gradient-to-r from-[#F37021] to-red-600 text-white font-bold text-lg rounded-full shadow-2xl hover:shadow-[#F37021]/60 transition-all duration-300"
-          >
-            Join Getfix Today
-            <motion.span animate={{ x: [0, 8, 0] }} transition={{ duration: 1.5, repeat: Infinity }}>
-              <ChevronRight className="w-6 h-6" />
-            </motion.span>
-          </motion.a>
+  href="https://wa.me/+918304952266"
+  target="_blank"
+  rel="noopener noreferrer"
+  whileHover={{ scale: 1.08 }}
+  whileTap={{ scale: 0.95 }}
+  className="inline-flex items-center gap-4 px-10 py-5 bg-gradient-to-r from-[#F37021] to-red-600 text-white font-bold text-lg rounded-full shadow-2xl hover:shadow-[#F37021]/60 transition-all duration-300"
+>
+  Join Getfix Today
+  <motion.span animate={{ x: [0, 8, 0] }} transition={{ duration: 1.5, repeat: Infinity }}>
+    <ChevronRight className="w-6 h-6" />
+  </motion.span>
+</motion.a>
+
         </motion.div>
       </div>
     </section>

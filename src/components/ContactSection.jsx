@@ -388,8 +388,8 @@ export default function ContactSection() {
               {/* Offices */}
               <div className="grid grid-cols-1 gap-4">
                 {[
-                  { city: 'Kozhikode', phone: '+91 9720108040' },
-                  { city: 'Mumbai', phone: '+91 98765 43210' },
+                  { city: 'Kozhikode', phone: '+91 9758828258' },
+                  { city: 'Kochi', phone: '+91 9758828258' },
                 ].map((loc, i) => (
                   <motion.div
                     key={i}
@@ -514,11 +514,10 @@ export default function ContactSection() {
             </motion.div>
 
             {/* Offices */}
-            <div className="grid grid-cols-3 gap-6">
+            <div className="grid grid-cols-2 gap-6">
               {[
-                { city: 'Kozhikode', address: 'Keystone Building, Calicut, Kerala', phone: '+91 9720108040' },
-                { city: 'Mumbai', address: 'Andheri East, Maharashtra', phone: '+91 98765 43210' },
-                { city: 'Delhi', address: 'Nehru Place, New Delhi', phone: '+91 98765 43211' },
+                { city: 'Kozhikode', address: 'Keystone Building, Calicut, Kerala', phone: '+91 9758828258' },
+                { city: 'Kochi', address: 'Kochi, Kerala', phone: '+91 9758828258' },
               ].map((loc, i) => (
                 <motion.div
                   key={i}

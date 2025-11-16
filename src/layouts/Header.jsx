@@ -272,37 +272,39 @@ const NavLink = ({ name, path, icon, index }) => {
    ------------------------------------------------- */
 const CTAButton = ({ mobile = false }) => (
   <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-    <Link
-      to="/enroll"
-      className={`
-        group relative inline-flex items-center justify-center gap-2
-        ${mobile
-          ? "px-8 py-4 text-lg font-bold w-full rounded-2xl shadow-xl"
-          : "px-5 py-2.5 text-sm font-bold rounded-full shadow-lg"}
-        bg-gradient-to-r from-[#F37021] to-red-600 text-white overflow-hidden
-        hover:shadow-[#F37021]/50 transition-all duration-300
-      `}
-    >
-      <span className="relative z-10 flex items-center gap-2">
-        {mobile ? "Start Learning" : "Enroll"}
-        {mobile ? (
-          <motion.div
-            animate={{ y: [0, 4, 0] }}
-            transition={{ duration: 1.5, repeat: Infinity }}
-          >
-            <ChevronDown className="w-5 h-5" />
-          </motion.div>
-        ) : (
-          <Zap className="w-4 h-4" />
-        )}
-      </span>
-
+ <Link
+  to="https://wa.me/+918304952266"
+  target="_blank"
+  rel="noopener noreferrer"
+  className={`
+    group relative inline-flex items-center justify-center gap-2
+    ${mobile
+      ? "px-8 py-4 text-lg font-bold w-full rounded-2xl shadow-xl"
+      : "px-5 py-2.5 text-sm font-bold rounded-full shadow-lg"}
+    bg-gradient-to-r from-[#F37021] to-red-600 text-white overflow-hidden
+    hover:shadow-[#F37021]/50 transition-all duration-300
+  `}
+>
+  <span className="relative z-10 flex items-center gap-2">
+    {mobile ? "Start Learning" : "Enroll"}
+    {mobile ? (
       <motion.div
-        className="absolute inset-0 bg-white opacity-0 group-hover:opacity-25"
-        initial={{ x: "-100%" }}
-        whileHover={{ x: "100%" }}
-        transition={{ duration: 0.6 }}
-      />
-    </Link>
+        animate={{ y: [0, 4, 0] }}
+        transition={{ duration: 1.5, repeat: Infinity }}
+      >
+        <ChevronDown className="w-5 h-5" />
+      </motion.div>
+    ) : (
+      <Zap className="w-4 h-4" />
+    )}
+  </span>
+
+  <motion.div
+    className="absolute inset-0 bg-white opacity-0 group-hover:opacity-25"
+    initial={{ x: "-100%" }}
+    whileHover={{ x: "100%" }}
+    transition={{ duration: 0.6 }}
+  />
+</Link>
   </motion.div>
 );
