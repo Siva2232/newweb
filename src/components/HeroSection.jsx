@@ -173,7 +173,7 @@ const HeroSection = () => {
           >
             <div className="flex items-center gap-2 text-gray-700 text-sm sm:text-base">
               <Zap className="w-5 h-5 sm:w-6 sm:h-6 text-[#F37021]" />
-              <span className="font-medium">30-Day Fast-Track</span>
+              <span className="font-medium">18-Days Intensive Repair Course</span>
             </div>
             <div className="flex items-center gap-2 text-gray-700 text-sm sm:text-base">
               <Shield className="w-5 h-5 sm:w-6 sm:h-6 text-green-600" />

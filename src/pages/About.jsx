@@ -187,7 +187,7 @@ const About = () => {
   ];
 
  const team = [
-    { name: "Sirajul Haque", tagline: "Co-Founder - GetFix Academy", role: "Founder & Lead Trainer - GetFix Academy", exp: "20+ Years Experience in chip level repair", img: T1 },
+    { name: "Sirajul Haque", tagline: "Co-Founder and Managing Director - GetFix", role: "Founder & Lead Trainer - GetFix Academy", exp: "20+ Years Experience in chip level repair", img: T1 },
     { name: "Shuhaib Shadi", role: "Co-Founder & Director - GetFix", exp: "15+ Year Experience, iPhone Chip level Expert", img: T2 },
     { name: "Pinks", role: "Co-Founder and Technical Support - GetFix", exp: "20+ Years Industry Expertise (Works at Apple-Croatia)", img: T3 },
   ];
@@ -411,7 +411,7 @@ const About = () => {
           <div className="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-orange-50 to-red-50 rounded-full border border-orange-200 shadow-lg">
             <CheckCircle className="w-8 h-8" style={{ color: "#F37021" }} />
             <p className="text-xl font-bold text-gray-800">
-              Trusted by <span style={{ color: "#F37021" }}>10,000+ Students</span> Across India
+              Trusted by <span style={{ color: "#F37021" }}>1000+ Students</span> Across Kerala
             </p>
           </div>
         </motion.div>
@@ -421,12 +421,12 @@ const About = () => {
           <FeatureCard
             icon={<Target className="w-12 h-12" style={{ color: "#F37021" }} />}
             title="Our Mission"
-            desc="Our mission is to establish Kerala’s No.1 Smartphone Training Academy. We aim to produce highly skilled technicians who can meet the growing demand in the mobile repair industry."
+            desc="Our mission is to establish Kerala’s No.1 Smartphone Training Academy. We aim to produce highly skilled technicians who can meet the growing demand in the mobile repair industry. The academy will also serve as a talent hub for the broader GetFix ecosystem, helping fuel the brand’s long term vision."
           />
           <FeatureCard
             icon={<Globe className="w-12 h-12" style={{ color: "#F37021" }} />}
             title="Our Vision"
-            desc="A world where every broken phone finds a skilled repair hero — trained, certified, and job-ready."
+            desc="To become India’s most trusted smartphone technology academy — empowering thousands of technicians, elevating industry standards, and supplying top-tier talent that drives the nationwide growth of the GetFix brand.."
             delay={0.4}
           />
         </div>

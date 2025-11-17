@@ -26,7 +26,7 @@ const initialServices = [
   },
   {
     img: iwatch,
-    title: "Apple Watch Repair",
+    title: "Apple Watch and AirPod Repair",
     turnaround: "1–2 Hours",
     warranty: "90 Days",
     price: "From ₹799",
@@ -50,7 +50,7 @@ const initialServices = [
   },
   {
     img: ipod,
-    title: "iPod Repair",
+    title: "Android Phone Repair",
     turnaround: "1–2 Hours",
     warranty: "90 Days",
     price: "From ₹499",
@@ -331,14 +331,17 @@ const ServiceCard = ({
               ))}
             </div>
           </div>
-          <motion.a
-            href={link}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="w-full block text-center py-3 bg-gradient-to-r from-[#F37021] to-red-600 text-white font-bold rounded-full shadow-lg hover:shadow-[#F37021]/50 transition-all"
-          >
-            Book Now
-          </motion.a>
+         <motion.a
+  href="https://wa.me/+919758828258"
+  target="_blank"
+  rel="noopener noreferrer"
+  whileHover={{ scale: 1.05 }}
+  whileTap={{ scale: 0.95 }}
+  className="w-full block text-center py-3 bg-gradient-to-r from-[#F37021] to-red-600 text-white font-bold rounded-full shadow-lg hover:shadow-[#F37021]/50 transition-all"
+>
+  Book Now
+</motion.a>
+
         </div>
 
         {/* Shine Sweep */}

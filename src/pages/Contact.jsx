@@ -15,7 +15,7 @@ const stats = [
 ];
 
 const faqs = [
-  { q: "What are the course fees?", a: "Fees range from $599 to $2,499 based on course level. Installments available." },
+  { q: "What are the course fees?", a: "Fees range from Rs2,499 to Rs60,000 based on course level. Installments available." },
   { q: "Do you offer job placement?", a: "Yes! 100% placement support with our 500+ partner service centers." },
   { q: "Are classes online or offline?", a: "Both! Hybrid mode with live online + hands-on offline labs." },
   { q: "Is certification provided?", a: "Yes! Industry-recognized certificate upon completion." },
@@ -135,9 +135,9 @@ const Contact = () => {
             className="space-y-8"
           >
             {[
-              { icon: <MapPin />, title: "Our Location", content: "123 Mobile Academy Street, Anna Nagar, Chennai, Tamil Nadu 600040, India" },
-              { icon: <Phone />, title: "Call Us", content: "+91 98765 43210 (Mon-Sat: 9AM-6PM)" },
-              { icon: <Mail />, title: "Email Us", content: "info@mobileacademy.in | support@mobileacademy.in" },
+              { icon: <MapPin />, title: "Our Location", content: "Keystone Building Kozhikode, Kerala, India 2nd Floor, Keystone Building, Room No 60, 4001, Jail Rd, Kozhikode, Kerala 673004" },
+              { icon: <Phone />, title: "Call Us", content: "+91 9758828258 (Mon-Sat: 9AM-6PM)" },
+              { icon: <Mail />, title: "Email Us", content: "info@getfixacademy.com" },
               { icon: <Clock />, title: "Working Hours", content: "Monday - Saturday: 9:00 AM - 6:00 PM IST" },
             ].map((item, i) => (
               <motion.div
@@ -157,36 +157,45 @@ const Contact = () => {
           </motion.div>
 
           {/* Interactive 3D Map */}
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            className="relative h-96 lg:h-full min-h-96"
-            style={{ perspective: 1500 }}
-          >
-            <motion.div
-              whileHover={{ scale: 1.02, rotateY: 5, rotateX: -5 }}
-              transition={{ type: "spring", stiffness: 300 }}
-              className="absolute inset-0 rounded-3xl overflow-hidden shadow-2xl"
-            >
-              <div className="w-full h-full bg-gradient-to-br from-orange-200 to-red-200 flex items-center justify-center">
-                <div className="text-center">
-                  <MapPin className="w-24 h-24 text-orange-600 mx-auto mb-4" />
-                  <p className="text-2xl font-bold text-gray-800">Chennai, India</p>
-                  <p className="text-gray-600">Main Campus</p>
-                </div>
-              </div>
-              <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent rounded-3xl" />
-              <motion.div
-                animate={{ y: [0, -10, 0] }}
-                transition={{ duration: 3, repeat: Infinity }}
-                className="absolute top-8 left-8 bg-white/90 backdrop-blur-md px-4 py-2 rounded-full shadow-lg flex items-center gap-2"
-              >
-                <div className="w-3 h-3 bg-red-500 rounded-full animate-pulse" />
-                <span className="text-sm font-bold text-gray-800">Live Campus</span>
-              </motion.div>
-            </motion.div>
-          </motion.div>
+        <motion.div
+  initial={{ opacity: 0, x: 50 }}
+  whileInView={{ opacity: 1, x: 0 }}
+  viewport={{ once: true }}
+  className="relative h-96 lg:h-full min-h-96"
+  style={{ perspective: 1500 }}
+>
+  <motion.div
+    whileHover={{ scale: 1.02, rotateY: 5, rotateX: -5 }}
+    transition={{ type: "spring", stiffness: 300 }}
+    className="absolute inset-0 rounded-3xl overflow-hidden shadow-2xl"
+  >
+    {/* 👉 Embedded Google Map */}
+    <iframe
+      title="Location"
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3913.125176151029!2d75.7901384!3d11.252201!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba6593c6c20a8e3%3A0xb30547e131adeb98!2sGetFix%20Academy!5e0!3m2!1sen!2sin!4v1763393846551!5m2!1sen!2sin"
+      width="100%"
+      height="100%"
+      style={{ border: 0 }}
+      allowFullScreen
+      loading="lazy"
+      referrerPolicy="no-referrer-when-downgrade"
+    />
+
+    {/* Dark overlay for style */}
+    <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent rounded-3xl" />
+
+    {/* Floating LIVE badge */}
+    <motion.div
+      animate={{ y: [0, -10, 0] }}
+      transition={{ duration: 3, repeat: Infinity }}
+      className="absolute top-8 left-8 bg-white/90 backdrop-blur-md px-4 py-2 rounded-full shadow-lg flex items-center gap-2"
+    >
+      <div className="w-3 h-3 bg-red-500 rounded-full animate-pulse" />
+      <span className="text-sm font-bold text-gray-800">Live Campus Map</span>
+    </motion.div>
+  </motion.div>
+</motion.div>
+
         </div>
       </div>
 

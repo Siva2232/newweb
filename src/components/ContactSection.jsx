@@ -199,18 +199,19 @@ export default function ContactSection() {
               transition={{ delay: 0.5 }}
               className="hidden lg:block"
             >
-              <div className="rounded-3xl overflow-hidden shadow-2xl h-96 border border-gray-200/50">
-                <iframe
-                  title="Location"
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d241316.6433229765!2d72.7410994!3d19.082688!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7c6306644edc1%3A0x5da4f4624c4a1b!2sMumbai%2C%20Maharashtra!5e0!3m2!1sen!2sin!4v1698765432100!5m2!1sen!2sin"
-                  width="100%"
-                  height="100%"
-                  style={{ border: 0 }}
-                  allowFullScreen
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                />
-              </div>
+         <div className="rounded-3xl overflow-hidden shadow-2xl h-96 border border-gray-200/50">
+  <iframe
+    title="Location"
+    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3913.125176151029!2d75.7901384!3d11.252201!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba6593c6c20a8e3%3A0xb30547e131adeb98!2sGetFix%20Academy!5e0!3m2!1sen!2sin!4v1763393846551!5m2!1sen!2sin"
+    width="100%"
+    height="100%"
+    style={{ border: 0 }}
+    allowFullScreen
+    loading="lazy"
+    referrerPolicy="no-referrer-when-downgrade"
+  />
+</div>
+
             </motion.div>
           </div>
 
@@ -224,8 +225,8 @@ export default function ContactSection() {
             >
               {[
                 { icon: <Phone className="w-6 h-6" />, label: 'Call', value: '+91 7510636404' },
-                { icon: <Mail className="w-6 h-6" />, label: 'Email', value: 'info@getfixonline.com' },
-                { icon: <MapPin className="w-6 h-6" />, label: 'Visit', value: 'Keystone Building, Kozhikode' },
+                { icon: <Mail className="w-6 h-6" />, label: 'Email', value: 'info@getfixacademy.com' },
+                { icon: <MapPin className="w-6 h-6" />, label: 'Visit', value: ' 2nd Floor, Keystone Building, Room No 60, 4001, Jail Rd, Kozhikode, Kerala 673004' },
               ].map((item, i) => (
                 <motion.div
                   key={i}
@@ -487,7 +488,7 @@ export default function ContactSection() {
                 {[
                   { q: 'How fast do you reply?', a: 'Within 2 hours, guaranteed. Most replies in under 30 mins.' },
                   { q: 'Do you offer free consultation?', a: 'Yes! 15-min free call to discuss your needs.' },
-                  { q: 'Where are you located?', a: 'Main office in Kozhikode, Kerala. Support teams in Mumbai & Delhi.' },
+                  { q: 'Where are you located?', a: 'Main office in Kozhikode, Kerala.' },
                 ].map((faq, i) => (
                   <div
                     key={i}

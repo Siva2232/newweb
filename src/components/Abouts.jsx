@@ -22,14 +22,14 @@ const AboutSection = () => {
   ];
 
   const whyChoose = [
-    { icon: <Layers className="w-8 h-8" />, title: "Structured Learning", desc: "Basic,Advanced,and Master modules designed for technicians to upgrade skills step-by-step." },
+    { icon: <Layers className="w-8 h-8" />, title: "Structured Learning", desc: "Basic, Advanced and Master modules designed for technicians to upgrade skills step-by-step." },
     { icon: <Users className="w-8 h-8" />, title: "Lifetime Support Community", desc: "Join a strong community with regular updates, doubt clearing, and guidance even after the course." },
     { icon: <MonitorSmartphone className="w-8 h-8" />, title: "Online + Offline + App Learning", desc: "Learn anytime, anywhere — with weekly live sessions for new faults and techniques." },
     { icon: <UserCheck className="w-8 h-8" />, title: "Learn Directly From the Expert", desc: "Get trained by Sirajul Haque, Kerala’s leading iPhone repair specialist and a trusted chip-level trainer across South India." },
     { icon: <Wrench className="w-8 h-8" />, title: "Hands-On Labs", desc: "Work on real iPhone & Android devices — not simulators." },
     { icon: <Cpu className="w-8 h-8" />, title: "Chip-Level Expertise", desc: "Learn micro-soldering, BGA reballing, and IC replacement." },
     { icon: <Shield className="w-8 h-8" />, title: "Certified Instructors", desc: "Trained Apple & Android repair specialists teaching you directly." },
-    { icon: <Rocket className="w-8 h-8" />, title: "Job Guarantee", desc: "100% placement assistance — or your money back." },
+    { icon: <Rocket className="w-8 h-8" />, title: "Job Guarantee", desc: "100% placement assistance" },
     // { icon: <Clock className="w-8 h-8" />, title: "Flexible Schedules", desc: "Weekend and evening batches designed for working professionals." },
   ];
 

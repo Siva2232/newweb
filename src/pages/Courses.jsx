@@ -84,9 +84,9 @@ const useIsDesktop = () => {
 };
 
 const stats = [
-  { icon: <Users className="w-8 h-8" />, value: "12K+", label: "Students Trained" },
-  { icon: <Trophy className="w-8 h-8" />, value: "3,842+", label: "Placed" },
-  { icon: <Globe className="w-8 h-8" />, value: "58", label: "Countries" },
+  { icon: <Users className="w-8 h-8" />, value: "500+", label: "Students Trained" },
+  { icon: <Trophy className="w-8 h-8" />, value: "250+", label: "Placed" },
+  { icon: <Globe className="w-8 h-8" />, value: "3", label: "Countries" },
   { icon: <Star className="w-8 h-8" />, value: "4.9", label: "Rating" },
 ];
 
