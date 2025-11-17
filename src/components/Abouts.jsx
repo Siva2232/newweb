@@ -30,7 +30,7 @@ const AboutSection = () => {
     { icon: <Cpu className="w-8 h-8" />, title: "Chip-Level Expertise", desc: "Learn micro-soldering, BGA reballing, and IC replacement." },
     { icon: <Shield className="w-8 h-8" />, title: "Certified Instructors", desc: "Trained Apple & Android repair specialists teaching you directly." },
     { icon: <Rocket className="w-8 h-8" />, title: "Job Guarantee", desc: "100% placement assistance — or your money back." },
-    { icon: <Clock className="w-8 h-8" />, title: "Flexible Schedules", desc: "Weekend and evening batches designed for working professionals." },
+    // { icon: <Clock className="w-8 h-8" />, title: "Flexible Schedules", desc: "Weekend and evening batches designed for working professionals." },
   ];
 
   const missionVision = [
