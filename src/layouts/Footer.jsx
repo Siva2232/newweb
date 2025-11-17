@@ -33,8 +33,8 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   const socialLinks = [
-    { icon: <Facebook className="w-4.5 h-4.5" />, href: "https://www.facebook.com/Getfixonline/", label: "Facebook" },
-    { icon: <Instagram className="w-4.5 h-4.5" />, href: "https://www.instagram.com/getfixonline/?hl=en", label: "Instagram" },
+    { icon: <Facebook className="w-4.5 h-4.5" />, href: "https://www.facebook.com/haqsworld/videos/-welcome-to-getfix-academyin-this-video-we-dive-deep-into-the-jc-drawing-repair-/3991283944466014/", label: "Facebook" },
+    { icon: <Instagram className="w-4.5 h-4.5" />, href: "https://www.instagram.com/getfix_academy/", label: "Instagram" },
     { icon: <Linkedin className="w-4.5 h-4.5" />, href: "https://www.linkedin.com/company/getfixonline/?trk=organization_guest_main-feed-card_feed-actor-name&originalSubdomain=in", label: "LinkedIn" },
     { icon: <Youtube className="w-4.5 h-4.5" />, href: "https://www.youtube.com/watch?v=zMjvlr7nOiM", label: "YouTube" },
   ];
