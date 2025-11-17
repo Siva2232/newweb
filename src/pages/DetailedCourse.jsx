@@ -81,9 +81,7 @@ syllabus: [
   "Accessory Repairing Tools and Demonstrations",
   "iTunes Error Solutions and NAND Programming",
   "25+ Additional Important Topics"
-]
-,    syllabus: ["Android Architecture", "Fastboot & ADB", "Rooting & Unlocking", "EDL & 9008 Mode", "Board Diagnostics", "Software Issues Fix"],
-    schedule: "Weekend Batches",
+],    schedule: "Weekend Batches",
     trainer: "Priya Sharma (8+ Yrs Exp)",
     seats: 50,
     enrolled: 42,

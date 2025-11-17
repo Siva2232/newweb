@@ -223,7 +223,7 @@ export default function ContactSection() {
               className="grid grid-cols-1 sm:grid-cols-3 gap-4"
             >
               {[
-                { icon: <Phone className="w-6 h-6" />, label: 'Call', value: '+91 9720108040' },
+                { icon: <Phone className="w-6 h-6" />, label: 'Call', value: '+91 7510636404' },
                 { icon: <Mail className="w-6 h-6" />, label: 'Email', value: 'info@getfixonline.com' },
                 { icon: <MapPin className="w-6 h-6" />, label: 'Visit', value: 'Keystone Building, Kozhikode' },
               ].map((item, i) => (
@@ -271,7 +271,7 @@ export default function ContactSection() {
               <div className="rounded-3xl overflow-hidden shadow-2xl h-72 border border-gray-200/50">
                 <iframe
                   title="Location"
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d241316.6433229765!2d72.7410994!3d19.082688!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7c6306644edc1%3A0x5da4f4624c4a1b!2sMumbai%2C%20Maharashtra!5e0!3m2!1sen!2sin!4v1698765432100!5m2!1sen!2sin"
+                  src="https://share.google/l9JKuZynadg4Y1HW6"
                   width="100%"
                   height="100%"
                   style={{ border: 0 }}
@@ -388,8 +388,8 @@ export default function ContactSection() {
               {/* Offices */}
               <div className="grid grid-cols-1 gap-4">
                 {[
-                  { city: 'Kozhikode', phone: '+91 9758828258' },
-                  { city: 'Kochi', phone: '+91 9758828258' },
+                  { city: 'Kozhikode', phone: '+918304952266' },
+                  { city: 'Kochi', phone: '+91 7025229464' },
                 ].map((loc, i) => (
                   <motion.div
                     key={i}
@@ -517,7 +517,7 @@ export default function ContactSection() {
             <div className="grid grid-cols-2 gap-6">
               {[
                 { city: 'Kozhikode', address: 'Keystone Building, Calicut, Kerala', phone: '+91 9758828258' },
-                { city: 'Kochi', address: 'Kochi, Kerala', phone: '+91 9758828258' },
+                { city: 'Kochi', address: 'Kochi, Kerala', phone: '7025229464' },
               ].map((loc, i) => (
                 <motion.div
                   key={i}

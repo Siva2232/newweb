@@ -150,6 +150,14 @@ const Hire = () => {
                 icon: <MapPin className="w-6 h-6" />,
                 color: "from-cyan-500 to-blue-600"
               },
+{
+  title: "ISO-Certified Institution",
+  desc: "Receive 12–18 months of hands-on training with live projects from an ISO-certified institution.",
+  icon: <BookOpen className="w-6 h-6" />,
+  color: "from-[#F37021] to-red-600"
+},
+
+
             ].map((item, i) => (
               <motion.div
                 key={i}
