@@ -27,7 +27,7 @@ const initialServices = [
   },
   {
     img: iwatch,
-    title: "Apple Watch Repair",
+    title: "Apple Watch and AirPods Repair",
     turnaround: "1–2 Hours",
     warranty: "90 Days",
     price: "From ₹799",
@@ -51,7 +51,7 @@ const initialServices = [
   },
   {
     img: ipod,
-    title: "iPod Repair",
+    title: "Android phone Repair",
     turnaround: "1–2 Hours",
     warranty: "90 Days",
     price: "From ₹499",
@@ -65,7 +65,7 @@ const initialServices = [
 
 // ── STATS & TESTIMONIALS ─────────────────────────────────────
 const stats = [
-  { icon: <Wrench className="w-8 h-8" />, value: "10K+", label: "Devices Fixed" },
+  { icon: <Wrench className="w-8 h-8" />, value: "18K+", label: "Devices Fixed" },
   { icon: <Award className="w-8 h-8" />, value: "4.9", label: "Avg Rating" },
   { icon: <Clock className="w-8 h-8" />, value: "30 min", label: "Avg Turnaround" },
   { icon: <Shield className="w-8 h-8" />, value: "180+", label: "Days Warranty" },

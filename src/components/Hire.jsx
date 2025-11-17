@@ -89,9 +89,9 @@ const Hire = () => {
         {/* STATS */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-16">
           {[
-            { icon: <Trophy className="w-8 h-8" />, value: "3,842+", label: "Technicians Placed" },
+            { icon: <Trophy className="w-8 h-8" />, value: "1000+", label: "Technicians Placed" },
             { icon: <Star className="w-8 h-8" />, value: "4.9/5", label: "Client Rating" },
-            { icon: <Users className="w-8 h-8" />, value: "250+", label: "Partner Shops" },
+            { icon: <Users className="w-8 h-8" />, value: "500+", label: "Partner Shops" },
           ].map((s, i) => (
             <motion.div
               key={i}
@@ -122,7 +122,7 @@ const Hire = () => {
             {[
               {
                 title: "Academy-Trained",
-                desc: "18–12 months hands-on training with live projects",
+                desc: "12–18 months hands-on training with live projects",
                 icon: <BookOpen className="w-6 h-6" />,
                 color: "from-[#F37021] to-red-600"
               },
@@ -145,8 +145,8 @@ const Hire = () => {
                 color: "from-blue-500 to-indigo-600"
               },
               {
-                title: "PAN India Network",
-                desc: "Available in 150+ cities, metro to Tier-3",
+                title: "Associated Network",
+                desc: "Available in 300+ cities, metro to Tier-3",
                 icon: <MapPin className="w-6 h-6" />,
                 color: "from-cyan-500 to-blue-600"
               },
@@ -188,7 +188,7 @@ const Hire = () => {
           </motion.a>
 
           <p className="mt-6 text-sm text-gray-600">
-            Or call us at <a href="tel:+919876543210" className="font-bold text-[#F37021]">+91 98765 43210</a>
+            Or call us at <a href="tel:+91 83049 52266" className="font-bold text-[#F37021]">+91 83049 52266</a>
           </p>
         </motion.div>
 

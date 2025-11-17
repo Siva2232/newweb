@@ -151,7 +151,7 @@ const About = () => {
     },
     {
       icon: <Users className="w-10 h-10" />,
-      value: "10,000+",
+      value: "500+",
       label: "Students Trained",
       color: "from-amber-500 to-orange-700",
     },
@@ -235,7 +235,7 @@ const About = () => {
               },
             }}
           >
-            {"About Getfix Academy".split("").map((char, i) => (
+            {"About GetFix Academy".split("").map((char, i) => (
               <motion.span
                 key={i}
                 variants={{
@@ -257,7 +257,7 @@ const About = () => {
           >
             Pioneering{" "}
             <span className="font-bold" style={{ color: "#F37021" }}>
-              mobile engineering education
+            Mobile Engineering Education
             </span>{" "}
             since 2019 — where{" "}
             <span className="font-bold">practical skills meet real careers</span>.

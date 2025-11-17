@@ -151,8 +151,8 @@ const CoursesAndServicesSection = () => {
           {/* STATS */}
           <div className="flex flex-wrap justify-center gap-8 sm:gap-12 mt-10">
             {[
-              { icon: <Users className="w-7 h-7" />, value: "7,542+", label: "Students Trained" },
-              { icon: <Trophy className="w-7 h-7" />, value: "3,842", label: "Jobs Secured" },
+              { icon: <Users className="w-7 h-7" />, value: "500+", label: "Students Trained" },
+              { icon: <Trophy className="w-7 h-7" />, value: "250+", label: "Jobs Secured" },
               { icon: <Star className="w-7 h-7" />, value: "4.9", label: "Avg Rating" },
             ].map((s, i) => (
               <motion.div
