@@ -517,7 +517,7 @@ export default function ContactSection() {
             <div className="grid grid-cols-2 gap-6">
               {[
                 { city: 'Kozhikode', address: 'Keystone Building, Calicut, Kerala', phone: '+91 9758828258' },
-                { city: 'Kochi', address: 'Kochi, Kerala', phone: '7025229464' },
+                { city: 'Kadavantra,Kochi', address: 'Kochi, Kerala', phone: '7025229464' },
               ].map((loc, i) => (
                 <motion.div
                   key={i}
