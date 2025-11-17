@@ -9,7 +9,7 @@ import iphones from "../assets/iphones.png";
 import img from "../assets/images/img.png";
 import imgg from "../assets/images/imgg.png";
 import imagee from "../assets/imagee.png";
-
+import LaunchAdPopup from "../components/LaunchAdPopup";
 const carouselItems = [
   { type: "video", src: videoFile, poster: "/hero/image1.jpg" },
   { type: "image", src: img, alt: "Expert technician repairing iPhone screen" },
@@ -36,7 +36,6 @@ const HeroSection = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [currentTextIndex, setCurrentTextIndex] = useState(0);
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
-
   /* Auto-rotate carousel */
   useEffect(() => {
     const interval = setInterval(() => {
@@ -62,12 +61,14 @@ const HeroSection = () => {
   }, []);
 
   return (
+    
     <section className="relative min-h-screen flex flex-col justify-center items-center text-center px-4 sm:px-6 bg-gradient-to-b from-[#F37021]/5 via-white to-[#F37021]/5 overflow-hidden">
       {/* Subtle Background Orbs */}
       <div className="absolute inset-0 opacity-30 pointer-events-none">
         <div className="absolute top-16 sm:top-20 left-10 sm:left-20 w-64 sm:w-96 h-64 sm:h-96 bg-[#F37021]/30 rounded-full blur-3xl" />
         <div className="absolute bottom-16 sm:bottom-20 right-10 sm:right-20 w-60 sm:w-80 h-60 sm:h-80 bg-red-200/30 rounded-full blur-3xl" />
       </div>
+ <LaunchAdPopup />
 
       <div className="relative z-10 max-w-7xl mx-auto w-full grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 items-center">
         

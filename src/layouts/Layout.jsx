@@ -4,14 +4,14 @@ import Header from "./Header";
 import Footer from "./Footer";
 import { motion, AnimatePresence } from "framer-motion";
 import StickyButton from "../components/StickyButton"
-import LaunchingSoon from "../components/LaunchingSoon";
+// import LaunchAdPopup from "../components/LaunchAdPopup";
 const Layout = () => {
 
   return (
       <div className="flex flex-col min-h-screen">
         {/* Header */}
+        {/* <LaunchAdPopup /> */}
         <Header />
-        <LaunchingSoon />
         <StickyButton />
         {/* Main Content */}
         <main className="flex-1 pt-24 relative">
