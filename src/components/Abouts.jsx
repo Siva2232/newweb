@@ -40,7 +40,7 @@ const AboutSection = () => {
 
   const team = [
     { name: "Sirajul Haque", tagline: "Co-Founder and Managing Director - GetFix", role: "Founder & Lead Trainer - GetFix Academy", exp: "20+ Years Experience in chip level repair", img: T1 },
-    { name: "Shuhaib Shadi", role: "Co-Founder & Director - GetFix", exp: "10+ Year Experience iPhone Chip level Expert", img: T2 },
+    { name: "Shuhaib Shadi", role: "Co-Founder & Director - GetFix", exp: "15+ Year Experience, iPhone Chip level Expert", img: T2 },
     { name: "Pinks", role: "Co-Founder and Technical Support - GetFix", exp: "20+ Years Industry Expertise (Works at Apple-Croatia)", img: T3 },
   ];
 

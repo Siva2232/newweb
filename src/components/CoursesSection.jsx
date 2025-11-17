@@ -160,7 +160,7 @@ const CoursesSection = () => {
             transition={{ delay: 0.6 }}
             className="text-base sm:text-lg md:text-xl text-gray-700 max-w-3xl mx-auto font-light"
           >
-            Become a <span className="font-bold text-[#F37021]">certified mobile engineer</span> with hands-on training.
+            Become a <span className="font-bold text-[#F37021]">Certified Mobile Engineer</span> with hands-on training.
           </motion.p>
 
           {/* STATS */}
