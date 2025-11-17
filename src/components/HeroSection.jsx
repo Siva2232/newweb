@@ -49,7 +49,7 @@ const HeroSection = () => {
   useEffect(() => {
     const textInterval = setInterval(() => {
       setCurrentTextIndex((prev) => (prev + 1) % tagLines.length);
-    }, 2000);
+    }, 5000);
     return () => clearInterval(textInterval);
   }, []);
 
@@ -57,7 +57,7 @@ const HeroSection = () => {
   useEffect(() => {
     const wordInterval = setInterval(() => {
       setCurrentWordIndex((prev) => (prev + 1) % futureWords.length);
-    }, 2000);
+    }, 5000);
     return () => clearInterval(wordInterval);
   }, []);
 
@@ -215,7 +215,7 @@ const HeroSection = () => {
             className="grid grid-cols-2 gap-4 sm:gap-6 text-center pt-6 sm:pt-8 border-t border-gray-200"
           >
             {[
-              { value: "10,000+", label: "Students Trained" },
+              { value: "500+", label: "Students Trained" },
               { value: "6+", label: "Years Excellence" },
               { value: "100%", label: "Job Placement" },
               { value: "4.9", label: "Student Rating" },

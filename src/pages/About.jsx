@@ -102,11 +102,12 @@ const successStories = [
    Academy Milestones
    -------------------------------------------------------------- */
 const milestones = [
-  { year: "2019", event: "GetFix Repair Center Launched in Kerala" },
-  { year: "2021", event: "Expanded to 5 Branches Across South India" },
+  { year: "2019", event: "GetFix  premium Repair Center Launched in Kerala" },
+  { year: "2022", event: "GetFix store launched (Spare parts store)" },
+  { year: "2022", event: "Expanded to 4 Branches Across South India" },
   { year: "2023", event: "GetFix Academy Officially Launched" },
-  { year: "2024", event: "Trained 5,000+ Students" },
-  { year: "2025", event: "10,000+ Students & 100% Placement" },
+  { year: "2024", event: "Trained 500+ Students & 100% Placement" },
+  { year: "2025", event: "Upgraded to a premium platform accommodating 10 students." },
 ];
 
 /* --------------------------------------------------------------

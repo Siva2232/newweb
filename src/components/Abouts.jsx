@@ -16,9 +16,9 @@ import whyChooseImage from "../assets/why.png";
 const AboutSection = () => {
   const stats = [
     { icon: <GraduationCap className="w-7 h-7 sm:w-9 sm:h-9" />, value: "6+", label: "Years of Excellence" },
-    { icon: <Users className="w-7 h-7 sm:w-9 sm:h-9" />, value: "10,000+", label: "Students Trained" },
+    { icon: <Users className="w-7 h-7 sm:w-9 sm:h-9" />, value: "500+", label: "Students Trained" },
     { icon: <Award className="w-7 h-7 sm:w-9 sm:h-9" />, value: "100%", label: "Job Placement" },
-    { icon: <Zap className="w-8 h-8" />, value: "30 Days", label: "Fast-Track Course" },
+    { icon: <Zap className="w-8 h-8" />, value: "18 Days", label: "Intensive Repair Course" },
   ];
 
   const whyChoose = [
@@ -61,7 +61,7 @@ const AboutSection = () => {
               Our Story
             </h2>
             <p className="text-base sm:text-lg md:text-xl text-gray-700 leading-relaxed">
-              Founded in 2019, we’re India’s <span className="font-bold text-[#F37021]">leading smartphone technology institute Kerala</span>.
+              Founded in 2019, we’re Kerala’s <span className="font-bold text-[#F37021]">Leading Smartphone Technology Institute Kerala</span>.
               We don’t just teach — we <span className="font-bold">build careers</span> with hands-on, job-ready skills.
             </p>
           </motion.div>
