@@ -22,7 +22,7 @@ const AboutSection = () => {
   ];
 
   const whyChoose = [
-    { icon: <Layers className="w-8 h-8" />, title: "Structured Learning", desc: "Basic to Advanced to Master modules designed for technicians to upgrade skills step-by-step." },
+    { icon: <Layers className="w-8 h-8" />, title: "Structured Learning", desc: "Basic,Advanced,and Master modules designed for technicians to upgrade skills step-by-step." },
     { icon: <Users className="w-8 h-8" />, title: "Lifetime Support Community", desc: "Join a strong community with regular updates, doubt clearing, and guidance even after the course." },
     { icon: <MonitorSmartphone className="w-8 h-8" />, title: "Online + Offline + App Learning", desc: "Learn anytime, anywhere — with weekly live sessions for new faults and techniques." },
     { icon: <UserCheck className="w-8 h-8" />, title: "Learn Directly From the Expert", desc: "Get trained by Sirajul Haque, Kerala’s leading iPhone repair specialist and a trusted chip-level trainer across South India." },
@@ -35,12 +35,12 @@ const AboutSection = () => {
 
   const missionVision = [
     { icon: <Target className="w-9 h-9 sm:w-10 sm:h-10" />, title: "Our Mission", desc: "Our mission is to establish Kerala’s No.1 Smartphone Training Academy. We aim to produce highly skilled technicians who can meet the growing demand in the mobile repair industry. The academy will also serve as a talent hub for the broader GetFix ecosystem, helping fuel the brand’s long term vision" },
-    { icon: <Globe className="w-9 h-9 sm:w-10 sm:h-10" />, title: "Our Vision", desc: "A world where every phone has a skilled repair hero — trained by Getfix." },
+    { icon: <Globe className="w-9 h-9 sm:w-10 sm:h-10" />, title: "Our Vision", desc: "To become India’s most trusted smartphone technology academy — empowering thousands of technicians, elevating industry standards, and supplying top-tier talent that drives the nationwide growth of the GetFix brand." },
   ];
 
   const team = [
-    { name: "Sirajul Haque", tagline: "Co-Founder - GetFix Academy", role: "Founder & Lead Trainer - GetFix Academy", exp: "20+ Years Experience in chip level repair", img: T1 },
-    { name: "Shuhaib Shadi", role: "Co-Founder & Director - GetFix Academy", exp: "10+ Year Experience iPhone Chip level Expert", img: T2 },
+    { name: "Sirajul Haque", tagline: "Co-Founder and Managing Director - GetFix", role: "Founder & Lead Trainer - GetFix Academy", exp: "20+ Years Experience in chip level repair", img: T1 },
+    { name: "Shuhaib Shadi", role: "Co-Founder & Director - GetFix", exp: "10+ Year Experience iPhone Chip level Expert", img: T2 },
     { name: "Pinks", role: "Co-Founder and Technical Support - GetFix", exp: "20+ Years Industry Expertise (Works at Apple-Croatia)", img: T3 },
   ];
 
