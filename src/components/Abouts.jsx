@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import {
   GraduationCap, Users, Award, Wrench, Cpu, Shield, Rocket,
-  Target, Globe, Star, Zap, Clock, CheckCircle, ChevronRight, Layers, MonitorSmartphone, UserCheck,
+  Target, Globe, Star, Zap, Clock, CheckCircle, ChevronRight, Layers, MonitorSmartphone, UserCheck, ArrowRight,
 } from "lucide-react";
 import T1 from "../assets/T1.png";
 import T2 from "../assets/T2.png";
@@ -30,7 +30,6 @@ const AboutSection = () => {
     { icon: <Cpu className="w-8 h-8" />, title: "Chip-Level Expertise", desc: "Learn micro-soldering, BGA reballing, and IC replacement." },
     { icon: <Shield className="w-8 h-8" />, title: "Certified Instructors", desc: "Trained Apple & Android repair specialists teaching you directly." },
     { icon: <Rocket className="w-8 h-8" />, title: "Job Guarantee", desc: "100% placement assistance" },
-    // { icon: <Clock className="w-8 h-8" />, title: "Flexible Schedules", desc: "Weekend and evening batches designed for working professionals." },
   ];
 
   const missionVision = [
@@ -49,7 +48,7 @@ const AboutSection = () => {
       <div className="max-w-7xl mx-auto">
 
         {/* OUR STORY: Text Left + Animated Image Right */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center mb-20">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center mb-12">
           <motion.div
             initial={{ opacity: 0, x: -60 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -64,6 +63,23 @@ const AboutSection = () => {
               Founded in 2019, we’re Kerala’s <span className="font-bold text-[#F37021]">Leading Smartphone Technology Institute Kerala</span>.
               We don’t just teach — we <span className="font-bold">build careers</span> with hands-on, job-ready skills.
             </p>
+
+            {/* NEW LEARN MORE BUTTON */}
+            <motion.a
+              href="/about" // you can change this to any section or external link
+              className="inline-flex items-center gap-3 mt-6 px-8 py-4 bg-[#F37021] text-white font-semibold text-lg rounded-full shadow-lg hover:shadow-xl hover:bg-[#f37021e0] transition-all duration-300 group"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.98 }}
+            >
+              Learn More
+              <motion.span
+                animate={{ x: [0, 6, 0] }}
+                transition={{ duration: 1.2, repeat: Infinity }}
+                className="inline-block"
+              >
+                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              </motion.span>
+            </motion.a>
           </motion.div>
 
           {/* Floating Animated Image */}
@@ -126,9 +142,9 @@ const AboutSection = () => {
           ))}
         </div>
 
-        {/* WHY CHOOSE US: Animated Image Left + Cards Right */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center mb-20">
-          {/* Floating Image - Left */}
+        {/* WHY CHOOSE US */}
+        <div id="why-choose" className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center mb-20">
+          {/* ... rest of your Why Choose section remains unchanged ... */}
           <motion.div
             initial={{ opacity: 0, y: 80 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -151,7 +167,6 @@ const AboutSection = () => {
             </motion.div>
           </motion.div>
 
-          {/* Content - Right */}
           <motion.div
             initial={{ opacity: 0, x: 60 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -186,12 +201,7 @@ const AboutSection = () => {
         </div>
 
         {/* Team Section */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          className="mb-20"
-        >
+        <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} className="mb-20">
           <h3 className="text-4xl sm:text-5xl font-bold text-center mb-12">
             Meet Our <span className="text-[#F37021]">Expert Instructors</span>
           </h3>
@@ -212,7 +222,7 @@ const AboutSection = () => {
                 <div className="p-6 text-center">
                   <h4 className="text-xl font-bold text-gray-900">{member.name}</h4>
                   <p className="text-[#F37021] font-medium">{member.role}</p>
-                  <p className="text-[#F37021] font-medium">{member.tagline}</p>
+                  {member.tagline && <p className="text-[#F37021] font-medium">{member.tagline}</p>}
                   <p className="text-sm text-gray-600 mt-1">{member.exp}</p>
                 </div>
               </motion.div>
@@ -228,19 +238,18 @@ const AboutSection = () => {
           className="text-center"
         >
           <motion.a
-  href="https://wa.me/+918304952266"
-  target="_blank"
-  rel="noopener noreferrer"
-  whileHover={{ scale: 1.08 }}
-  whileTap={{ scale: 0.95 }}
-  className="inline-flex items-center gap-4 px-10 py-5 bg-gradient-to-r from-[#F37021] to-red-600 text-white font-bold text-lg rounded-full shadow-2xl hover:shadow-[#F37021]/60 transition-all duration-300"
->
-  Join Getfix Today
-  <motion.span animate={{ x: [0, 8, 0] }} transition={{ duration: 1.5, repeat: Infinity }}>
-    <ChevronRight className="w-6 h-6" />
-  </motion.span>
-</motion.a>
-
+            href="https://wa.me/+918304952266"
+            target="_blank"
+            rel="noopener noreferrer"
+            whileHover={{ scale: 1.08 }}
+            whileTap={{ scale: 0.95 }}
+            className="inline-flex items-center gap-4 px-10 py-5 bg-gradient-to-r from-[#F37021] to-red-600 text-white font-bold text-lg rounded-full shadow-2xl hover:shadow-[#F37021]/60 transition-all duration-300"
+          >
+            Join Getfix Today
+            <motion.span animate={{ x: [0, 8, 0] }} transition={{ duration: 1.5, repeat: Infinity }}>
+              <ChevronRight className="w-6 h-6" />
+            </motion.span>
+          </motion.a>
         </motion.div>
       </div>
     </section>

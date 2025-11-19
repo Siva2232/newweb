@@ -229,14 +229,14 @@ const CoursesAndServicesSection = () => {
           className="mt-20 text-center"
         >
            <motion.a
-  href="https://wa.me/+918304952266"
+  href="https://wa.me/+919758828258"
   target="_blank"
   rel="noopener noreferrer"
   whileHover={{ scale: 1.08 }}
   whileTap={{ scale: 0.95 }}
   className="inline-flex items-center gap-4 px-10 py-5 bg-gradient-to-r from-[#F37021] to-red-600 text-white font-bold text-lg rounded-full shadow-2xl hover:shadow-[#F37021]/60 transition-all duration-300"
 >
-            Start Your Journey Today
+           Schedule a Repair
             <motion.div animate={{ x: [0, 10, 0] }} transition={{ duration: 1.5, repeat: Infinity }}>
               <ChevronRight className="w-7 h-7 group-hover:translate-x-1 transition-transform" />
             </motion.div>

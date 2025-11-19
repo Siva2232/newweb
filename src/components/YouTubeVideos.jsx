@@ -40,7 +40,7 @@ const YouTubeVideos = () => {
           className="text-center mb-16"
         >
           <h2 className="text-4xl sm:text-5xl md:text-6xl font-black text-[#F37021] mb-4">
-            See Getfix in Action
+            Watch Free Classes
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
             Watch real students, real results, real learning.

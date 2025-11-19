@@ -213,12 +213,12 @@ const Hire = () => {
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 text-center">
             <div>
               <Phone className="w-6 h-6 text-[#F37021] mx-auto mb-2" />
-              <p className="font-bold text-gray-900">+91 9758828258</p>
+              <p className="font-bold text-gray-900">+91 70252 29464</p>
               <p className="text-xs text-gray-600">Mon–Sat, 9AM–6PM</p>
             </div>
             <div>
               <Mail className="w-6 h-6 text-[#F37021] mx-auto mb-2" />
-              <p className="font-bold text-gray-900">Hr@getfixacademy.in</p>
+              <p className="font-bold text-gray-900">Hr@getfixacademy.com</p>
               <p className="text-xs text-gray-600">Response in 2 hours</p>
             </div>
             <div>

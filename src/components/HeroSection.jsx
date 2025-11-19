@@ -9,7 +9,7 @@ import iphones from "../assets/iphones.png";
 import img from "../assets/images/img.png";
 import imgg from "../assets/images/imgg.png";
 import imagee from "../assets/imagee.png";
-import LaunchAdPopup from "../components/LaunchAdPopup";
+// import LaunchAdPopup from "../components/LaunchAdPopup";
 const carouselItems = [
   { type: "video", src: videoFile, poster: "/hero/image1.jpg" },
   { type: "image", src: img, alt: "Expert technician repairing iPhone screen" },
@@ -68,7 +68,7 @@ const HeroSection = () => {
         <div className="absolute top-16 sm:top-20 left-10 sm:left-20 w-64 sm:w-96 h-64 sm:h-96 bg-[#F37021]/30 rounded-full blur-3xl" />
         <div className="absolute bottom-16 sm:bottom-20 right-10 sm:right-20 w-60 sm:w-80 h-60 sm:h-80 bg-red-200/30 rounded-full blur-3xl" />
       </div>
- <LaunchAdPopup />
+
 
       <div className="relative z-10 max-w-7xl mx-auto w-full grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 items-center">
         
@@ -201,10 +201,10 @@ const HeroSection = () => {
               <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
             </Link>
             <Link
-              to="https://www.youtube.com/watch?v=zMjvlr7nOiM"
+              to="/services"
               className="inline-flex items-center justify-center gap-2 px-6 py-3 sm:px-8 sm:py-4 bg-white text-[#F37021] font-bold text-base sm:text-lg rounded-full border-2 border-[#F37021] hover:bg-[#F37021]/5 transition-all shadow-lg whitespace-nowrap"
             >
-              Get Free Demo
+              Why Choose Us
             </Link>
           </motion.div>
 
