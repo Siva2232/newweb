@@ -1,7 +1,8 @@
 // src/lib/api.js  (or src/services/api.js)
 
-const API_BASE_URL = 'https://newwebbackends.onrender.com/api';
-// Helper to handle response & errors''
+export const API_BASE_URL = "https://newwebbackends.onrender.com/api";
+
+// Helper to handle response & errors
 const handleResponse = async (res) => {
   const data = await res.json().catch(() => ({}));
 

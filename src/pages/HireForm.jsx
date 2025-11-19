@@ -8,6 +8,7 @@ import {
   CheckCircle, XCircle, Loader2, Sparkles
 } from "lucide-react";
 import { useState } from "react";
+import { API_BASE_URL } from "../api/api";
 
 // Indian Phone Validation
 const schema = z.object({
@@ -49,7 +50,7 @@ export default function HireForm() {
     setIsLoading(true);
 
     try {
-      const response = await fetch("https://newwebbackends.onrender.com", {
+      const response = await fetch(API_BASE_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
