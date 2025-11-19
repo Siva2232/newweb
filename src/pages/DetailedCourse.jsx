@@ -18,7 +18,7 @@ const courseData = [
     id: "iphone-offline",
     name: "iPhone Basic to Advanced Level Repair Course (Offline)",
     duration: "18 Days",
-    location: "Mumbai, Delhi, Bangalore",
+    location: "Calicut, Kerala",
     students: "250+",
     rating: 4.9,
     price: "₹60,000/-",
@@ -49,7 +49,7 @@ const courseData = [
       "Live CPU board practice plus additional surprise sessions in class"
     ],
     schedule: "Mon–Sat, 10 AM – 5 PM",
-    trainer: "Rajesh Kumar (10+ Yrs Exp)",
+    // trainer: "Rajesh Kumar (10+ Yrs Exp)",
     seats: 12,
     enrolled: 8,
   },
@@ -88,7 +88,7 @@ const courseData = [
       "25+ Additional Important Topics"
     ],
     schedule: "Weekend Batches",
-    trainer: "Priya Sharma (8+ Yrs Exp)",
+    // trainer: "Priya Sharma (8+ Yrs Exp)",
     seats: 50,
     enrolled: 42,
   },
@@ -122,7 +122,7 @@ const courseData = [
       "Lifetime Community Access"
     ],
     schedule: "Flexible Timings",
-    trainer: "Amit Singh (15+ Yrs Exp)",
+    // trainer: "Amit Singh (15+ Yrs Exp)",
     seats: 30,
     enrolled: 25,
   },
@@ -134,6 +134,9 @@ const DetailedCourse = () => {
   const sectionRef = useRef(null);
   const [course, setCourse] = useState(null);
   const [isDesktop, setIsDesktop] = useState(false);
+ useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   useEffect(() => {
     const found = courseData.find(c => c.id === id);
@@ -299,7 +302,7 @@ const DetailedCourse = () => {
                   <Calendar className="w-6 h-6 text-[#F37021]" /> Schedule
                 </h4>
                 <p className="text-gray-700">{course.schedule}</p>
-                <p className="text-sm text-gray-500 mt-2">Trainer: {course.trainer}</p>
+                {/* <p className="text-sm text-gray-500 mt-2">Trainer: {course.trainer}</p> */}
               </div>
               <div className="bg-white/80 backdrop-blur-xl rounded-3xl p-6 shadow-xl border border-white/50">
                 <h4 className="text-xl font-black flex items-center gap-2 mb-3">

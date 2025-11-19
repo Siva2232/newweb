@@ -145,19 +145,19 @@ const Footer = () => {
                   <div className="p-2 bg-white/10 rounded-lg border border-white/20">
                     <Phone className="w-4.5 h-4.5 text-[#F37021]" />
                   </div>
-                  <span>+91 9758828258</span>
+                  <span>+91 8304952266</span>
                 </div>
                 <div className="flex items-center gap-3 text-gray-400 text-sm sm:text-base">
                   <div className="p-2 bg-white/10 rounded-lg border border-white/20">
                     <Mail className="w-4.5 h-4.5 text-[#F37021]" />
                   </div>
-                  <span>info@getfixacademy.com</span>
+                  <span>info@getfixonline.com</span>
                 </div>
                 <div className="flex items-center gap-3 text-gray-400 text-sm sm:text-base">
                   <div className="p-2 bg-white/10 rounded-lg border border-white/20">
                     <MapPin className="w-4.5 h-4.5 text-[#F37021]" />
                   </div>
-                  <span>Keystone Building Kozhikode, Kerala, India 2nd Floor, Keystone Building, Room No 60, 4001, Jail Rd, Kozhikode, Kerala 673004</span>
+                  <span>Keystone Building, Room No 60, 4001, Jail Rd, Kozhikode, Kerala 673004</span>
                 </div>
               </div>
             </motion.div>
