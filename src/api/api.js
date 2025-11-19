@@ -1,11 +1,7 @@
 // src/lib/api.js  (or src/services/api.js)
 
-const API_BASE_URL =
-  process.env.NODE_ENV === "production"
-    ? "https://yourdomain.com/api"  // Change to your live domain later
-    : "http://localhost:5002/api";
-
-// Helper to handle response & errors
+const API_BASE_URL = 'https://newwebbackends.onrender.com/api';
+// Helper to handle response & errors''
 const handleResponse = async (res) => {
   const data = await res.json().catch(() => ({}));
 

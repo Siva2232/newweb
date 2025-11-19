@@ -49,7 +49,7 @@ export default function HireForm() {
     setIsLoading(true);
 
     try {
-      const response = await fetch("http://localhost:5002/api/hire", {
+      const response = await fetch("https://newwebbackends.onrender.com", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
