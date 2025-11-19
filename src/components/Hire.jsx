@@ -82,7 +82,7 @@ const Hire = () => {
             transition={{ delay: 0.6 }}
             className="text-base sm:text-lg md:text-xl text-gray-700 max-w-3xl mx-auto font-light"
           >
-            Get <span className="font-bold text-[#F37021]">job-ready, academy-trained technicians</span> for your repair shop, service center, or startup — <span className="font-bold">100% certified & verified</span>.
+            Get <span className="font-bold text-[#F37021]">Job-Ready, Academy-Trained Technicians</span> for your repair shop, service center, or startup — <span className="font-bold">100% certified & verified</span>.
           </motion.p>
         </motion.div>
 
