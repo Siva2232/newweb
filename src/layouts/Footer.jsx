@@ -90,11 +90,11 @@ const Footer = () => {
                 {/* LOGO SIZE INCREASED */}
                 <img
                   src={Logo2}
-                  alt="GetFix Academy Logo"
+                  alt="Fixverse Academy Logo"
                   className="w-24 h-24 sm:w-28 sm:h-28 object-contain drop-shadow-md"
                 />
                 <h3 className="text-2xl sm:text-3xl font-black text-white leading-tight">
-                  GetFix Academy
+                  Fixverse Academy
                 </h3>
               </div>
               <p className="text-gray-400 text-sm sm:text-base leading-relaxed max-w-xs">
@@ -214,7 +214,7 @@ const Footer = () => {
             <div className="flex flex-col sm:flex-row justify-center items-center gap-4 text-xs sm:text-sm text-gray-400">
               <p className="flex items-center gap-1.5">
                 <Copyright className="w-3.5 h-3.5" />
-                {currentYear} GetFix Academy. All Rights Reserved.
+                {currentYear} Fixverse Academy. All Rights Reserved.
               </p>
 
               <motion.button

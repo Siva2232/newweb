@@ -50,7 +50,7 @@ export default function Gallery() {
             Highlights
           </h1>
           <p className="text-lg sm:text-xl md:text-2xl text-gray-700 font-light">
-            Real moments from <span className="font-bold text-[#F37021]">GetFix Academy</span>
+            Real moments from <span className="font-bold text-[#F37021]">Fixverse Academy</span>
             <br className="sm:hidden" /> — Where passion becomes profession
           </p>
         </motion.div>

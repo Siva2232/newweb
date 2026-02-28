@@ -163,7 +163,7 @@ const LogoLink = ({ size = "sm" }) => {
       transition={{ type: "spring", stiffness: 400, damping: 20 }}
       className="relative group"
     >
-      <a href="/" aria-label="GetFix Academy">
+      <a href="/" aria-label="Fixverse Academy">
         <div className="relative">
           <motion.div
             className="absolute -inset-3 rounded-full bg-gradient-to-r from-[#F37021]/40 to-red-600/40 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
@@ -173,7 +173,7 @@ const LogoLink = ({ size = "sm" }) => {
           <div className={size === "lg" ? "w-24 h-24 lg:w-28 lg:h-28" : "w-16 h-16 sm:w-20 sm:h-20"}>
             <img
               src={Logo}
-              alt="GetFix Academy"
+              alt="Fixverse Academy"
               className="w-full h-full object-contain drop-shadow-xl"
               style={{
                 imageRendering: "-webkit-optimize-contrast",

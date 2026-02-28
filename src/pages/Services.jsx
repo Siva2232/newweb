@@ -220,7 +220,7 @@ const Services = () => {
           className="bg-gradient-to-r from-[#F37021] to-red-600 text-white py-20 px-8 rounded-3xl mb-20"
         >
           <div className="max-w-7xl mx-auto text-center">
-            <h3 className="text-5xl md:text-6xl font-black mb-12">Why Trust GetFix?</h3>
+            <h3 className="text-5xl md:text-6xl font-black mb-12">Why Trust Fixverse?</h3>
             <div className="grid md:grid-cols-3 gap-10">
               {[
                 { icon: <Zap className="w-14 h-14" />, title: "Lightning Fast", desc: "Most repairs done in under 1 hour" },

@@ -33,7 +33,7 @@ export default function HireForm() {
   const sendViaWhatsApp = () => {
     const d = getValues();
 
-    const text = `Hello GetFix Team! 
+    const text = `Hello Fixverse Team! 
 
 I'm interested in hiring certified technicians.
 

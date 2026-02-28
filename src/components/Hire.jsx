@@ -115,7 +115,7 @@ const Hire = () => {
           className="mb-16"
         >
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-center text-gray-900 mb-10">
-            Why Hire from <span className="text-[#F37021]">GetFix Academy</span>?
+            Why Hire from <span className="text-[#F37021]">Fixverse Academy</span>?
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -218,7 +218,7 @@ const Hire = () => {
             </div>
             <div>
               <Mail className="w-6 h-6 text-[#F37021] mx-auto mb-2" />
-              <p className="font-bold text-gray-900">Hr@getfixacademy.com</p>
+              <p className="font-bold text-gray-900">Hr@fixverseacademy.com</p>
               <p className="text-xs text-gray-600">Response in 2 hours</p>
             </div>
             <div>

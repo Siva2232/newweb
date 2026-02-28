@@ -242,7 +242,7 @@
 //             <motion.div initial={{ opacity: 0, y: 30 }} animate={isVisible ? { opacity: 1, y: 0 } : {}} transition={{ delay: 0.4 }} className="grid grid-cols-1 sm:grid-cols-3 gap-4">
 //               {[
 //                 { icon: <Phone className="w-6 h-6" />, label: 'Call', value: '+91 7510636404' },
-//                 { icon: <Mail className="w-6 h-6" />, label: 'Email', value: 'info@getfixacademy.com' },
+//                 { icon: <Mail className="w-6 h-6" />, label: 'Email', value: 'info@fixverseacademy.com' },
 //                 { icon: <MapPin className="w-6 h-6" />, label: 'Visit', value: '2nd Floor, Keystone Building, Kozhikode, Kerala 673004' },
 //               ].map((item, i) => (
 //                 <motion.div key={i} whileHover={{ y: -6 }} initial={{ opacity: 0, y: 20 }} animate={isVisible ? { opacity: 1, y: 0 } : {}} transition={{ delay: 0.5 + i * 0.1 }}
@@ -528,7 +528,7 @@ export default function Contact() {
               {[
                 { icon: <MapPin className="w-8 h-8" />, title: "Our Location", content: "2nd Floor, Keystone Building, Jail Rd, Kozhikode, Kerala 673004" },
                 { icon: <Phone className="w-8 h-8" />, title: "Call Us", content: "+91 9758828258 (Mon-Sat: 9AM-6PM)" },
-                { icon: <Mail className="w-8 h-8" />, title: "Email Us", content: "info@getfixacademy.com" },
+                { icon: <Mail className="w-8 h-8" />, title: "Email Us", content: "info@fixverseacademy.com" },
                 { icon: <Clock className="w-8 h-8" />, title: "Working Hours", content: "Monday - Saturday: 9:00 AM - 6:00 PM IST" },
               ].map((item, i) => (
                 <motion.div
@@ -560,7 +560,7 @@ export default function Contact() {
                 className="absolute inset-0 rounded-3xl overflow-hidden shadow-2xl"
               >
                 <iframe
-                  title="GetFix Academy Location"
+                  title="Fixverse Academy Location"
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3913.77!2d75.7901384!3d11.252201!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba6593c6c20a8e3%3A0xb30547e131adeb98!2sGetFix%20Academy!5e0!3m2!1sen!2sin!4v1763393846551!5m2!1sen!2sin"
                   width="100%"
                   height="100%"

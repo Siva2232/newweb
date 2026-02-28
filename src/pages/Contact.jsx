@@ -168,7 +168,7 @@
 //               {[
 //                 { icon: <MapPin className="w-8 h-8" />, title: "Our Location", content: "2nd Floor, Keystone Building, Jail Rd, Kozhikode, Kerala 673004" },
 //                 { icon: <Phone className="w-8 h-8" />, title: "Call Us", content: "+91 9758828258 (Mon-Sat: 9AM-6PM)" },
-//                 { icon: <Mail className="w-8 h-8" />, title: "Email Us", content: "info@getfixacademy.com" },
+//                 { icon: <Mail className="w-8 h-8" />, title: "Email Us", content: "info@fixverseacademy.com" },
 //                 { icon: <Clock className="w-8 h-8" />, title: "Working Hours", content: "Monday - Saturday: 9:00 AM - 6:00 PM IST" },
 //               ].map((item, i) => (
 //                 <motion.div
@@ -201,7 +201,7 @@
 //                 className="absolute inset-0 rounded-3xl overflow-hidden shadow-2xl"
 //               >
 //                 <iframe
-//                   title="GetFix Academy Location"
+//                   title="Fixverse Academy Location"
 //                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3913.77!2d75.7901384!3d11.252201!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba6593c6c20a8e3%3A0xb30547e131adeb98!2sGetFix%20Academy!5e0!3m2!1sen!2sin!4v1763393846551!5m2!1sen!2sin"
 //                   width="100%"
 //                   height="100%"
@@ -479,7 +479,7 @@ export default function Contact() {
               {[
                 { icon: <MapPin className="w-8 h-8" />, title: "Our Location", content: "2nd Floor, Keystone Building, Jail Rd, Kozhikode, Kerala 673004" },
                 { icon: <Phone className="w-8 h-8" />, title: "Call Us", content: "+91 9758828258 (Mon-Sat: 9AM-6PM)" },
-                { icon: <Mail className="w-8 h-8" />, title: "Email Us", content: "info@getfixacademy.com" },
+                { icon: <Mail className="w-8 h-8" />, title: "Email Us", content: "info@fixverseacademy.com" },
                 { icon: <Clock className="w-8 h-8" />, title: "Working Hours", content: "Monday - Saturday: 9:00 AM - 6:00 PM IST" },
               ].map((item, i) => (
                 <motion.div key={i} whileHover={{ scale: 1.03, x: 12 }} className="group flex gap-5 p-6 bg-white/80 backdrop-blur-xl rounded-3xl border border-white/50 shadow-xl hover:shadow-2xl transition-all">
@@ -497,7 +497,7 @@ export default function Contact() {
             <motion.div initial={{ opacity: 0, x: 60 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="relative h-96 lg:h-full min-h-96" style={{ perspective: 1500 }}>
               <motion.div whileHover={{ scale: 1.02, rotateY: 6, rotateX: -6 }} transition={{ type: "spring", stiffness: 300 }} className="absolute inset-0 rounded-3xl overflow-hidden shadow-2xl">
                 <iframe
-                  title="GetFix Academy Location"
+                  title="Fixverse Academy Location"
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3913.77!2d75.7901384!3d11.252201!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba6593c6c20a8e3%3A0xb30547e131adeb98!2sGetFix%20Academy!5e0!3m2!1sen!2sin!4v1763393846551!5m2!1sen!2sin"
                   width="100%"
                   height="100%"
@@ -549,7 +549,7 @@ export default function Contact() {
               </div>
 
               <p className="mt-8 text-sm text-gray-500">
-                🔒 100% Secure • Powered by GetFix Academy
+                🔒 100% Secure • Powered by Fixverse Academy
               </p>
             </div>
           </div>

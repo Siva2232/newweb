@@ -34,27 +34,27 @@ import T3 from "../assets/T3.png";
 /* --------------------------------------------------------------
    "Our Story" – Teaser + Full
    -------------------------------------------------------------- */
-const storyTeaser = `GetFix began its journey in 2019 with a clear mission — to bring professionalism, precision, and trust to the smartphone repair industry. What started as a small premium repair center in Kerala quickly grew into a respected multi-branch service brand, known for its high-quality repairs, transparent approach, and advanced technical expertise.`;
+const storyTeaser = `Fixverse began its journey in 2019 with a clear mission — to bring professionalism, precision, and trust to the smartphone repair industry. What started as a small premium repair center in Kerala quickly grew into a respected multi-branch service brand, known for its high-quality repairs, transparent approach, and advanced technical expertise.`;
 
-const storyFull = `Over the years, GetFix became the go-to destination for complex device repairs, chip-level services, and professional-grade diagnostics. But with every step forward, we observed an industry challenge:
+const storyFull = `Over the years, Fixverse became the go-to destination for complex device repairs, chip-level services, and professional-grade diagnostics. But with every step forward, we observed an industry challenge:
 There were far more devices needing quality repair than there were skilled technicians capable of handling them.
 
 This growing gap led to the birth of something bigger —
-**GetFix Academy**, launched in 2023.
+**Fixverse Academy**, launched in 2023.
 
-GetFix Academy was created with a powerful purpose:
+Fixverse Academy was created with a powerful purpose:
 to build a new generation of confident, highly skilled smartphone technicians equipped for the future.
 
-At the core of our academy is **Sirajul Haque**, the Visionary Co-Founder & Managing Director of GetFix, and the Founder & Lead Trainer at the Academy. With **20+ years** of smartphone repair expertise, Sirajul has trained hundreds of technicians and shaped the repair standards followed across our service centers today. His experience, passion, and hands-on teaching style form the backbone of every module we offer.
+At the core of our academy is **Sirajul Haque**, the Visionary Co-Founder & Managing Director of Fixverse, and the Founder & Lead Trainer at the Academy. With **20+ years** of smartphone repair expertise, Sirajul has trained hundreds of technicians and shaped the repair standards followed across our service centers today. His experience, passion, and hands-on teaching style form the backbone of every module we offer.
 
-What makes GetFix Academy different is our learning philosophy:
+What makes Fixverse Academy different is our learning philosophy:
 We teach only what works in the real world.
 
-Every lesson, workflow, and repair technique comes directly from the practical challenges handled at GetFix service centers. Our in-house R&D team continuously studies new smartphone architectures, updated IC designs, and the latest repair methods — ensuring our students stay ahead in a rapidly evolving industry.
+Every lesson, workflow, and repair technique comes directly from the practical challenges handled at Fixverse service centers. Our in-house R&D team continuously studies new smartphone architectures, updated IC designs, and the latest repair methods — ensuring our students stay ahead in a rapidly evolving industry.
 
 From basic electronics to advanced chip-level workflows, from online learning to offline intensive programs — our training ecosystem is designed to suit both beginners and working professionals. With centralized support, live revision classes, real board case studies, and lifetime doubt assistance, we stand with our students long after their course is completed.
 
-Today, GetFix Academy is more than a training institute.
+Today, Fixverse Academy is more than a training institute.
 It is a growth platform.
 A community.
 A movement built on knowledge, innovation, and real-world experience.
@@ -102,10 +102,10 @@ const successStories = [
    Academy Milestones
    -------------------------------------------------------------- */
 const milestones = [
-  { year: "2019", event: "GetFix  premium Repair Center Launched in Kerala" },
-  { year: "2022", event: "GetFix store launched (Spare parts store)" },
+  { year: "2019", event: "Fixverse  premium Repair Center Launched in Kerala" },
+  { year: "2022", event: "Fixverse store launched (Spare parts store)" },
   { year: "2022", event: "Expanded to 4 Branches Across South India" },
-  { year: "2023", event: "GetFix Academy Officially Launched" },
+  { year: "2023", event: "Fixverse Academy Officially Launched" },
   { year: "2024", event: "Trained 500+ Students & 100% Placement" },
   { year: "2025", event: "Upgraded to a premium platform accommodating 10 students." },
 ];
@@ -187,9 +187,9 @@ const About = () => {
   ];
 
  const team = [
-    { name: "Sirajul Haque", tagline: "Co-Founder and Managing Director - GetFix", role: "Founder & Lead Trainer - GetFix Academy", exp: "20+ Years Experience in chip level repair", img: T1 },
-    { name: "Shuhaib Shadi", role: "Co-Founder & Director - GetFix", exp: "15+ Year Experience, iPhone Chip level Expert", img: T2 },
-    { name: "Pinks", role: "Co-Founder and Technical Support - GetFix", exp: "20+ Years Industry Expertise (Works at Apple-Croatia)", img: T3 },
+    { name: "Sirajul Haque", tagline: "Co-Founder and Managing Director - Fixverse", role: "Founder & Lead Trainer - Fixverse Academy", exp: "20+ Years Experience in chip level repair", img: T1 },
+    { name: "Shuhaib Shadi", role: "Co-Founder & Director - Fixverse", exp: "15+ Year Experience, iPhone Chip level Expert", img: T2 },
+    { name: "Pinks", role: "Co-Founder and Technical Support - Fixverse", exp: "20+ Years Industry Expertise (Works at Apple-Croatia)", img: T3 },
   ];
 
   return (
@@ -235,7 +235,7 @@ const About = () => {
               },
             }}
           >
-            {"About GetFix Academy".split("").map((char, i) => (
+            {"About Fixverse Academy".split("").map((char, i) => (
               <motion.span
                 key={i}
                 variants={{
@@ -421,12 +421,12 @@ const About = () => {
           <FeatureCard
             icon={<Target className="w-12 h-12" style={{ color: "#F37021" }} />}
             title="Our Mission"
-            desc="Our mission is to establish Kerala’s No.1 Smartphone Training Academy. We aim to produce highly skilled technicians who can meet the growing demand in the mobile repair industry. The academy will also serve as a talent hub for the broader GetFix ecosystem, helping fuel the brand’s long term vision."
+            desc="Our mission is to establish Kerala’s No.1 Smartphone Training Academy. We aim to produce highly skilled technicians who can meet the growing demand in the mobile repair industry. The academy will also serve as a talent hub for the broader Fixverse ecosystem, helping fuel the brand’s long term vision."
           />
           <FeatureCard
             icon={<Globe className="w-12 h-12" style={{ color: "#F37021" }} />}
             title="Our Vision"
-            desc="To become India’s most trusted smartphone technology academy — empowering thousands of technicians, elevating industry standards, and supplying top-tier talent that drives the nationwide growth of the GetFix brand.."
+            desc="To become India’s most trusted smartphone technology academy — empowering thousands of technicians, elevating industry standards, and supplying top-tier talent that drives the nationwide growth of the Fixverse brand.."
             delay={0.4}
           />
         </div>
