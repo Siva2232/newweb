@@ -87,15 +87,14 @@ const Footer = () => {
               className="space-y-5"
             >
               <div className="flex items-center gap-3">
-                {/* LOGO SIZE INCREASED */}
                 <img
                   src={Logo2}
                   alt="Fixverse Academy Logo"
-                  className="w-24 h-24 sm:w-28 sm:h-28 object-contain drop-shadow-md"
+                  className="w-36 h-auto sm:w-44 object-contain drop-shadow-md"
                 />
-                <h3 className="text-2xl sm:text-3xl font-black text-white leading-tight">
+                {/* <h3 className="text-2xl sm:text-3xl font-black text-white leading-tight">
                   Fixverse Academy
-                </h3>
+                </h3> */}
               </div>
               <p className="text-gray-400 text-sm sm:text-base leading-relaxed max-w-xs">
                 Empowering the next generation of mobile engineers with world-class training.
